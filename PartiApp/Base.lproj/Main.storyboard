@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="PartiApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="G0v-02-MSr"/>
+                        <viewControllerLayoutGuide type="bottom" id="0Iy-6c-jGF"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fkx-7h-4st">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="lNg-9Q-By7">
+                                        <rect key="frame" x="169" y="315" width="37" height="37"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="lNg-9Q-By7" firstAttribute="centerX" secondItem="fkx-7h-4st" secondAttribute="centerX" id="9CD-Ez-cLk"/>
+                                    <constraint firstItem="lNg-9Q-By7" firstAttribute="centerY" secondItem="fkx-7h-4st" secondAttribute="centerY" id="Rlh-Wy-soy"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="fkx-7h-4st" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="KOd-8Y-BMv"/>
+                            <constraint firstItem="fkx-7h-4st" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="XUc-ZG-wBF"/>
+                            <constraint firstItem="0Iy-6c-jGF" firstAttribute="top" secondItem="fkx-7h-4st" secondAttribute="bottom" id="dVg-wt-crd"/>
+                            <constraint firstAttribute="trailing" secondItem="fkx-7h-4st" secondAttribute="trailing" id="vg6-oR-fWH"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="vwWaitScreen" destination="fkx-7h-4st" id="jzY-Gy-BOy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="116" y="115.59220389805098"/>
+        </scene>
+    </scenes>
+</document>

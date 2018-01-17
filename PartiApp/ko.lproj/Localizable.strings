@@ -1,0 +1,10 @@
+/* Korean Localizable.strings */
+
+ok = "확인";
+cancel = "취소";
+back = "뒤로";
+yes = "예";
+no = "아니오";
+downloading = "다운로드중...";
+wait_moment = "잠시만 기다려주세요.";
+inet_fail = "인터넷 연결에 실패하였습니다.";

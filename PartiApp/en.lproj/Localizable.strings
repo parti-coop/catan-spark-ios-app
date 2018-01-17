@@ -1,0 +1,10 @@
+/* English Localizable.strings */
+
+ok = "OK";
+cancel = "Cancel";
+back = "Back";
+yes = "Yes";
+no = "No";
+downloading = "Downloading...";
+wait_moment = "Wait a moment...";
+inet_fail = "Failed to connect to Internet.";
