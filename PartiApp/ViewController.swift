@@ -156,7 +156,7 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
 		
 		if m_isInitialWaitDone == false && isShowWait() {
 			m_nPageFinishCount += 1
-			if m_nPageFinishCount >= 2 {
+			if m_nPageFinishCount >= 2 || Config.apiBaseUrl == url {
 				print("InitialWait done")
 				m_isInitialWaitDone = true
 				showWaitMark(false)
