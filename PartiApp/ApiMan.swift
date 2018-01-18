@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Natrium
 
 protocol ApiResultDelegate : NSObjectProtocol
 {
@@ -17,19 +18,17 @@ protocol ApiResultDelegate : NSObjectProtocol
 
 class ApiMan : NSObject, HttpQueryDelegate
 {
-	private static var API_BASEURL: String = "https://parti.xyz/"
+	private static var API_BASEURL: String = Natrium.Config.apiBaseUrl
 	
 	static let JOBID_REGISTER_TOKEN = 1
 	static let JOBID_DELETE_TOKEN = 2
 	static let JOBID_DOWNLOAD_FILE = 3
 
 	static func setDevMode() {
-		//ApiMan.API_BASEURL = "http://192.168.0.100:8500/"
-		ApiMan.API_BASEURL = "https://dev.parti.xyz/"
 	}
 	
 	static func getBaseUrl() -> String {
-		return ApiMan.API_BASEURL
+		return API_BASEURL
 	}
 	
 	private static func getEmptySpec(_ uri: String) -> HttpQuerySpec {

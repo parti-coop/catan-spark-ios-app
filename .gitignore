@@ -72,3 +72,9 @@ env.yml
 
 # googleservice info
 PartiApp/GoogleService-Info.plist
+PartiApp/firebase/*
+
+# natrium
+.natrium.yml
+Pods/Natrium/bin/Config.swift
+PartiApp/Info.plist

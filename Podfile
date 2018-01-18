@@ -5,6 +5,7 @@ pod 'Crashlytics'
 pod 'Firebase/Messaging'
 pod 'MBProgressHUD', '~> 1.1.0'
 pod 'TMReachability', :git => 'https://github.com/albertbori/Reachability'
+pod 'Natrium'
 
 target 'PartiApp' do
 	use_frameworks!

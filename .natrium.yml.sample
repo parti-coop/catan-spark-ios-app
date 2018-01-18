@@ -1,0 +1,24 @@
+---
+environments:
+  - Development
+  - Staging
+  - Production
+
+variables:
+  apiBaseUrl:
+    Development: https://parti.test/
+    Staging: https://dev.parti.xyz/
+    Production: https://parti.xyz/
+
+plists:
+  "PartiApp/Info.plist":
+    CFBundleDisplayName:
+      Development: 빠띠-개발
+      Staging: 빠띠-테스트
+      Production: 빠띠
+
+files:
+  PartiApp/GoogleService-Info.plist:
+    Development: PartiApp/firebase/GoogleService-Info_DEV.plist
+    Staging: PartiApp/firebase/GoogleService-Info_STAGING.plist
+    Production: PartiApp/firebase/GoogleService-Info_PRODUCTION.plist

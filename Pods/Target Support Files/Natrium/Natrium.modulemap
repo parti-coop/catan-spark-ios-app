@@ -1,0 +1,6 @@
+framework module Natrium {
+  umbrella header "Natrium-umbrella.h"
+
+  export *
+  module * { export * }
+}
