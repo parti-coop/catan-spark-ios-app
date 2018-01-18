@@ -77,4 +77,6 @@ PartiApp/firebase/*
 # natrium
 .natrium.yml
 Pods/Natrium/bin/Config.swift
+Pods/Natrium/bin/natrium.log
+Pods/Natrium/bin/natrium.lock
 PartiApp/Info.plist
