@@ -30,4 +30,4 @@ variables:
     Production: https://parti.xyz/
 ```
 
-https://github.com/e-sites/Natrium/blob/master/docs/INSTALL_COCOAPODS.md#step-3
+https://github.com/e-sites/Natrium/blob/master/docs/INSTALL_COCOAPODS.md#step-3 를 보고 그대로 세팅합니다. 다만 환경 설정값은 Development로 지정합니다.
