@@ -8,7 +8,7 @@
 
 import UIKit
 import WebKit
-
+import Regex
 
 protocol UfoWebDelegate : NSObjectProtocol
 {
@@ -175,28 +175,23 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
 			style:.cancel, handler: { _ in completionHandler(false) }))
 		ViewController.instance.present(alertController, animated:true, completion:nil)
 	}
-
-	var XXX_internalOrExternal: Bool = false
 	
+    // WKWebView에서 자바스크립트로 window.open(), window.close() 하는 경우 처리
 	func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
-		guard let reqUrl = navigationAction.request.url else {
-			return nil
-		}
 		
-		print("window.open(\(reqUrl))")
-		
-		XXX_internalOrExternal = !XXX_internalOrExternal
-		// 여기서는 그냥 토글하면서 외부/내부 번갈아 이동합니다.
-		// 정규표현식 등 조건 처리를 아래 if문에서 구현 바랍니다.
-		if XXX_internalOrExternal {
-			// 앱 내의 웹뷰에서 계속 진행합니다.
-			webView.load(navigationAction.request)
-		} else {
-			// 외부 브라우저를 엽니다. (사파리)
-			UIApplication.shared.openURL(reqUrl)
-		}
-		
-		return nil
+        if !process(webView, request: navigationAction.request as NSURLRequest, hasTargetFrame: false, onLoadInCurrentWebView: { (webView, request) in
+            webView.load(request as URLRequest)
+            return true
+        }, onLoadInExternal: { (request) in
+            guard let reqUrl = request.url else { return false }
+            UIApplication.shared.openURL(reqUrl)
+            return true
+        }) {
+            // process 실패
+            print("Failed to open url")
+        }
+        
+        return nil
 	}
 	
 	func webViewDidClose(_ webView: WKWebView) {
@@ -219,22 +214,23 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
 
 	func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
 		var request = navigationAction.request
-		guard let url = request.url?.absoluteString else {
+		guard let reqUrl = request.url else {
 			// failed to get url
 			decisionHandler(.cancel)
 			return
 		}
+        let reqUrlString = reqUrl.absoluteString
 		
-		print("willNavigate \(request.httpMethod ?? "?"): \(url)")
+		print("willNavigate \(request.httpMethod ?? "?"): \(reqUrl)")
 		
-		if url.hasPrefix("ufo:") {
+		if reqUrlString.hasPrefix("ufo:") {
 			decisionHandler(.cancel)
-			let index = url.index(url.startIndex, offsetBy: 4)
-			handleUfoLink(String(url.suffix(from: index)))
+			let index = reqUrlString.index(reqUrlString.startIndex, offsetBy: 4)
+			handleUfoLink(String(reqUrlString.suffix(from: index)))
 			return
 		}
 		
-		if url.hasPrefix("http") {
+		if reqUrlString.hasPrefix("http") {
 			if let targetFrm = navigationAction.targetFrame {
 				if targetFrm.isMainFrame == false {
 					// maybe ajax call
@@ -257,24 +253,26 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
 				return
 			}
 			
-			m_lastOnlineUrl = url
-	
-			if m_isAutomaticShowHideWait {
-				showWait()
-			}
-
-			guard let mutableRequest = (request as NSURLRequest).mutableCopy() as? NSMutableURLRequest else {
-				// failed to get mutable request copy
-				decisionHandler(.allow)
-				return
-			}
-
-			decisionHandler(.cancel)
-			
-			mutableRequest.setValue("catan-spark-android", forHTTPHeaderField: UfoWebView.HEADERKEY_CATAN_AGENT)
-			mutableRequest.setValue("1.0.0", forHTTPHeaderField: UfoWebView.HEADERKEY_CATAN_VERSION)
-			webView.load(mutableRequest as URLRequest)
-			return
+            // _blank처리
+            //
+            // webView(_ webView, createWebViewWith: WKWebViewConfiguration, for: WKNavigationAction, windowFeatures: WKWindowFeatures) 보다 먼저 처리는 듯 보임
+            //
+            // WKNavigationAction#targetFrame
+            // The target frame, or nil if this is a new window navigation.
+            //
+            // https://developer.apple.com/documentation/webkit/wknavigationaction/1401918-targetframe
+            if process(webView, request: request as NSURLRequest, hasTargetFrame: (navigationAction.targetFrame == nil), onLoadInCurrentWebView: { (webView, request) in
+                decisionHandler(.allow)
+                return true
+            }, onLoadInExternal: { (request) in
+                guard let reqUrl = request.url else { return false }
+                UIApplication.shared.openURL(reqUrl)
+                decisionHandler(.cancel)
+                return true
+            }) {
+                // process 성공
+                return
+            }
 		}
 		
 		// unknown scheme
@@ -293,6 +291,35 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
 	}
 */
 	
+    fileprivate func process(_ webView: WKWebView, request: NSURLRequest, hasTargetFrame: Bool, onLoadInCurrentWebView: ((WKWebView, NSURLRequest) -> Bool), onLoadInExternal: ((NSURLRequest) -> Bool)) -> Bool {
+        guard let reqUrl = request.url else {
+            return false
+        }
+        
+        guard let mutableRequest = (request).mutableCopy() as? NSMutableURLRequest else {
+            return false
+        }
+        
+        mutableRequest.setValue("catan-spark-android", forHTTPHeaderField: UfoWebView.HEADERKEY_CATAN_AGENT)
+        mutableRequest.setValue("1.0.0", forHTTPHeaderField: UfoWebView.HEADERKEY_CATAN_VERSION)
+        
+        if hasTargetFrame == true || reqUrl.absoluteString =~ Config.apiBaseUrlRegex.r {
+            m_lastOnlineUrl = reqUrl.absoluteString
+            
+            if m_isAutomaticShowHideWait {
+                showWait()
+            }
+            
+            // 앱 내의 웹뷰에서 계속 진행합니다.
+            // ex) webView.load(mutableRequest as URLRequest)
+            return onLoadInCurrentWebView(webView, request)
+        } else {
+            // 외부 브라우저를 엽니다. (사파리)
+            // ex) UIApplication.shared.openURL(reqUrl)
+            return onLoadInExternal(request)
+        }
+    }
+    
 	func evalJs(_ jsStr: String) {
 		evaluateJavaScript(jsStr)
 	}

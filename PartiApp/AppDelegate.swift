@@ -15,6 +15,8 @@ import FirebaseMessaging
 
 import Fabric
 import Crashlytics
+import Natrium
+typealias Config = Natrium.Config
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate
@@ -52,7 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 		}
 
 		application.registerForRemoteNotifications()
-        
+		
 		// Override point for customization after application launch.
 		return true
 	}

@@ -20,7 +20,7 @@ $ pod install
 $ cp .natrium.yml.sample .natrium.yml
 ```
 
-${PROJECT_DIR}/.natrium.yml을 열어서 variables > apiBaseUrl > Development를 자신의 환경에 맞게 설정합니다.
+${PROJECT_DIR}/.natrium.yml을 열어서 variables > apiBaseUrl > Development와 variables > apiBaseUrlRegex > Development를 자신의 환경에 맞게 설정합니다.
 
 ```
 variables:
@@ -28,6 +28,11 @@ variables:
     Development: https://parti.test/  # <-- 이부분
     Staging: https://dev.parti.xyz/
     Production: https://parti.xyz/
+  apiBaseUrlRegex:
+    Development: ^https:\\/\\/(.*\\.)?parti\\.test(\\$|\\/)  # <-- 이부분
+    Staging: ^https:\\/\\/(.*\\.)?dev.parti\\.xyz(\\$|\\/)
+    Production: ^https:\\/\\/(.*\\.)?parti\\.xyz(\\$|\\/)
+
 ```
 
 https://github.com/e-sites/Natrium/blob/master/docs/INSTALL_COCOAPODS.md#step-3 를 보고 그대로 세팅합니다. 다만 환경 설정값은 Development로 지정합니다.

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Natrium
 
 protocol ApiResultDelegate : NSObjectProtocol
 {
@@ -18,7 +17,7 @@ protocol ApiResultDelegate : NSObjectProtocol
 
 class ApiMan : NSObject, HttpQueryDelegate
 {
-	private static var API_BASEURL: String = Natrium.Config.apiBaseUrl
+	private static var API_BASEURL: String = Config.apiBaseUrl
 	
 	static let JOBID_REGISTER_TOKEN = 1
 	static let JOBID_DELETE_TOKEN = 2
