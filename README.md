@@ -1,6 +1,6 @@
-== 빠띠앱 ==
+# 빠띠앱
 
-=== 개발 환경 설정 ===
+## 개발 환경 설정
 
 Info.plist를 설정합니다.
 
@@ -14,7 +14,7 @@ pod를 설치합니다. pod로 관련된 라이브러리를 설치합니다. 소
 $ pod install
 ```
 
-[https://github.com/e-sites/Natrium]의 설정 파일을 세팅합니다. ${PROJECT_DIR}/.natrium.yml.sample을 복사하여 만듭니다.
+[https://github.com/e-sites/Natrium] 의 설정 파일을 세팅합니다. ${PROJECT_DIR}/.natrium.yml.sample을 복사하여 만듭니다.
 
 ```
 $ cp .natrium.yml.sample .natrium.yml
