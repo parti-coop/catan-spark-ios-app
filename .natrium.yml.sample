@@ -9,6 +9,10 @@ variables:
     Development: https://parti.test/
     Staging: https://dev.parti.xyz/
     Production: https://parti.xyz/
+  apiBaseUrlRegex:
+    Development: ^https:\\/\\/(.*\\.)?parti\\.test(\\$|\\/)
+    Staging: ^https:\\/\\/(.*\\.)?dev.parti\\.xyz(\\$|\\/)
+    Production: ^https:\\/\\/(.*\\.)?parti\\.xyz(\\$|\\/)
 
 plists:
   "PartiApp/Info.plist":
