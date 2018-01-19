@@ -5,8 +5,32 @@
 Info.plist를 설정합니다.
 
 ```
-cp PartiApp/Info.plist.sample PartiApp/Info.plist
+cp PartiApp/natrium.files/Info-DEV.plist.sample PartiApp/natrium.files/Info-DEV.plist
 ```
+
+위의 PartiApp/natrium.files/Info-DEV.plist 파일에 NSExceptionDomains 아래 key "parti.test"를 테스트할 서버에 맞춰 설정합니다.
+
+```
+<key>NSAppTransportSecurity</key>
+<dict>
+  <key>NSAllowsArbitraryLoads</key>
+  <true/>
+  <key>NSAllowsArbitraryLoadsInWebContent</key>
+  <true/>
+  <key>NSExceptionDomains</key>
+  <dict>
+      <key>parti.test</key>       <!-- *== 이부분 -->
+      <dict>
+          <key>NSIncludesSubdomains</key>
+          <true/>
+          <key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+          <true/>
+      </dict>
+  </dict>
+</dict>
+```
+
+GoogleService-Info.plist 파일이 있다면 이를 준비해서 PartiApp/natrium.files/GoogleService-Info-DEV.plist에 복사해 둡니다.
 
 pod를 설치합니다. pod로 관련된 라이브러리를 설치합니다. 소스 레포지토리에 이미 들어가 있기는 합니다. 그래도 아래 명령어로 라이브러리를 다시 설치하는게 좋습니다.
 

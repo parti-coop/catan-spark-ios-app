@@ -72,7 +72,6 @@ env.yml
 
 # googleservice info
 PartiApp/GoogleService-Info.plist
-PartiApp/firebase/*
 
 # natrium
 .natrium.yml
@@ -80,3 +79,7 @@ Pods/Natrium/bin/Config.swift
 Pods/Natrium/bin/natrium.log
 Pods/Natrium/bin/natrium.lock
 PartiApp/Info.plist
+PartiApp/natrium.files/*
+!PartiApp/natrium.files/info-PRODUCTION.plist
+!PartiApp/natrium.files/info-STAGING.plist
+!PartiApp/natrium.files/info-DEV.plist.sample

@@ -4,6 +4,12 @@ environments:
   - Staging
   - Production
 
+natrium_variables:
+  environmentSlug:
+    Development: DEV
+    Staging: STAGING
+    Production: PRODUCTION
+
 variables:
   apiBaseUrl:
     Development: https://parti.test/
@@ -14,15 +20,6 @@ variables:
     Staging: ^https:\\/\\/(.*\\.)?dev.parti\\.xyz(\\$|\\/)
     Production: ^https:\\/\\/(.*\\.)?parti\\.xyz(\\$|\\/)
 
-plists:
-  "PartiApp/Info.plist":
-    CFBundleDisplayName:
-      Development: 빠띠-개발
-      Staging: 빠띠-테스트
-      Production: 빠띠
-
 files:
-  PartiApp/GoogleService-Info.plist:
-    Development: PartiApp/firebase/GoogleService-Info_DEV.plist
-    Staging: PartiApp/firebase/GoogleService-Info_STAGING.plist
-    Production: PartiApp/firebase/GoogleService-Info_PRODUCTION.plist
+  PartiApp/Info.plist: PartiApp/natrium.files/Info-#{environmentSlug}.plist
+  PartiApp/GoogleService-Info.plist: PartiApp/natrium.files/GoogleService-Info-#{environmentSlug}.plist
