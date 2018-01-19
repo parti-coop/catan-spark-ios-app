@@ -20,6 +20,8 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
 {
 	private static let HEADERKEY_CATAN_AGENT = "catan-agent"
 	private static let HEADERKEY_CATAN_VERSION = "catan-version"
+    
+    private static let FAKE_USER_AGENT_FOR_GOOGLE_OAUTH = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.75.14 (KHTML, like Gecko) Version/7.0.3 Safari/7046A194A"
 
 	public var ufoDelegate: UfoWebDelegate?
 	
@@ -27,6 +29,7 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
 	private var m_wasOffline: Bool = false
 	
 	private var m_isAutomaticShowHideWait: Bool = false
+    private var m_originalUserAgent: String? = nil
 	
 	public init() {
 		let wkconf = WKWebViewConfiguration()
@@ -35,6 +38,11 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
 		self.navigationDelegate = self
 		self.uiDelegate = self
 		self.scrollView.bounces = false
+        
+        loadHTMLString("<html></html>", baseURL: nil)
+        evaluateJavaScript("navigator.userAgent") { (result, error) in
+            self.m_originalUserAgent = result as? String
+        }
 	}
 	
 	required init?(coder: NSCoder) {
@@ -179,17 +187,12 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
     // WKWebView에서 자바스크립트로 window.open(), window.close() 하는 경우 처리
 	func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
 		
-        if !process(webView, request: navigationAction.request as NSURLRequest, hasTargetFrame: false, onLoadInCurrentWebView: { (webView, request) in
+        process(webView, request: navigationAction.request as NSURLRequest, hasTargetFrame: false, onLoadInCurrentWebView: { (webView, request) in
             webView.load(request as URLRequest)
-            return true
         }, onLoadInExternal: { (request) in
-            guard let reqUrl = request.url else { return false }
+            guard let reqUrl = request.url else { return }
             UIApplication.shared.openURL(reqUrl)
-            return true
-        }) {
-            // process 실패
-            print("Failed to open url")
-        }
+        }, onLoadUnknown: {})
         
         return nil
 	}
@@ -261,22 +264,25 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
             // The target frame, or nil if this is a new window navigation.
             //
             // https://developer.apple.com/documentation/webkit/wknavigationaction/1401918-targetframe
-            if process(webView, request: request as NSURLRequest, hasTargetFrame: (navigationAction.targetFrame != nil), onLoadInCurrentWebView: { (webView, request) in
-                decisionHandler(.allow)
-                return true
+            process(webView, request: request as NSURLRequest, hasTargetFrame: (navigationAction.targetFrame != nil), onLoadInCurrentWebView: { (webView, request) in
+                webView.load(request as URLRequest)
+                decisionHandler(.cancel)
             }, onLoadInExternal: { (request) in
-                guard let reqUrl = request.url else { return false }
+                guard let reqUrl = request.url else {
+                    decisionHandler(.cancel) // or .allow?
+                    return
+                }
                 UIApplication.shared.openURL(reqUrl)
                 decisionHandler(.cancel)
-                return true
-            }) {
-                // process 성공
-                return
-            }
+            }, onLoadUnknown: { () in
+                decisionHandler(.allow)    // or .cancel?
+            })
+            
+            return
 		}
 		
-		// unknown scheme
-		decisionHandler(.allow)	// or .cancel?
+        // unknown scheme
+        decisionHandler(.allow)	// or .cancel?
 	}
 
 /*
@@ -290,20 +296,62 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
 		decisionHandler(.allow)
 	}
 */
-	
-    fileprivate func process(_ webView: WKWebView, request: NSURLRequest, hasTargetFrame: Bool, onLoadInCurrentWebView: ((WKWebView, NSURLRequest) -> Bool), onLoadInExternal: ((NSURLRequest) -> Bool)) -> Bool {
+    
+    fileprivate func process(_ webView: WKWebView, request: NSURLRequest, hasTargetFrame: Bool, onLoadInCurrentWebView: ((WKWebView, NSURLRequest) -> Void), onLoadInExternal: ((NSURLRequest) -> Void), onLoadUnknown: () -> Void) {
         guard let reqUrl = request.url else {
-            return false
+            return onLoadUnknown()
         }
-        
         guard let mutableRequest = (request).mutableCopy() as? NSMutableURLRequest else {
-            return false
+            return onLoadUnknown()
         }
         
         mutableRequest.setValue("catan-spark-ios", forHTTPHeaderField: UfoWebView.HEADERKEY_CATAN_AGENT)
         mutableRequest.setValue("1.0.0", forHTTPHeaderField: UfoWebView.HEADERKEY_CATAN_VERSION)
         
-        if hasTargetFrame == true || reqUrl.absoluteString =~ Config.apiBaseUrlRegex.r {
+#if DEBUG
+        // 구글 Oauth에서 parti.dev로 인증결과가 넘어오면 로컬 개발용이다.
+        // 그러므로 Config.apiBaseUrl로 주소를 바꾸어 인증하도록 한다
+        let GOOGLE_OAUTH_FOR_DEV_URL = "https://parti.dev/users/auth/google_oauth2/callback"
+        if reqUrl.absoluteString.hasPrefix(GOOGLE_OAUTH_FOR_DEV_URL) {
+            if let newUrlString = (mutableRequest.url?.absoluteString.replacingOccurrences(of: "https://parti.dev/", with: Config.apiBaseUrl)), let newUrl = URL(string: newUrlString) {
+                mutableRequest.url = newUrl
+                return onLoadInCurrentWebView(webView, mutableRequest)
+            }
+        }
+#endif
+        let GOOGLE_OAUTH_START_URL = "\(Config.apiBaseUrl)users/auth/google_oauth2"
+        if reqUrl.absoluteString.hasPrefix(GOOGLE_OAUTH_START_URL) {
+            // 구글 인증이 시작되었다.
+            // 가짜 User-Agent 사용을 시작한다.
+            m_lastOnlineUrl = reqUrl.absoluteString
+            
+            if m_isAutomaticShowHideWait {
+                showWait()
+            }
+            
+            webView.customUserAgent = UfoWebView.FAKE_USER_AGENT_FOR_GOOGLE_OAUTH
+            mutableRequest.setValue(UfoWebView.FAKE_USER_AGENT_FOR_GOOGLE_OAUTH, forHTTPHeaderField: "User-Agent")
+            return onLoadInCurrentWebView(webView, mutableRequest)
+        } else if request.value(forHTTPHeaderField: "User-Agent") == UfoWebView.FAKE_USER_AGENT_FOR_GOOGLE_OAUTH || webView.customUserAgent == UfoWebView.FAKE_USER_AGENT_FOR_GOOGLE_OAUTH {
+            // 가짜 User-Agent 사용하는 걸보니 이전 request에서 구글 인증이 시작된 상태이다.
+            if !reqUrl.absoluteString.hasPrefix("https://accounts.google.com") {
+                // 구글 인증이 시작된 상태였다가
+                // 구글 인증 주소가 아닌 다른 페이지로 이동하는 중이다.
+                // 구글 인증이 끝났다고 보고 원래 "User-Agent"로 원복한다.
+                m_lastOnlineUrl = reqUrl.absoluteString
+    
+                if m_isAutomaticShowHideWait {
+                    showWait()
+                }
+    
+                webView.customUserAgent = m_originalUserAgent
+                mutableRequest.setValue(m_originalUserAgent, forHTTPHeaderField: "User-Agent")
+                return onLoadInCurrentWebView(webView, mutableRequest)
+            }
+        }
+    
+        let isPartiPage = reqUrl.absoluteString =~ Config.apiBaseUrlRegex.r
+        if hasTargetFrame == true || isPartiPage {
             m_lastOnlineUrl = reqUrl.absoluteString
             
             if m_isAutomaticShowHideWait {
@@ -312,11 +360,11 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
             
             // 앱 내의 웹뷰에서 계속 진행합니다.
             // ex) webView.load(mutableRequest as URLRequest)
-            return onLoadInCurrentWebView(webView, request)
+            return onLoadInCurrentWebView(webView, mutableRequest)
         } else {
             // 외부 브라우저를 엽니다. (사파리)
             // ex) UIApplication.shared.openURL(reqUrl)
-            return onLoadInExternal(request)
+            return onLoadInExternal(mutableRequest)
         }
     }
     
