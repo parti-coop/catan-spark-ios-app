@@ -51,6 +51,7 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
 	
 	func showOfflinePage() {
 		loadLocalHtml("offline")
+        hideWait()
 		m_wasOffline = true
 	}
 	
