@@ -261,7 +261,7 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
             // The target frame, or nil if this is a new window navigation.
             //
             // https://developer.apple.com/documentation/webkit/wknavigationaction/1401918-targetframe
-            if process(webView, request: request as NSURLRequest, hasTargetFrame: (navigationAction.targetFrame == nil), onLoadInCurrentWebView: { (webView, request) in
+            if process(webView, request: request as NSURLRequest, hasTargetFrame: (navigationAction.targetFrame != nil), onLoadInCurrentWebView: { (webView, request) in
                 decisionHandler(.allow)
                 return true
             }, onLoadInExternal: { (request) in
