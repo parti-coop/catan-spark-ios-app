@@ -337,9 +337,14 @@ fileprivate class HttpQueryJob : NSObject, URLSessionDataDelegate, URLSessionDow
 		print("didBecomeInvalidWithError")
 	}
 
-	func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Swift.Void) {
-	
-	}
+    /*
+     
+     테스트 환경을 위해 주석 처리합니다.
+     
+    func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Swift.Void) {
+    
+    }
+    */
 	
 	func urlSessionDidFinishEvents(forBackgroundURLSession session: URLSession) {
 		print("urlSessionDidFinishEvents_forBackgroundURLSession")
@@ -352,7 +357,10 @@ fileprivate class HttpQueryJob : NSObject, URLSessionDataDelegate, URLSessionDow
 	func urlSession(_ session: URLSession, task: URLSessionTask, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Swift.Void)
 	{
 #if DEBUG//_HTTPMAN_ENABLE_FAKE_SSL
-		completionHandler(.useCredential, URLCredential(trust:challenge.protectionSpace.serverTrust!))
+        guard let serverTrust = challenge.protectionSpace.serverTrust else {
+            return completionHandler(.useCredential, nil)
+        }
+        completionHandler(.useCredential, URLCredential(trust:serverTrust))
 #endif
 	}
 
