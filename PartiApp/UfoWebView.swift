@@ -300,7 +300,7 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
             return false
         }
         
-        mutableRequest.setValue("catan-spark-android", forHTTPHeaderField: UfoWebView.HEADERKEY_CATAN_AGENT)
+        mutableRequest.setValue("catan-spark-ios", forHTTPHeaderField: UfoWebView.HEADERKEY_CATAN_AGENT)
         mutableRequest.setValue("1.0.0", forHTTPHeaderField: UfoWebView.HEADERKEY_CATAN_VERSION)
         
         if hasTargetFrame == true || reqUrl.absoluteString =~ Config.apiBaseUrlRegex.r {
