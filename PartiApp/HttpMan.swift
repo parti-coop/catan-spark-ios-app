@@ -402,14 +402,14 @@ fileprivate class HttpQueryJob : NSObject, URLSessionDataDelegate, URLSessionDow
 			return
 		}
 	
-		//print("didCompleteWithError: \(error!.localizedDescription())")
-		print("didCompleteWithError: TODO")
+		let nserr = error! as NSError
+		print("didCompleteWithError: \(nserr.localizedDescription)")
 
 		if m_statusCode == 0 {
-			//m_statusCode = error!.rawValue
+			m_statusCode = nserr.code
 		}
 		
-		m_delegate?.httpQuery(m_spec, ofJob:m_jobId, didFinish:false, withResult:error)
+		m_delegate?.httpQuery(m_spec, ofJob:m_jobId, didFinish:false, withResult:nserr)
 	}
 
 	func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Swift.Void) {
@@ -436,31 +436,10 @@ fileprivate class HttpQueryJob : NSObject, URLSessionDataDelegate, URLSessionDow
 		print("dataTask didBecomeStreamTask")
 	}
 
-	func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data)
-	{
+	func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
 		if m_spec.resultType == .fileWithProgress {
 			assert(false)
-/*
-			assert(m_outFileStream != nil)
-			data.withUnsafeBytes{(u8ptr: UnsafePointer<UInt8>) in
-				//let rawPtr = UnsafeRawPointer(u8ptr)
-				
-				let written = m_outFileStream!.write(u8ptr, maxLength:data.count)
-				if written != data.count || m_outFileStream!.hasSpaceAvailable == false {
-					//[m_connection cancel];
-					m_sessionTask.cancel()
-					m_statusCode = -9;
-					//[self connection:m_connection didFailWithError:nil];
-					return
-				}
-				
-				m_downSoFar += Int64(data.count)
-				m_delegate?.httpQuery(m_spec, ofJob:m_jobId, progressSoFar:m_downSoFar, progressTotal:m_expectedContentLength)
-			}
-*/
-		}
-		else
-		{
+		} else {
 			m_receivedData?.append(data)
 		
 			if m_spec.resultType == .binaryWithProgress {

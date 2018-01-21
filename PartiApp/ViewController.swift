@@ -28,7 +28,8 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
 
 	var m_timeHideQueued: DispatchTime = .now()
 
-	var m_downloadingHud: MBProgressHUD?
+	var m_downloadProgress: UIProgressView?
+	var m_downloadAlertCtlr: UIAlertController?
 	var m_curDownloadFilename: String?
 	var m_curDownloadedFileUrl: URL?
 
@@ -37,18 +38,21 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
 		// Dispose of any resources that can be recreated.
 	}
 
+	private func showToast(_ msg: String) {
+		let toast = MBProgressHUD.showAdded(to: view, animated: true)
+		toast.mode = MBProgressHUDMode.text
+		toast.label.text = msg
+		toast.offset = CGPoint(x: 0, y: MBProgressMaxOffset)
+		toast.hide(animated: true, afterDelay: 3)
+	}
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		ViewController.instance = self
 		
 #if DEBUG
 		ApiMan.setDevMode()
-	
-		let toast = MBProgressHUD.showAdded(to: view, animated: true)
-		toast.mode = MBProgressHUDMode.text
-		toast.label.text = "개발자모드"
-		toast.offset = CGPoint(x: 0, y: MBProgressMaxOffset)
-		toast.hide(animated: true, afterDelay: 3)
+		showToast("개발자모드")
 #endif
 
 		setupReachability()
@@ -232,29 +236,40 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
 		// remove old file
 		let destPathUrl = URL.init(fileURLWithPath: destPath)
 		try? FileManager.default.removeItem(at: destPathUrl)
-		
+
 		AppDelegate.getApiManager().requestFileDownload(self, authkey: getAuthKey(), postId: postId, fileId: fileId, atLocalPath: destPath)
-		
 		m_curDownloadFilename = fileName
-		m_downloadingHud = MBProgressHUD.showAdded(to: view, animated: true)
-		m_downloadingHud?.backgroundView.style = .solidColor
-		m_downloadingHud?.backgroundView.color = UIColor(white:0, alpha:0.4)
-		m_downloadingHud?.mode = MBProgressHUDMode.determinateHorizontalBar
-		m_downloadingHud?.label.text = Util.getLocalizedString("downloading")
-		m_downloadingHud?.detailsLabel.text = m_curDownloadFilename
-	}
-	
-	private func hideDownloadingHud() {
-		m_downloadingHud?.hide(animated: true)
-		m_downloadingHud = nil
+
+		m_downloadAlertCtlr = UIAlertController(title: Util.getLocalizedString("downloading"),
+			message: fileName, preferredStyle: .alert)
+
+		m_downloadAlertCtlr!.addAction(UIAlertAction(title: Util.getLocalizedString("cancel"),
+			style: .default, handler: { _ in
+			self.showWaitMark(true)
+			AppDelegate.getApiManager().cancelDownload()
+		}))
+
+		self.present(m_downloadAlertCtlr!, animated: true, completion: {
+			guard let alert = self.m_downloadAlertCtlr else {
+				return
+			}
+
+			let margin: CGFloat = 8
+			let rect = CGRect(x:margin, y:72, width:alert.view.frame.width - margin * 2 , height: 2)
+			self.m_downloadProgress = UIProgressView(frame: rect)
+			self.m_downloadProgress!.tintColor = UIColor.blue
+			alert.view.addSubview(self.m_downloadProgress!)
+		})
+
 	}
 	
 	func onApi(_ jobId: Int, failedWithErrorMessage errMsg: String) -> Bool {
 		switch (jobId)
 		{
 		case ApiMan.JOBID_DOWNLOAD_FILE:
+			purgeDownloadedFile()
 			hideDownloadingHud()
-			Util.showSimpleAlert("다운로드에 실패하였습니다.")
+			Util.showSimpleAlert(Util.getLocalizedString("download_fail"))
 			return true
 			
 		default:
@@ -280,18 +295,23 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
 		}
 	}
 	
+	private func hideDownloadingHud() {
+		m_downloadProgress = nil
+		m_downloadAlertCtlr?.dismiss(animated: true, completion: nil)
+		m_downloadAlertCtlr = nil
+		showWaitMark(false)
+	}
+	
 	func onApi(_ jobId: Int, downloadedSoFar current: Int64, ofTotal total: Int64) {
-		let prgs = Float(current) / Float(total)
-		m_downloadingHud?.progress = prgs
+		m_downloadProgress?.progress = Float(current) / Float(total)
 	}
 	
 	private func openDownloadedFile(_ fileUrl: URL) {
 		print("openDownloadedFile: \(fileUrl)")
 		let m_docIC: UIDocumentInteractionController = UIDocumentInteractionController.init(url: fileUrl)
-        m_docIC.delegate = self
-        m_docIC.name = m_curDownloadFilename
-        m_curDownloadFilename = nil
-        m_curDownloadedFileUrl = fileUrl
+		m_docIC.delegate = self
+		m_docIC.name = m_curDownloadFilename
+		m_curDownloadedFileUrl = fileUrl
 
         m_docIC.presentPreview(animated: true)
 	}
@@ -300,12 +320,17 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
 		return self
 	}
 	
-	func documentInteractionControllerDidEndPreview(_ controller: UIDocumentInteractionController) {
+	private func purgeDownloadedFile() {
+		m_curDownloadFilename = nil
 		if let url = m_curDownloadedFileUrl {
 			print("delete downloaded file: \(url)")
 			try? FileManager.default.removeItem(at: url)
 			m_curDownloadedFileUrl = nil
 		}
+	}
+	
+	func documentInteractionControllerDidEndPreview(_ controller: UIDocumentInteractionController) {
+		purgeDownloadedFile()
  	}
 	
  	func documentInteractionController(_ controller: UIDocumentInteractionController, didEndSendingToApplication application: String?) {

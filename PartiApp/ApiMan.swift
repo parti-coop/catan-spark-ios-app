@@ -78,6 +78,10 @@ class ApiMan : NSObject, HttpQueryDelegate
 		AppDelegate.getHttpManager().download(spec, ofJob:ApiMan.JOBID_DOWNLOAD_FILE, atPath:localPath, delegate:self)
 	}
 	
+	func cancelDownload() {
+		AppDelegate.getHttpManager().cancel(ApiMan.JOBID_DOWNLOAD_FILE)
+	}
+
 	private func notifyFailure(ofJob jobId: Int, withMessage errMsg: String, delegate _resDelegate: ApiResultDelegate?) {
 		guard let resDelegate = _resDelegate else {
 			return
