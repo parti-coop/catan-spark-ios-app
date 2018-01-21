@@ -268,8 +268,7 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
 		{
 		case ApiMan.JOBID_DOWNLOAD_FILE:
 			purgeDownloadedFile()
-			hideDownloadingHud()
-			Util.showSimpleAlert(Util.getLocalizedString("download_fail"))
+			hideDownloadingHud({ Util.showSimpleAlert(Util.getLocalizedString("download_fail")) })
 			return true
 			
 		default:
@@ -280,14 +279,13 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
 	}
 	
 	func onApi(_ jobId: Int, finishedWithResult _param: Any?) {
-		print("TODO: api \(jobId) succeeded")
+		print("Info: api \(jobId) succeeded")
 		
 		switch (jobId)
 		{
 		case ApiMan.JOBID_DOWNLOAD_FILE:
-			hideDownloadingHud()
 			let downInfo = _param as! HttpFileDownloadResult
-			openDownloadedFile(downInfo.localFileUrl!)
+			hideDownloadingHud({ self.openDownloadedFile(downInfo.localFileUrl!) })
 			break
 		
 		default:
@@ -295,9 +293,9 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
 		}
 	}
 	
-	private func hideDownloadingHud() {
+	private func hideDownloadingHud(_ completion: (() -> Swift.Void)? = nil) {
 		m_downloadProgress = nil
-		m_downloadAlertCtlr?.dismiss(animated: true, completion: nil)
+		m_downloadAlertCtlr?.dismiss(animated: true, completion: completion)
 		m_downloadAlertCtlr = nil
 		showWaitMark(false)
 	}
