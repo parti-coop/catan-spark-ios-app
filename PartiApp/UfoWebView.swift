@@ -133,7 +133,8 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
 		print("didFinishNavigation: \(url)")
 		ufoDelegate?.onWebPageFinished(url)
 		
-		if m_isAutomaticShowHideWait {
+		let isPartiPage = url =~ Config.apiBaseUrlRegex.r
+		if m_isAutomaticShowHideWait || isPartiPage == false {
 			hideWait()
 		}
 	}
@@ -244,9 +245,7 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
 			}
 			
 			if request.httpMethod != "GET" {
-				if m_isAutomaticShowHideWait {
-					showWait()
-				}
+				showWait()
 				
 				decisionHandler(.allow)
 				return
@@ -326,10 +325,8 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
             // 가짜 User-Agent 사용을 시작한다.
             m_lastOnlineUrl = reqUrl.absoluteString
             
-            if m_isAutomaticShowHideWait {
-                showWait()
-            }
-            
+			showWait()
+			
             webView.customUserAgent = UfoWebView.FAKE_USER_AGENT_FOR_GOOGLE_OAUTH
             mutableRequest.setValue(UfoWebView.FAKE_USER_AGENT_FOR_GOOGLE_OAUTH, forHTTPHeaderField: "User-Agent")
             return onLoadInCurrentWebView(webView, mutableRequest)
@@ -341,9 +338,7 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
                 // 구글 인증이 끝났다고 보고 원래 "User-Agent"로 원복한다.
                 m_lastOnlineUrl = reqUrl.absoluteString
     
-                if m_isAutomaticShowHideWait {
-                    showWait()
-                }
+				showWait()
     
                 webView.customUserAgent = m_originalUserAgent
                 mutableRequest.setValue(m_originalUserAgent, forHTTPHeaderField: "User-Agent")
@@ -355,10 +350,8 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
         if hasTargetFrame == true || isPartiPage {
             m_lastOnlineUrl = reqUrl.absoluteString
             
-            if m_isAutomaticShowHideWait {
-                showWait()
-            }
-            
+			showWait()
+			
             // 앱 내의 웹뷰에서 계속 진행합니다.
             // ex) webView.load(mutableRequest as URLRequest)
             return onLoadInCurrentWebView(webView, mutableRequest)

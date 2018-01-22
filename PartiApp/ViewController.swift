@@ -165,7 +165,7 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
 				m_isInitialWaitDone = true
 				showWaitMark(false)
 				
-				m_webView.setAutoWait(true)
+				//m_webView.setAutoWait(true)
 			}
 		}
 	}
