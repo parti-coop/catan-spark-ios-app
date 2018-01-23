@@ -348,9 +348,20 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
     
         let isPartiPage = reqUrl.absoluteString =~ Config.apiBaseUrlRegex.r
         if hasTargetFrame == true || isPartiPage {
-            m_lastOnlineUrl = reqUrl.absoluteString
-            
-			showWait()
+			let newUrl: String = reqUrl.absoluteString
+
+			var isAnchorMove = false
+			if let anchorPos = newUrl.index(of: "#") {
+				let pageUrl = newUrl.prefix(upTo: anchorPos)
+				isAnchorMove = m_lastOnlineUrl?.contains(pageUrl) ?? false
+			}
+
+			// 같은 페이지내 앵커 이동은 wait 표시를 하지 않습니다.
+			if !isAnchorMove {
+				showWait()
+			}
+
+			m_lastOnlineUrl = newUrl
 			
             // 앱 내의 웹뷰에서 계속 진행합니다.
             // ex) webView.load(mutableRequest as URLRequest)
