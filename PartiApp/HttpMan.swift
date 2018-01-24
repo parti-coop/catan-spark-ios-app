@@ -356,12 +356,15 @@ fileprivate class HttpQueryJob : NSObject, URLSessionDataDelegate, URLSessionDow
 
 	func urlSession(_ session: URLSession, task: URLSessionTask, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Swift.Void)
 	{
-#if DEBUG//_HTTPMAN_ENABLE_FAKE_SSL
-        guard let serverTrust = challenge.protectionSpace.serverTrust else {
-            return completionHandler(.useCredential, nil)
-        }
-        completionHandler(.useCredential, URLCredential(trust:serverTrust))
-#endif
+        print("willPerformHTTPRedirection");
+        #if DEBUG//_HTTPMAN_ENABLE_FAKE_SSL
+            guard let serverTrust = challenge.protectionSpace.serverTrust else {
+                return completionHandler(.useCredential, nil)
+            }
+            completionHandler(.useCredential, URLCredential(trust: serverTrust))
+        #else
+            completionHandler(.useCredential, nil)
+        #endif
 	}
 
 	func urlSession(_ session: URLSession, task: URLSessionTask, needNewBodyStream completionHandler: @escaping (InputStream?) -> Swift.Void) {
@@ -382,7 +385,6 @@ fileprivate class HttpQueryJob : NSObject, URLSessionDataDelegate, URLSessionDow
 	}
 
 	func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
-	
 		AppDelegate.getHttpManager().decreaseNetworkJob(self)
 
 		if error == nil {
@@ -413,7 +415,7 @@ fileprivate class HttpQueryJob : NSObject, URLSessionDataDelegate, URLSessionDow
 	}
 
 	func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Swift.Void) {
-		guard let httpResponse = response as? HTTPURLResponse else {
+        guard let httpResponse = response as? HTTPURLResponse else {
 			return
 		}
 		
@@ -450,6 +452,7 @@ fileprivate class HttpQueryJob : NSObject, URLSessionDataDelegate, URLSessionDow
 	}
 
 	func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, willCacheResponse proposedResponse: CachedURLResponse, completionHandler: @escaping (CachedURLResponse?) -> Swift.Void) {
+        print("XXXX2")
 		completionHandler(m_spec.isIgnoreCache ? nil : proposedResponse);
 	}
 
