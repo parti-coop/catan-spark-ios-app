@@ -319,7 +319,8 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
 		m_docIC.name = m_curDownloadFilename
 		m_curDownloadedFileUrl = fileUrl
 
-        m_docIC.presentPreview(animated: true)
+//        m_docIC.presentPreview(animated: true)
+        m_docIC.presentOpenInMenu(from: CGRect.zero, in: m_webView, animated: true)
 	}
 	
 	func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
