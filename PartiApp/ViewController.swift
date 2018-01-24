@@ -25,7 +25,7 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
 
 	var m_isInitialWaitDone = false
 	var m_nPageFinishCount = 0
-
+	var m_urlToGoDelayed: String?
 	var m_timeHideQueued: DispatchTime = .now()
 
 	var m_downloadProgress: UIProgressView?
@@ -118,15 +118,20 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
 		}
 	}
 
-	func gotoUrl(_ url: String) {
+	func safelyGoToUrl(_ url: String) {
 		let urlToGo: String
 		if url.hasPrefix("/") {
 			urlToGo = ApiMan.getBaseUrl() + String(url.dropFirst())
 		} else {
 			urlToGo = url
 		}
-		
-		m_webView.loadRemoteUrl(urlToGo)
+
+		if isShowWait() {
+			m_urlToGoDelayed = urlToGo
+		} else {
+			m_urlToGoDelayed = nil
+			m_webView.loadRemoteUrl(urlToGo)
+		}
 	}
 	
 	private func isShowWait() -> Bool {
@@ -152,6 +157,9 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
 				
 				self.showWaitMark(false)
 			}
+		} else if let urlToGo = m_urlToGoDelayed {
+			m_urlToGoDelayed = nil
+			m_webView.loadRemoteUrl(urlToGo)
 		}
 	}
 	

@@ -134,6 +134,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 		
 		let url = pushInfo["url"]
 		
+		if let urlStr = url as? String, !Util.isNilOrEmpty(urlStr) {
+			ViewController.instance.safelyGoToUrl(urlStr)
+		}
+/*
 		if let aps = pushInfo["aps"] as? NSDictionary {
 			var title: String?
 			var body: String?
@@ -156,11 +160,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 			let alertController = UIAlertController(title: title, message:body, preferredStyle:.alert)
 			alertController.addAction(UIAlertAction(title: Util.getLocalizedString("ok"), style:.`default`, handler: { _ in
 				if let urlStr = url as? String {
-					ViewController.instance.gotoUrl(urlStr)
+					ViewController.instance.safelyGoToUrl(urlStr)
 				}
 			}))
 			ViewController.instance.present(alertController, animated:true, completion:nil)
 		}
+*/
 	}
 }
 
@@ -172,10 +177,10 @@ extension AppDelegate : UNUserNotificationCenterDelegate
 		willPresent notification: UNNotification,
 		withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
 		
-		handlePushData(notification.request.content.userInfo)
+		//handlePushData(notification.request.content.userInfo)
 
 		// Change this to your preferred presentation option
-		completionHandler([])
+		completionHandler([.alert, .badge, .sound])
 	}
 
 	func userNotificationCenter(_ center: UNUserNotificationCenter,
