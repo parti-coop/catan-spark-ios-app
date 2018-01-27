@@ -356,7 +356,7 @@ fileprivate class HttpQueryJob : NSObject, URLSessionDataDelegate, URLSessionDow
 
 	func urlSession(_ session: URLSession, task: URLSessionTask, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Swift.Void)
 	{
-        print("willPerformHTTPRedirection");
+        print("didReceive completionHandler");
         #if DEBUG//_HTTPMAN_ENABLE_FAKE_SSL
             guard let serverTrust = challenge.protectionSpace.serverTrust else {
                 return completionHandler(.useCredential, nil)

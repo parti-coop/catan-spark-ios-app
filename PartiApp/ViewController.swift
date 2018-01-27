@@ -32,6 +32,8 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
 	var m_downloadAlertCtlr: UIAlertController?
 	var m_curDownloadFilename: String?
 	var m_curDownloadedFileUrl: URL?
+    
+    var m_remoteHostReach: TMReachability?
 
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
@@ -101,8 +103,8 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
 		NotificationCenter.default.addObserver(self, selector: #selector(self.reachabilityChanged(noti:)),
 			name: NSNotification.Name.reachabilityChanged, object: nil)
 
-		let remoteHostReach = TMReachability(hostname: "google.com")
-		remoteHostReach?.startNotifier()
+        self.m_remoteHostReach = TMReachability.forInternetConnection()
+		self.m_remoteHostReach?.startNotifier()
 	}
 	
 	@objc func reachabilityChanged(noti: Notification?) {
@@ -177,6 +179,15 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
 			}
 		}
 	}
+    
+    func onWebPageNetworkError(_ url: String) {
+        print("onWebPageNetworkError: \(url)")
+        if m_remoteHostReach?.isReachable() ?? false {
+            showToast("앗! 연결할 수 없습니다. 나중에 다시 시도해 주세요.")
+        } else {
+            m_webView.showOfflinePage()
+        }
+    }
 	
 	private func getAuthKey() -> String? {
 		let ud = UserDefaults.standard
@@ -220,10 +231,57 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
 			}
 		} else if action == "download" {
 			handleDownload(json)
-		} else {
+        } else if action == "reload" {
+            if isConnectedToNetwork() {
+                m_webView.onNetworkReady()
+            } else {
+                showToast("연결이 지연되고 있습니다")
+            }
+        } else {
 			print("unhandled post action: \(action)")
 		}
 	}
+    
+    func isConnectedToNetwork() -> Bool {
+        guard let flags = getFlags() else { return false }
+        let isReachable = flags.contains(.reachable)
+        let needsConnection = flags.contains(.connectionRequired)
+        return (isReachable && !needsConnection)
+    }
+    
+    private func getFlags() -> SCNetworkReachabilityFlags? {
+        guard let reachability = ipv4Reachability() ?? ipv6Reachability() else {
+            return nil
+        }
+        var flags = SCNetworkReachabilityFlags()
+        if !SCNetworkReachabilityGetFlags(reachability, &flags) {
+            return nil
+        }
+        return flags
+    }
+    
+    private func ipv6Reachability() -> SCNetworkReachability? {
+        var zeroAddress = sockaddr_in6()
+        zeroAddress.sin6_len = UInt8(MemoryLayout<sockaddr_in>.size)
+        zeroAddress.sin6_family = sa_family_t(AF_INET6)
+        
+        return withUnsafePointer(to: &zeroAddress, {
+            $0.withMemoryRebound(to: sockaddr.self, capacity: 1) {
+                SCNetworkReachabilityCreateWithAddress(nil, $0)
+            }
+        })
+    }
+    private func ipv4Reachability() -> SCNetworkReachability? {
+        var zeroAddress = sockaddr_in()
+        zeroAddress.sin_len = UInt8(MemoryLayout<sockaddr_in>.size)
+        zeroAddress.sin_family = sa_family_t(AF_INET)
+        
+        return withUnsafePointer(to: &zeroAddress, {
+            $0.withMemoryRebound(to: sockaddr.self, capacity: 1) {
+                SCNetworkReachabilityCreateWithAddress(nil, $0)
+            }
+        })
+    }
 	
 	private func handleDownload(_ json: [String : Any]?) {
 		let _postId = json?["post"] as? Int

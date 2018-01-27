@@ -13,6 +13,7 @@ import Regex
 protocol UfoWebDelegate : NSObjectProtocol
 {
 	func onWebPageFinished(_ url: String)
+    func onWebPageNetworkError(_ url: String)
 	func handleAction(_ action: String, withJSON json: [String:Any]?)
 }
 
@@ -26,7 +27,7 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
 	public var ufoDelegate: UfoWebDelegate?
 	
 	private var m_lastOnlineUrl: String? = nil
-	private var m_wasOffline: Bool = false
+	private var m_wasOfflinePageShown: Bool = false
 	
 	private var m_isAutomaticShowHideWait: Bool = false
     private var m_originalUserAgent: String? = nil
@@ -52,17 +53,17 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
 	func showOfflinePage() {
 		loadLocalHtml("offline")
         hideWait()
-		m_wasOffline = true
+		m_wasOfflinePageShown = true
 	}
-	
+    
 	func onNetworkReady() {
-		if m_wasOffline, let lastOnlineUrl = m_lastOnlineUrl {
-			m_wasOffline = false
+		if m_wasOfflinePageShown, let lastOnlineUrl = m_lastOnlineUrl {
+			m_wasOfflinePageShown = false
 			print("Recover online: \(lastOnlineUrl)")
 			loadRemoteUrl(lastOnlineUrl)
 		}
 	}
-	
+    
 	func loadLocalHtml(_ filename: String) {
 		let path = Bundle.main.path(forResource: filename, ofType: "html")
 		let fileUrl = URL.init(fileURLWithPath: path!)
@@ -110,7 +111,7 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
 				setAutoWait(Util.isNilOrEmpty(arg0) ? false : true)
 			} else if "post" == method {
 				_post(arg0 ?? "", json:arg1)
-			} else {
+            } else {
 				print("Unknown ufo method: \(method ?? "nil")")
 			}
 		}
@@ -152,6 +153,7 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
 			break
 			
 		case NSURLErrorUnsupportedURL:
+            ufoDelegate?.onWebPageNetworkError(url)
 			return
 		
 		case NSURLErrorTimedOut,
@@ -162,7 +164,7 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
 			NSURLErrorResourceUnavailable,
 			NSURLErrorNotConnectedToInternet,
 			NSURLErrorRedirectToNonExistentLocation:
-			showOfflinePage()
+			ufoDelegate?.onWebPageNetworkError(url)
 			break
 			
 		default:
@@ -193,7 +195,7 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
             webView.load(request as URLRequest)
         }, onLoadInExternal: { (request) in
             guard let reqUrl = request.url else { return }
-            UIApplication.shared.openURL(reqUrl)
+            UIApplication.shared.open(reqUrl, options: [:], completionHandler: nil)
         }, onLoadUnknown: {})
         
         return nil
@@ -272,7 +274,7 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
                     decisionHandler(.cancel) // or .allow?
                     return
                 }
-                UIApplication.shared.openURL(reqUrl)
+                UIApplication.shared.open(reqUrl, options: [:], completionHandler: nil)
                 decisionHandler(.cancel)
             }, onLoadUnknown: { () in
                 decisionHandler(.allow)    // or .cancel?
