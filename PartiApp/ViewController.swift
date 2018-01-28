@@ -169,13 +169,21 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
 
         if keyPath == "estimatedProgress" {
             m_progressView.alpha = 0.6
+            
+            if m_webView.estimatedProgress < 1.0 {
+                m_progressView.layer.removeAllAnimations()
+            }
+            
             m_progressView.setProgress(Float(m_webView.estimatedProgress), animated: true)
+            
             if m_webView.estimatedProgress >= 1.0 {
                 UIView.animate(withDuration: 0.3, delay: 0.3, options: [.curveEaseOut],
                                animations: { [weak self] in self?.m_progressView.alpha = 0.0 },
-                               completion: { [weak self] _ in self?.m_progressView.setProgress(0.0, animated: false) })
-            } else {
-                m_progressView.layer.removeAllAnimations()
+                               completion: { [weak self] _ in
+                                if self?.m_progressView.progress ?? 0.0 >= 1.0 {
+                                    self?.m_progressView.setProgress(0.0, animated: false)
+                                }
+                })
             }
             return
         }
