@@ -328,8 +328,7 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
 		AppDelegate.getApiManager().requestFileDownload(self, authkey: getAuthKey(), postId: postId, fileId: fileId, atLocalPath: destPath)
 		m_curDownloadFilename = fileName
 
-		m_downloadAlertCtlr = UIAlertController(title: Util.getLocalizedString("downloading"),
-			message: fileName, preferredStyle: .alert)
+        m_downloadAlertCtlr = UIAlertController(title: Util.getLocalizedString("downloading"), message: nil, preferredStyle: .alert)
 
 		m_downloadAlertCtlr!.addAction(UIAlertAction(title: Util.getLocalizedString("cancel"),
 			style: .default, handler: { _ in
@@ -341,11 +340,13 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
 				return
 			}
 
-			let margin: CGFloat = 8
-			let rect = CGRect(x:margin, y:72, width:alert.view.frame.width - margin * 2 , height: 2)
+			let margin: CGFloat = 15
+			let rect = CGRect(x:margin, y:60, width:alert.view.frame.width - margin * 2 , height: 2)
 			self.m_downloadProgress = UIProgressView(frame: rect)
-			self.m_downloadProgress!.tintColor = UIColor.blue
-			alert.view.addSubview(self.m_downloadProgress!)
+            guard let downloadProgress = self.m_downloadProgress else { return }
+            
+			downloadProgress.tintColor = UIColor.blue
+			alert.view.addSubview(downloadProgress)
 		})
 
 	}
