@@ -12,20 +12,20 @@ import MBProgressHUD
 import TMReachability
 import FirebaseMessaging
 import Crashlytics
+import WebKit
+
+var myContext = 0
 
 class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
 	,UfoWebDelegate, ApiResultDelegate
 {
-	@IBOutlet weak var vwWaitScreen: UIView!
-
 	private static let KEY_AUTHKEY = "xAK"
+    private static let URL_MOBILE_APP_START = ApiMan.getBaseUrl() + "mobile_app/start"
 	static var instance: ViewController!
 
-	var m_webView: UfoWebView!
+    @objc var m_webView: UfoWebView!
+    var m_progressView: UIProgressView!
 
-	var m_isInitialWaitDone = false
-	var m_nPageFinishCount = 0
-	var m_urlToGoDelayed: String?
 	var m_timeHideQueued: DispatchTime = .now()
 
 	var m_downloadProgress: UIProgressView?
@@ -58,46 +58,65 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
 #endif
 
 		setupReachability()
-		
-		m_webView = UfoWebView()
-		m_webView.ufoDelegate = self
-		m_webView.translatesAutoresizingMaskIntoConstraints = false
-		self.view.insertSubview(m_webView, belowSubview:self.vwWaitScreen)
-
-		self.view.addConstraint(NSLayoutConstraint(item:m_webView,
-			attribute:.top,
-			relatedBy:.equal,
-			toItem:self.topLayoutGuide,
-			attribute:.bottom,
-			multiplier:1.0,
-			constant:0))
-		
-		self.view.addConstraint(NSLayoutConstraint(item:m_webView,
-			attribute:.bottom,
-			relatedBy:.equal,
-			toItem:self.view,
-			attribute:.bottom,
-			multiplier:1.0,
-			constant:0))
-		
-		self.view.addConstraint(NSLayoutConstraint(item:m_webView,
-			attribute:.leading,
-			relatedBy:.equal,
-			toItem:self.view,
-			attribute:.leading,
-			multiplier:1.0,
-			constant:0))
-		
-		self.view.addConstraint(NSLayoutConstraint(item:m_webView,
-			attribute:.trailing,
-			relatedBy:.equal,
-			toItem:self.view,
-			attribute:.trailing,
-			multiplier:1.0,
-			constant:0))
-	
-		m_webView.loadRemoteUrl(ApiMan.getBaseUrl() + "mobile_app/start")
+		setupWebView()
+        setupProgressBar()
+        
+        m_progressView.isHidden = true
+        m_webView.loadRemoteUrl(ViewController.URL_MOBILE_APP_START)
 	}
+    
+    fileprivate func setupWebView() {
+        m_webView = UfoWebView()
+        m_webView.ufoDelegate = self
+        m_webView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(m_webView)
+        
+        self.view.addConstraint(NSLayoutConstraint(item:m_webView,
+                                                   attribute:.top,
+                                                   relatedBy:.equal,
+                                                   toItem:self.topLayoutGuide,
+                                                   attribute:.bottom,
+                                                   multiplier:1.0,
+                                                   constant:0))
+        
+        self.view.addConstraint(NSLayoutConstraint(item:m_webView,
+                                                   attribute:.bottom,
+                                                   relatedBy:.equal,
+                                                   toItem:self.view,
+                                                   attribute:.bottom,
+                                                   multiplier:1.0,
+                                                   constant:0))
+        
+        self.view.addConstraint(NSLayoutConstraint(item:m_webView,
+                                                   attribute:.leading,
+                                                   relatedBy:.equal,
+                                                   toItem:self.view,
+                                                   attribute:.leading,
+                                                   multiplier:1.0,
+                                                   constant:0))
+        
+        self.view.addConstraint(NSLayoutConstraint(item:m_webView,
+                                                   attribute:.trailing,
+                                                   relatedBy:.equal,
+                                                   toItem:self.view,
+                                                   attribute:.trailing,
+                                                   multiplier:1.0,
+                                                   constant:0))
+    }
+    
+    fileprivate func setupProgressBar() {
+        //add progresbar to navigation bar
+        m_progressView = UIProgressView(progressViewStyle: .default)
+        m_progressView.translatesAutoresizingMaskIntoConstraints = false
+        m_progressView.tintColor = #colorLiteral(red: 0.5882352941, green: 0.4352941176, blue: 0.8392156863, alpha: 1)
+        m_progressView.trackTintColor = #colorLiteral(red: 0.9450980392, green: 0.9215686275, blue: 0.9843137255, alpha: 1)
+
+        self.view.addSubview(m_progressView)
+        m_progressView.topAnchor.constraint(equalTo: m_webView.topAnchor).isActive = true
+        m_progressView.widthAnchor.constraint(equalToConstant: view.frame.width).isActive = true
+
+        m_webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: .new, context: &myContext)
+    }
 	
 	private func setupReachability() {
 		NotificationCenter.default.addObserver(self, selector: #selector(self.reachabilityChanged(noti:)),
@@ -119,6 +138,13 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
 			//print("RemoteHostNotReachable", reach.currentReachabilityString())
 		}
 	}
+    
+    deinit {
+        //remove all observers
+        m_webView.removeObserver(self, forKeyPath: "estimatedProgress")
+        //remove progress bar from navigation bar
+        m_progressView.removeFromSuperview()
+    }
 
 	func safelyGoToUrl(_ url: String) {
 		let urlToGo: String
@@ -128,65 +154,59 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
 			urlToGo = url
 		}
 
-		if isShowWait() {
-			m_urlToGoDelayed = urlToGo
-		} else {
-			m_urlToGoDelayed = nil
-			m_webView.loadRemoteUrl(urlToGo)
-		}
-	}
-	
-	private func isShowWait() -> Bool {
-		return !vwWaitScreen.isHidden
-	}
-	
-	func showWaitMark(_ show: Bool) {
-		print("showWaitMark:\(show)")
-		
-		let hide = !show
-		if vwWaitScreen.isHidden != hide {
-			vwWaitScreen.isHidden = hide
-		}
-		
-		if show {
-			// set auto-hide timeout
-			let now = DispatchTime.now()
-			m_timeHideQueued = now
-			DispatchQueue.main.asyncAfter(deadline: now + .seconds(5)) {
-				guard self.m_timeHideQueued == now else {
-					return
-				}
-				
-				self.showWaitMark(false)
-			}
-		} else if let urlToGo = m_urlToGoDelayed {
-			m_urlToGoDelayed = nil
-			m_webView.loadRemoteUrl(urlToGo)
-		}
-	}
-	
-	func onWebPageFinished(_ url: String) {
-		print("onWebPageFinished: \(url)")
-		
-		if m_isInitialWaitDone == false && isShowWait() {
-			m_nPageFinishCount += 1
-			if m_nPageFinishCount >= 2 || Config.apiBaseUrl == url {
-				print("InitialWait done")
-				m_isInitialWaitDone = true
-				showWaitMark(false)
-				
-				//m_webView.setAutoWait(true)
-			}
-		}
+        m_webView.loadRemoteUrl(urlToGo)
 	}
     
-    func onWebPageNetworkError(_ url: String) {
-        print("onWebPageNetworkError: \(url)")
+    //observer
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        
+        guard let change = change else { return }
+        if context != &myContext {
+            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
+            return
+        }
+
+        if keyPath == "estimatedProgress" {
+            m_progressView.alpha = 1.0
+            m_progressView.setProgress(Float(m_webView.estimatedProgress), animated: true)
+            if m_webView.estimatedProgress >= 1.0 {
+                UIView.animate(withDuration: 0.3, delay: 0.3, options: [.curveEaseOut],
+                               animations: { [weak self] in self?.m_progressView.alpha = 0.0 },
+                               completion: { [weak self] _ in self?.m_progressView.setProgress(0.0, animated: false) })
+            }
+            return
+        }
+    }
+	
+	private func isShowWait() -> Bool {
+        return false
+	}
+    
+    func onWebPageStared(_ url: String?) {
+        print("onWebPageStared: \(url ?? "nil")")
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+    }
+	
+	func onWebPageFinished(_ url: String?) {
+		print("onWebPageFinished: \(url ?? "nil")")
+		
+        // 처음 뷰가 로딩될 때는 숨겨놓았다가
+        // 첫 페이지가 표시 완료되고 난 후 부터는
+        // 프로그레스를 보여 줍니다.
+        if url != ViewController.URL_MOBILE_APP_START && url != "about:blank" {
+            m_progressView.isHidden = false
+        }
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+	}
+    
+    func onWebPageNetworkError(_ url: String?) {
+        print("onWebPageNetworkError: \(url ?? "nil")")
         if m_remoteHostReach?.isReachable() ?? false {
             showToast("앗! 연결할 수 없습니다. 나중에 다시 시도해 주세요.")
         } else {
             m_webView.showOfflinePage()
         }
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
 	
 	private func getAuthKey() -> String? {
@@ -214,10 +234,6 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
 			}
 			
 		} else if action == "logout" {
-			if m_isInitialWaitDone == false {
-				m_nPageFinishCount -= 1
-			}
-			
 			let ud = UserDefaults.standard
 			let lastAuthKey = ud.object(forKey: ViewController.KEY_AUTHKEY) as? String
 			if lastAuthKey != nil {
@@ -311,7 +327,6 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
 
 		m_downloadAlertCtlr!.addAction(UIAlertAction(title: Util.getLocalizedString("cancel"),
 			style: .default, handler: { _ in
-			self.showWaitMark(true)
 			AppDelegate.getApiManager().cancelDownload()
 		}))
 
@@ -363,7 +378,6 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
 		m_downloadProgress = nil
 		m_downloadAlertCtlr?.dismiss(animated: true, completion: completion)
 		m_downloadAlertCtlr = nil
-		showWaitMark(false)
 	}
 	
 	func onApi(_ jobId: Int, downloadedSoFar current: Int64, ofTotal total: Int64) {

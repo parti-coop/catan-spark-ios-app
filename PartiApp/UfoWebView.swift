@@ -12,8 +12,9 @@ import Regex
 
 protocol UfoWebDelegate : NSObjectProtocol
 {
-	func onWebPageFinished(_ url: String)
-    func onWebPageNetworkError(_ url: String)
+    func onWebPageStared(_ url: String?)
+	func onWebPageFinished(_ url: String?)
+    func onWebPageNetworkError(_ url: String?)
 	func handleAction(_ action: String, withJSON json: [String:Any]?)
 }
 
@@ -29,7 +30,6 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
 	private var m_lastOnlineUrl: String? = nil
 	private var m_wasOfflinePageShown: Bool = false
 	
-	private var m_isAutomaticShowHideWait: Bool = false
     private var m_originalUserAgent: String? = nil
 	
 	public init() {
@@ -52,7 +52,6 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
 	
 	func showOfflinePage() {
 		loadLocalHtml("offline")
-        hideWait()
 		m_wasOfflinePageShown = true
 	}
     
@@ -102,49 +101,26 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
 			let method = body?["method"] as? String
 			let arg0 = body?["arg0"] as? String
 			let arg1 = body?["arg1"] as? String
-		
-			if "showWait" == method {
-				showWait()
-			} else if "hideWait" == method {
-				hideWait()
-			} else if "setAutoWait" == method {
-				setAutoWait(Util.isNilOrEmpty(arg0) ? false : true)
-			} else if "post" == method {
+
+            if "post" == method {
 				_post(arg0 ?? "", json:arg1)
             } else {
 				print("Unknown ufo method: \(method ?? "nil")")
 			}
 		}
 	}
-	
-	func setAutoWait(_ isAuto: Bool) {
-		print("setAutoWait(\(isAuto))")
-		m_isAutomaticShowHideWait = isAuto
-	}
-	
-	func showWait() {
-		ViewController.instance.showWaitMark(true)
-	}
-	func hideWait() {
-		ViewController.instance.showWaitMark(false)
-	}
 
 	func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
 		let url = webView.url?.absoluteString ?? "nil"
 		print("didFinishNavigation: \(url)")
 		ufoDelegate?.onWebPageFinished(url)
-		
-		let isPartiPage = url =~ Config.apiBaseUrlRegex.r
-		if m_isAutomaticShowHideWait || isPartiPage == false {
-			hideWait()
-		}
 	}
 
 	func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
 		let nserr = error as NSError
 		
-		let url = webView.url?.absoluteString ?? "nil"
-		print("didFailProvisionalNavigation: \(url) \(nserr.code)")
+		let url = webView.url?.absoluteString
+		print("didFailProvisionalNavigation: \(url ?? "nil") \(nserr.code)")
 
 		switch (nserr.code)
 		{
@@ -193,6 +169,7 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
 		
         process(webView, request: navigationAction.request as NSURLRequest, hasTargetFrame: false, onLoadInCurrentWebView: { (webView, request) in
             webView.load(request as URLRequest)
+            ufoDelegate?.onWebPageStared(request.url?.absoluteString ?? "")
         }, onLoadInExternal: { (request) in
             guard let reqUrl = request.url else { return }
             UIApplication.shared.open(reqUrl, options: [:], completionHandler: nil)
@@ -247,8 +224,6 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
 			}
 			
 			if request.httpMethod != "GET" {
-				showWait()
-				
 				decisionHandler(.allow)
 				return
 			}
@@ -268,6 +243,7 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
             // https://developer.apple.com/documentation/webkit/wknavigationaction/1401918-targetframe
             process(webView, request: request as NSURLRequest, hasTargetFrame: (navigationAction.targetFrame != nil), onLoadInCurrentWebView: { (webView, request) in
                 webView.load(request as URLRequest)
+                ufoDelegate?.onWebPageStared(request.url?.absoluteString ?? "")
                 decisionHandler(.cancel)
             }, onLoadInExternal: { (request) in
                 guard let reqUrl = request.url else {
@@ -327,8 +303,6 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
             // 가짜 User-Agent 사용을 시작한다.
             m_lastOnlineUrl = reqUrl.absoluteString
             
-			showWait()
-			
             webView.customUserAgent = UfoWebView.FAKE_USER_AGENT_FOR_GOOGLE_OAUTH
             mutableRequest.setValue(UfoWebView.FAKE_USER_AGENT_FOR_GOOGLE_OAUTH, forHTTPHeaderField: "User-Agent")
             return onLoadInCurrentWebView(webView, mutableRequest)
@@ -340,8 +314,6 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
                 // 구글 인증이 끝났다고 보고 원래 "User-Agent"로 원복한다.
                 m_lastOnlineUrl = reqUrl.absoluteString
     
-				showWait()
-    
                 webView.customUserAgent = m_originalUserAgent
                 mutableRequest.setValue(m_originalUserAgent, forHTTPHeaderField: "User-Agent")
                 return onLoadInCurrentWebView(webView, mutableRequest)
@@ -351,17 +323,6 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
         let isPartiPage = reqUrl.absoluteString =~ Config.apiBaseUrlRegex.r
         if hasTargetFrame == true || isPartiPage {
 			let newUrl: String = reqUrl.absoluteString
-
-			var isAnchorMove = false
-			if let anchorPos = newUrl.index(of: "#") {
-				let pageUrl = newUrl.prefix(upTo: anchorPos)
-				isAnchorMove = m_lastOnlineUrl?.contains(pageUrl) ?? false
-			}
-
-			// 같은 페이지내 앵커 이동은 wait 표시를 하지 않습니다.
-			if !isAnchorMove {
-				showWait()
-			}
 
 			m_lastOnlineUrl = newUrl
 			
