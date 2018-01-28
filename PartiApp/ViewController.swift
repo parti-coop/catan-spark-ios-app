@@ -392,13 +392,15 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
 	
 	private func openDownloadedFile(_ fileUrl: URL) {
 		print("openDownloadedFile: \(fileUrl)")
-		let m_docIC: UIDocumentInteractionController = UIDocumentInteractionController.init(url: fileUrl)
+        let m_docIC: UIDocumentInteractionController = UIDocumentInteractionController.init(url: fileUrl)
 		m_docIC.delegate = self
 		m_docIC.name = m_curDownloadFilename
 		m_curDownloadedFileUrl = fileUrl
 
-//        m_docIC.presentPreview(animated: true)
-        m_docIC.presentOpenInMenu(from: CGRect.zero, in: m_webView, animated: true)
+        if !m_docIC.presentPreview(animated: true) {
+            showToast("파일을 열 수 있는 앱이 없습니다.")
+        }
+//        m_docIC.presentOpenInMenu(from: CGRect.zero, in: m_webView, animated: true)
 	}
 	
 	func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
