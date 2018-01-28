@@ -114,6 +114,7 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
         self.view.addSubview(m_progressView)
         m_progressView.topAnchor.constraint(equalTo: m_webView.topAnchor).isActive = true
         m_progressView.widthAnchor.constraint(equalToConstant: view.frame.width).isActive = true
+        m_progressView.heightAnchor.constraint(equalToConstant: 3).isActive = true
 
         m_webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: .new, context: &myContext)
     }
@@ -167,12 +168,14 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
         }
 
         if keyPath == "estimatedProgress" {
-            m_progressView.alpha = 1.0
+            m_progressView.alpha = 0.6
             m_progressView.setProgress(Float(m_webView.estimatedProgress), animated: true)
             if m_webView.estimatedProgress >= 1.0 {
                 UIView.animate(withDuration: 0.3, delay: 0.3, options: [.curveEaseOut],
                                animations: { [weak self] in self?.m_progressView.alpha = 0.0 },
                                completion: { [weak self] _ in self?.m_progressView.setProgress(0.0, animated: false) })
+            } else {
+                m_progressView.layer.removeAllAnimations()
             }
             return
         }
@@ -195,6 +198,9 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
         // 프로그레스를 보여 줍니다.
         if url != ViewController.URL_MOBILE_APP_START && url != "about:blank" {
             m_progressView.isHidden = false
+        }
+        if url == ViewController.URL_MOBILE_APP_START {
+            m_webView.clearHistory()
         }
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
 	}

@@ -27,16 +27,26 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
 
 	public var ufoDelegate: UfoWebDelegate?
 	
-	private var m_lastOnlineUrl: String? = nil
+    private var m_lastOnlineUrlString: String? {
+        set(newUrlString) {
+            guard let newUrlString = newUrlString else { return }
+            if newUrlString == m_onlineUrlStrings.last { return }
+            m_onlineUrlStrings.append(newUrlString)
+        }
+        get {
+            return nil
+        }
+    }
+    private var m_onlineUrlStrings = [String]()
 	private var m_wasOfflinePageShown: Bool = false
 	
     private var m_originalUserAgent: String? = nil
-	
+    
 	public init() {
 		let wkconf = WKWebViewConfiguration()
 		super.init(frame:CGRect.zero, configuration:wkconf)
 		wkconf.userContentController.add(self, name:"ufop")
-		self.navigationDelegate = self
+        self.navigationDelegate = self
 		self.uiDelegate = self
 		self.scrollView.bounces = false
         
@@ -56,7 +66,7 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
 	}
     
 	func onNetworkReady() {
-		if m_wasOfflinePageShown, let lastOnlineUrl = m_lastOnlineUrl {
+		if m_wasOfflinePageShown, let lastOnlineUrl = m_lastOnlineUrlString {
 			m_wasOfflinePageShown = false
 			print("Recover online: \(lastOnlineUrl)")
 			loadRemoteUrl(lastOnlineUrl)
@@ -102,7 +112,17 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
 			let arg0 = body?["arg0"] as? String
 			let arg1 = body?["arg1"] as? String
 
-            if "post" == method {
+            if "goBack" == method {
+                if m_onlineUrlStrings.count <= 1 {
+                    print("No back url")
+                    return
+                }
+                m_onlineUrlStrings.removeLast()
+                guard let urlString = m_onlineUrlStrings.last else { return }
+                loadRemoteUrl(urlString)
+            } else if "canGoBack" == method {
+                evalJs("ufo.callback.canGoBack(\(m_onlineUrlStrings.count > 1 ? "true" : "false"))")
+            } else if "post" == method {
 				_post(arg0 ?? "", json:arg1)
             } else {
 				print("Unknown ufo method: \(method ?? "nil")")
@@ -217,12 +237,11 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
 		if reqUrlString.hasPrefix("http") {
 			if let targetFrm = navigationAction.targetFrame {
 				if targetFrm.isMainFrame == false {
-					// maybe ajax call
-					decisionHandler(.allow)
+                    decisionHandler(.allow)
 					return
 				}
 			}
-			
+            
 			if request.httpMethod != "GET" {
 				decisionHandler(.allow)
 				return
@@ -232,7 +251,13 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
 				decisionHandler(.allow)
 				return
 			}
-			
+
+            if reqUrlString == m_lastOnlineUrlString {
+                print("willNavigate disabled : same url")
+                decisionHandler(.cancel)
+                return
+            }
+
             // _blank처리
             //
             // webView(_ webView, createWebViewWith: WKWebViewConfiguration, for: WKNavigationAction, windowFeatures: WKWindowFeatures) 보다 먼저 처리는 듯 보임
@@ -292,6 +317,7 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
         let GOOGLE_OAUTH_FOR_DEV_URL = "https://parti.dev/users/auth/google_oauth2/callback"
         if reqUrl.absoluteString.hasPrefix(GOOGLE_OAUTH_FOR_DEV_URL) {
             if let newUrlString = (mutableRequest.url?.absoluteString.replacingOccurrences(of: "https://parti.dev/", with: Config.apiBaseUrl)), let newUrl = URL(string: newUrlString) {
+                m_lastOnlineUrlString = newUrlString
                 mutableRequest.url = newUrl
                 return onLoadInCurrentWebView(webView, mutableRequest)
             }
@@ -301,7 +327,7 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
         if reqUrl.absoluteString.hasPrefix(GOOGLE_OAUTH_START_URL) {
             // 구글 인증이 시작되었다.
             // 가짜 User-Agent 사용을 시작한다.
-            m_lastOnlineUrl = reqUrl.absoluteString
+            m_lastOnlineUrlString = reqUrl.absoluteString
             
             webView.customUserAgent = UfoWebView.FAKE_USER_AGENT_FOR_GOOGLE_OAUTH
             mutableRequest.setValue(UfoWebView.FAKE_USER_AGENT_FOR_GOOGLE_OAUTH, forHTTPHeaderField: "User-Agent")
@@ -312,7 +338,7 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
                 // 구글 인증이 시작된 상태였다가
                 // 구글 인증 주소가 아닌 다른 페이지로 이동하는 중이다.
                 // 구글 인증이 끝났다고 보고 원래 "User-Agent"로 원복한다.
-                m_lastOnlineUrl = reqUrl.absoluteString
+                m_lastOnlineUrlString = reqUrl.absoluteString
     
                 webView.customUserAgent = m_originalUserAgent
                 mutableRequest.setValue(m_originalUserAgent, forHTTPHeaderField: "User-Agent")
@@ -322,9 +348,7 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
     
         let isPartiPage = reqUrl.absoluteString =~ Config.apiBaseUrlRegex.r
         if hasTargetFrame == true || isPartiPage {
-			let newUrl: String = reqUrl.absoluteString
-
-			m_lastOnlineUrl = newUrl
+			m_lastOnlineUrlString = reqUrl.absoluteString
 			
             // 앱 내의 웹뷰에서 계속 진행합니다.
             // ex) webView.load(mutableRequest as URLRequest)
@@ -364,4 +388,8 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
 			print("Unhandled action: \(action) param=\(param ?? "nil")")
 		}
 	}
+    
+    func clearHistory() {
+        m_onlineUrlStrings.removeAll()
+    }
 }
