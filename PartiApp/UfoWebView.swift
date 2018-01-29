@@ -69,6 +69,11 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
 	}
 
 	func loadRemoteUrl(_ url: String) {
+        if url == m_onlineUrlStrings.last {
+            print("cancel loadRemoteUrl : same url")
+            return
+        }
+        
 		print("loadRemoteUrl: \(url)")
 		let req = URLRequest(url: URL(string: url)!)
 		super.load(req)
@@ -234,13 +239,6 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
 				decisionHandler(.allow)
 				return
 			}
-
-            if reqUrlString == m_onlineUrlStrings.last {
-                print(m_onlineUrlStrings)
-                print("willNavigate disabled : same url")
-                decisionHandler(.cancel)
-                return
-            }
 
             // _blank처리
             //
