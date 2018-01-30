@@ -207,9 +207,6 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
         if url != ViewController.URL_MOBILE_APP_START && url != "about:blank" {
             m_progressView.isHidden = false
         }
-        if url == ViewController.URL_MOBILE_APP_START {
-            m_webView.clearHistory()
-        }
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
 	}
     
