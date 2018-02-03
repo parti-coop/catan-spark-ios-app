@@ -20,7 +20,6 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
 	,UfoWebDelegate, ApiResultDelegate
 {
 	private static let KEY_AUTHKEY = "xAK"
-    private static let URL_MOBILE_APP_START = ApiMan.getBaseUrl() + "mobile_app/start"
 	static var instance: ViewController!
 
     @objc var m_webView: UfoWebView!
@@ -62,7 +61,7 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
         setupProgressBar()
         
         m_progressView.isHidden = true
-        m_webView.loadRemoteUrl(ViewController.URL_MOBILE_APP_START)
+        m_webView.loadRemoteUrl()
 	}
     
     fileprivate func setupWebView() {
@@ -136,6 +135,7 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
 			//print("RemoteHostReachable", reach.currentReachabilityString())
 			m_webView.onNetworkReady()
 		} else {
+            m_webView.onNetworkOffline()
 			//print("RemoteHostNotReachable", reach.currentReachabilityString())
 		}
 	}
@@ -193,8 +193,8 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
         return false
 	}
     
-    func onWebPageStared(_ url: String?) {
-        print("onWebPageStared: \(url ?? "nil")")
+    func onWebPageStarted(_ url: String?) {
+        print("onWebPageStarted: \(url ?? "nil")")
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
     }
 	
@@ -204,10 +204,9 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
         // 처음 뷰가 로딩될 때는 숨겨놓았다가
         // 첫 페이지가 표시 완료되고 난 후 부터는
         // 프로그레스를 보여 줍니다.
-        if url != ViewController.URL_MOBILE_APP_START && url != "about:blank" {
+        if !m_webView.isControllUrl(url) {
             m_progressView.isHidden = false
         }
-        UIApplication.shared.isNetworkActivityIndicatorVisible = false
 	}
     
     func onWebPageNetworkError(_ url: String?) {
@@ -217,6 +216,10 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
         } else {
             m_webView.showOfflinePage()
         }
+    }
+    
+    func onWebPageFinally(_ url: String?) {
+        print("onWebPageFinally: \(url ?? "nil")")
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
 	

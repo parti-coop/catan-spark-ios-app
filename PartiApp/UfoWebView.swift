@@ -12,23 +12,23 @@ import Regex
 
 protocol UfoWebDelegate : NSObjectProtocol
 {
-    func onWebPageStared(_ url: String?)
-	func onWebPageFinished(_ url: String?)
-    func onWebPageNetworkError(_ url: String?)
+    func onWebPageStarted(_ urlString: String?)
+	func onWebPageFinished(_ urlString: String?)
+    func onWebPageNetworkError(_ urlString: String?)
+    func onWebPageFinally(_ urlString: String?)
 	func handleAction(_ action: String, withJSON json: [String:Any]?)
 }
 
 class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUIDelegate
 {
-	private static let HEADERKEY_CATAN_AGENT = "catan-agent"
-	private static let HEADERKEY_CATAN_VERSION = "catan-version"
-    
-    private static let FAKE_USER_AGENT_FOR_GOOGLE_OAUTH = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.75.14 (KHTML, like Gecko) Version/7.0.3 Safari/7046A194A"
+    private static let URL_MOBILE_APP_START = ApiMan.getBaseUrl() + "mobile_app/start"
+
+    private static let CATAN_USER_AGENT = " CatanSparkIOS/2";
+    private static let FAKE_USER_AGENT_FOR_GOOGLE_OAUTH = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.75.14 (KHTML, like Gecko) Version/7.0.3 Safari/7046A194A" + CATAN_USER_AGENT
 
 	public var ufoDelegate: UfoWebDelegate?
     private var m_onlineUrlStrings = [String]()
 	private var m_wasOfflinePageShown: Bool = false
-	
     private var m_originalUserAgent: String? = nil
     
 	public init() {
@@ -38,10 +38,15 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
         self.navigationDelegate = self
 		self.uiDelegate = self
 		self.scrollView.bounces = false
+        self.allowsLinkPreview = false
+        self.allowsBackForwardNavigationGestures = false
         
         loadHTMLString("<html></html>", baseURL: nil)
-        evaluateJavaScript("navigator.userAgent") { (result, error) in
-            self.m_originalUserAgent = result as? String
+        evaluateJavaScript("navigator.userAgent") { [weak self] (result, error) in
+            if let strongSelf = self, let userAgent = result as? String {
+                strongSelf.customUserAgent = userAgent + UfoWebView.CATAN_USER_AGENT
+                strongSelf.m_originalUserAgent = strongSelf.customUserAgent
+            }
         }
 	}
 	
@@ -55,12 +60,20 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
 	}
     
 	func onNetworkReady() {
-		if m_wasOfflinePageShown, let lastOnlineUrl = m_onlineUrlStrings.last {
+        if m_wasOfflinePageShown, let lastOnlineUrlString = m_onlineUrlStrings.last {
 			m_wasOfflinePageShown = false
-			print("Recover online: \(lastOnlineUrl)")
-			loadRemoteUrl(lastOnlineUrl)
+			print("Recover online: \(lastOnlineUrlString)")
+			loadRemoteUrl(lastOnlineUrlString)
 		}
 	}
+    
+    func onNetworkOffline() {
+        if !m_wasOfflinePageShown {
+            m_wasOfflinePageShown = true
+            print("Offline!")
+            showOfflinePage()
+        }
+    }
     
 	func loadLocalHtml(_ filename: String) {
 		let path = Bundle.main.path(forResource: filename, ofType: "html")
@@ -68,16 +81,31 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
 		super.loadFileURL(fileUrl, allowingReadAccessTo: Bundle.main.bundleURL)
 	}
 
-	func loadRemoteUrl(_ url: String) {
-        print("loadRemoteUrl: \(url)")
-		let req = URLRequest(url: URL(string: url)!)
-		super.load(req)
-	}
+	func loadRemoteUrl(_ targetUrlString: String? = nil) {
+        print("loadRemoteUrl: \(targetUrlString ?? "nil")")
+        m_wasOfflinePageShown = false
+        guard let targetUrlString = targetUrlString else {
+            loadRequest(UfoWebView.URL_MOBILE_APP_START)
+            return
+        }
+        
+        if !isControllUrl(targetUrlString) && (m_wasOfflinePageShown || m_onlineUrlStrings.isEmpty) {
+            let escapedString = targetUrlString.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
+            loadRequest("\(UfoWebView.URL_MOBILE_APP_START)?after=\(escapedString)")
+            return
+        }
+        
+        loadRequest(targetUrlString)
+    }
+    
+    fileprivate func loadRequest(_ urlString: String) {
+        guard let url = URL(string: urlString) else { return }
+        let req = URLRequest(url: url)
+        super.load(req)
+    }
 	
-	private func _post(_ action: String, json jsonString: String?) {
-		if ufoDelegate == nil {
-			return
-		}
+	private func postJs(_ action: String, json jsonString: String?) {
+		guard let ufoDelegate = ufoDelegate else { return }
 		
 		var json: [String: Any]? = nil
 		if !Util.isNilOrEmpty(jsonString) {
@@ -90,9 +118,8 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
 			}
 		}
 		
-		ufoDelegate?.handleAction(action, withJSON:json)
+		ufoDelegate.handleAction(action, withJSON:json)
 	}
-
 
 	func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
 		if message.name == "ufop" {
@@ -102,9 +129,10 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
 			let arg1 = body?["arg1"] as? String
 
             if "addOnlineUrl" == method {
-                guard let url = arg0 else { return }
-                if url != m_onlineUrlStrings.last {
-                    m_onlineUrlStrings.append(url)
+                print("add addOnlineUrl!")
+                guard let urlString = arg0 else { return }
+                if urlString != m_onlineUrlStrings.last {
+                    m_onlineUrlStrings.append(urlString)
                 }
             } else if "goBack" == method {
                 m_onlineUrlStrings.removeLast()
@@ -115,7 +143,7 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
                     loadRemoteUrl(urlString)
                 }
             } else if "post" == method {
-				_post(arg0 ?? "", json:arg1)
+				postJs(arg0 ?? "", json: arg1)
             } else {
 				print("Unknown ufo method: \(method ?? "nil")")
 			}
@@ -123,16 +151,17 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
 	}
 
 	func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-		let url = webView.url?.absoluteString ?? "nil"
-		print("didFinishNavigation: \(url)")
-		ufoDelegate?.onWebPageFinished(url)
+		let urlString = webView.url?.absoluteString ?? "nil"
+		print("didFinishNavigation: \(urlString)")
+		ufoDelegate?.onWebPageFinished(urlString)
+        ufoDelegate?.onWebPageFinally(urlString)
 	}
 
 	func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
 		let nserr = error as NSError
 		
-		let url = webView.url?.absoluteString
-		print("didFailProvisionalNavigation: \(url ?? "nil") \(nserr.code)")
+		let urlString = webView.url?.absoluteString
+		print("didFailProvisionalNavigation: \(urlString ?? "nil") \(nserr.code)")
 
 		switch (nserr.code)
 		{
@@ -140,11 +169,8 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
 			NSURLErrorCancelled:
 			break
 			
-		case NSURLErrorUnsupportedURL:
-            ufoDelegate?.onWebPageNetworkError(url)
-			return
-		
-		case NSURLErrorTimedOut,
+		case NSURLErrorUnsupportedURL,
+            NSURLErrorTimedOut,
 			NSURLErrorCannotFindHost,
 			NSURLErrorCannotConnectToHost,
 			NSURLErrorNetworkConnectionLost,
@@ -152,12 +178,13 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
 			NSURLErrorResourceUnavailable,
 			NSURLErrorNotConnectedToInternet,
 			NSURLErrorRedirectToNonExistentLocation:
-			ufoDelegate?.onWebPageNetworkError(url)
+			ufoDelegate?.onWebPageNetworkError(urlString)
 			break
 			
 		default:
 			break
 		}
+        ufoDelegate?.onWebPageFinally(urlString)
 	}
 	
 	func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
@@ -178,20 +205,12 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
 	
     // WKWebView에서 자바스크립트로 window.open(), window.close() 하는 경우 처리
 	func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
-		
-        process(webView, request: navigationAction.request as NSURLRequest, hasTargetFrame: false, onLoadInCurrentWebView: { (webView, request) in
-            webView.load(request as URLRequest)
-            ufoDelegate?.onWebPageStared(request.url?.absoluteString ?? "")
-        }, onLoadInExternal: { (request) in
-            guard let reqUrl = request.url else { return }
-            UIApplication.shared.open(reqUrl, options: [:], completionHandler: nil)
-        }, onLoadUnknown: {})
-        
+		loadRemoteUrl(navigationAction.request.url?.absoluteString)
         return nil
 	}
 	
 	func webViewDidClose(_ webView: WKWebView) {
-		// window.close() 이벤트를 받을 수가 없음 ㅠ
+		// window.close() 이벤트를 받을 수가 없음
 		print("TODO: webViewDidClose \(webView)")
 	}
 
@@ -210,41 +229,70 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
 
 	func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
 		var request = navigationAction.request
-		guard let reqUrl = request.url else {
+		guard let requestUrl = request.url else {
 			// failed to get url
 			decisionHandler(.cancel)
 			return
 		}
-        let reqUrlString = reqUrl.absoluteString
+        let requestUrlString = requestUrl.absoluteString
 		
-		print("willNavigate \(request.httpMethod ?? "?"): \(reqUrl)")
+		print("willNavigate \(request.httpMethod ?? "?"): \(requestUrlString)")
 		
-		if reqUrlString.hasPrefix("ufo:") {
-			decisionHandler(.cancel)
-			let index = reqUrlString.index(reqUrlString.startIndex, offsetBy: 4)
-			handleUfoLink(String(reqUrlString.suffix(from: index)))
+        if requestUrlString == "about:blank" {
+            decisionHandler(.allow)
+            return
+        }
+        
+		if requestUrlString.hasPrefix("ufo:") {
+			let index = requestUrlString.index(requestUrlString.startIndex, offsetBy: 4)
+			handleUfoLink(String(requestUrlString.suffix(from: index)))
+            decisionHandler(.cancel)
 			return
 		}
 		
-		if reqUrlString.hasPrefix("http") {
-			if let targetFrm = navigationAction.targetFrame {
-				if targetFrm.isMainFrame == false {
-                    decisionHandler(.allow)
-					return
-				}
+		if requestUrlString.hasPrefix("http") {
+			if let targetFrm = navigationAction.targetFrame, targetFrm.isMainFrame == false {
+                allowHttpNavigationAction(decisionHandler, requestUrlString: requestUrlString)
+                return
 			}
             
 			if request.httpMethod != "GET" {
-				decisionHandler(.allow)
-				return
+                allowHttpNavigationAction(decisionHandler, requestUrlString: requestUrlString)
+                return
 			}
+            
+            // 이미 프로세싱되어 있는지 확인한다
+            if request.value(forHTTPHeaderField: "x-catan-spark-app") == "processed" {
+                allowHttpNavigationAction(decisionHandler, requestUrlString: requestUrlString)
+                return
+            }
+            guard let mutableRequest = (request as NSURLRequest).mutableCopy() as? NSMutableURLRequest else {
+                allowHttpNavigationAction(decisionHandler, requestUrlString: requestUrlString)
+                return
+            }
+            mutableRequest.setValue("processed", forHTTPHeaderField: "x-catan-spark-app")
+            
+            #if DEBUG
+                // 구글 Oauth에서 parti.dev로 인증결과가 넘어오면 로컬 개발용이다.
+                // 그러므로 Config.apiBaseUrl로 주소를 바꾸어 인증하도록 한다
+                let GOOGLE_OAUTH_FOR_DEV_URL = "https://parti.dev/users/auth/google_oauth2/callback"
+                if requestUrl.absoluteString.hasPrefix(GOOGLE_OAUTH_FOR_DEV_URL) {
+                    let newUrlString = requestUrlString.replacingOccurrences(of: "https://parti.dev/", with: Config.apiBaseUrl)
+                    if let newUrl = URL(string: newUrlString) {
+                        mutableRequest.url = newUrl
+                        restartHttpNavigationAction(decisionHandler, request: mutableRequest)
+                        return
+                    }
+                }
+            #endif
 			
-			if request.value(forHTTPHeaderField: UfoWebView.HEADERKEY_CATAN_AGENT) != nil {
-				decisionHandler(.allow)
-				return
-			}
-
-            // _blank처리
+            let userAgentString = makeUserAgentString(webView, request: request)
+            webView.customUserAgent = userAgentString
+            
+            // [ 빠띠 내의 주소인지 확인하고 처리 ]
+            // 빠띠 내의 주소면 무조건 현재 웹뷰에서 처리
+            //
+            // [ _blank처리 ]
             //
             // webView(_ webView, createWebViewWith: WKWebViewConfiguration, for: WKNavigationAction, windowFeatures: WKWindowFeatures) 보다 먼저 처리는 듯 보임
             //
@@ -252,92 +300,64 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
             // The target frame, or nil if this is a new window navigation.
             //
             // https://developer.apple.com/documentation/webkit/wknavigationaction/1401918-targetframe
-            process(webView, request: request as NSURLRequest, hasTargetFrame: (navigationAction.targetFrame != nil), onLoadInCurrentWebView: { (webView, request) in
-                webView.load(request as URLRequest)
-                ufoDelegate?.onWebPageStared(request.url?.absoluteString ?? "")
-                decisionHandler(.cancel)
-            }, onLoadInExternal: { (request) in
-                guard let reqUrl = request.url else {
-                    decisionHandler(.cancel) // or .allow?
+            let isPartiPage = requestUrl.absoluteString =~ Config.apiBaseUrlRegex.r
+            if navigationAction.targetFrame != nil || isPartiPage {
+                // 앱 내의 웹뷰에서 계속 진행합니다.
+                // ex) webView.load(mutableRequest as URLRequest)
+                if userAgentString != request.value(forHTTPHeaderField: "User-Agent") {
+                    // user agent가 맞지 않으므로 새로운 요청을 시작한다
+                    print("Start new request with new user agent : \(requestUrlString) : user agent - \(userAgentString ?? "")");
+                    mutableRequest.setValue(userAgentString, forHTTPHeaderField: "User-Agent")
+                    
+                    restartHttpNavigationAction(decisionHandler, request: mutableRequest)
+                    return
+                } else {
+                    allowHttpNavigationAction(decisionHandler, requestUrlString: requestUrlString)
                     return
                 }
-                UIApplication.shared.open(reqUrl, options: [:], completionHandler: nil)
+            } else {
+                // 외부 브라우저를 엽니다. (사파리)
+                UIApplication.shared.open(requestUrl, options: [:], completionHandler: nil)
                 decisionHandler(.cancel)
-            }, onLoadUnknown: { () in
-                decisionHandler(.allow)    // or .cancel?
-            })
+            }
             
             return
 		}
 		
         // unknown scheme
-        decisionHandler(.allow)	// or .cancel?
+        decisionHandler(.allow)
 	}
-
-/*
-	func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
-		if let mimeType = navigationResponse.response.mimeType {
-			print("Response MIME type: \(mimeType)")
-		} else {
-			// response has no MIME type, do some special handling
-			print("Response MIME type unknown")
-		}
-		decisionHandler(.allow)
-	}
-*/
     
-    fileprivate func process(_ webView: WKWebView, request: NSURLRequest, hasTargetFrame: Bool, onLoadInCurrentWebView: ((WKWebView, NSURLRequest) -> Void), onLoadInExternal: ((NSURLRequest) -> Void), onLoadUnknown: () -> Void) {
-        guard let reqUrl = request.url else {
-            return onLoadUnknown()
-        }
-        guard let mutableRequest = (request).mutableCopy() as? NSMutableURLRequest else {
-            return onLoadUnknown()
-        }
+    fileprivate func allowHttpNavigationAction(_ decisionHandler: @escaping (WKNavigationActionPolicy) -> Void, requestUrlString: String) {
+        ufoDelegate?.onWebPageStarted(requestUrlString)
+        decisionHandler(.allow)
+    }
+    
+    fileprivate func restartHttpNavigationAction(_ decisionHandler: @escaping (WKNavigationActionPolicy) -> Void, request: NSMutableURLRequest) {
+        load(request as URLRequest)
+        decisionHandler(.cancel)
+    }
+    
+    fileprivate func makeUserAgentString(_ webView: WKWebView, request: URLRequest) -> String? {
+        guard let url = request.url else { return self.m_originalUserAgent }
         
-        mutableRequest.setValue("catan-spark-ios", forHTTPHeaderField: UfoWebView.HEADERKEY_CATAN_AGENT)
-        mutableRequest.setValue("1.0.0", forHTTPHeaderField: UfoWebView.HEADERKEY_CATAN_VERSION)
-        
-#if DEBUG
-        // 구글 Oauth에서 parti.dev로 인증결과가 넘어오면 로컬 개발용이다.
-        // 그러므로 Config.apiBaseUrl로 주소를 바꾸어 인증하도록 한다
-        let GOOGLE_OAUTH_FOR_DEV_URL = "https://parti.dev/users/auth/google_oauth2/callback"
-        if reqUrl.absoluteString.hasPrefix(GOOGLE_OAUTH_FOR_DEV_URL) {
-            if let newUrlString = (mutableRequest.url?.absoluteString.replacingOccurrences(of: "https://parti.dev/", with: Config.apiBaseUrl)), let newUrl = URL(string: newUrlString) {
-                mutableRequest.url = newUrl
-                return onLoadInCurrentWebView(webView, mutableRequest)
-            }
-        }
-#endif
         let GOOGLE_OAUTH_START_URL = "\(Config.apiBaseUrl)users/auth/google_oauth2"
-        if reqUrl.absoluteString.hasPrefix(GOOGLE_OAUTH_START_URL) {
+        if url.absoluteString.hasPrefix(GOOGLE_OAUTH_START_URL) {
             // 구글 인증이 시작되었다.
             // 가짜 User-Agent 사용을 시작한다.
-            m_onlineUrlStrings.append(reqUrl.absoluteString)
-            
-            webView.customUserAgent = UfoWebView.FAKE_USER_AGENT_FOR_GOOGLE_OAUTH
-            mutableRequest.setValue(UfoWebView.FAKE_USER_AGENT_FOR_GOOGLE_OAUTH, forHTTPHeaderField: "User-Agent")
-            return onLoadInCurrentWebView(webView, mutableRequest)
+            return UfoWebView.FAKE_USER_AGENT_FOR_GOOGLE_OAUTH
         } else if request.value(forHTTPHeaderField: "User-Agent") == UfoWebView.FAKE_USER_AGENT_FOR_GOOGLE_OAUTH || webView.customUserAgent == UfoWebView.FAKE_USER_AGENT_FOR_GOOGLE_OAUTH {
             // 가짜 User-Agent 사용하는 걸보니 이전 request에서 구글 인증이 시작된 상태이다.
-            if !reqUrl.absoluteString.hasPrefix("https://accounts.google.com") {
+            if url.absoluteString.hasPrefix("https://accounts.google.com") {
+                return UfoWebView.FAKE_USER_AGENT_FOR_GOOGLE_OAUTH
+            } else {
                 // 구글 인증이 시작된 상태였다가
                 // 구글 인증 주소가 아닌 다른 페이지로 이동하는 중이다.
                 // 구글 인증이 끝났다고 보고 원래 "User-Agent"로 원복한다.
-                webView.customUserAgent = m_originalUserAgent
-                mutableRequest.setValue(m_originalUserAgent, forHTTPHeaderField: "User-Agent")
-                return onLoadInCurrentWebView(webView, mutableRequest)
+                return self.m_originalUserAgent
             }
-        }
-    
-        let isPartiPage = reqUrl.absoluteString =~ Config.apiBaseUrlRegex.r
-        if hasTargetFrame == true || isPartiPage {
-            // 앱 내의 웹뷰에서 계속 진행합니다.
-            // ex) webView.load(mutableRequest as URLRequest)
-            return onLoadInCurrentWebView(webView, mutableRequest)
         } else {
-            // 외부 브라우저를 엽니다. (사파리)
-            // ex) UIApplication.shared.openURL(reqUrl)
-            return onLoadInExternal(mutableRequest)
+            return self.m_originalUserAgent
         }
     }
     
@@ -360,7 +380,7 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
 		}
 	
 		if action == "post" {
-			_post(param ?? "", json:nil)
+			postJs(param ?? "", json:nil)
         } else if action == "eval" {
 			if param != nil {
 				evalJs(param!)
@@ -369,4 +389,8 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
 			print("Unhandled action: \(action) param=\(param ?? "nil")")
 		}
 	}
+    
+    func isControllUrl(_ urlString: String?) -> Bool {
+        return urlString == nil || UfoWebView.URL_MOBILE_APP_START == urlString || urlString == "about:blank"
+    }
 }
