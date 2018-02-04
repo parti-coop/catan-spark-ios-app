@@ -239,7 +239,11 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
         ud.synchronize()
 
         let pushToken = Messaging.messaging().fcmToken
-        let appId = Bundle.main.bundleIdentifier!
+        #if DEBUG
+          let appId = "xyz.parti.catan.ios.debug"
+        #else
+          let appId = "xyz.parti.catan.ios"
+        #endif
         AppDelegate.getApiManager().requestRegisterToken(self as ApiResultDelegate, authkey: authkey, pushToken: pushToken, appId: appId)
 
         Crashlytics.sharedInstance().setUserIdentifier(authkey)
