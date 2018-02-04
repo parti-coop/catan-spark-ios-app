@@ -184,6 +184,9 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
                           self?.m_progressView.setProgress(0.0, animated: false)
                         }
         })
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+      } else {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
       }
       return
     }
@@ -195,7 +198,6 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
 
   func onWebPageStarted(_ url: String?) {
     log.debug("onWebPageStarted: \(url ?? "nil")")
-    UIApplication.shared.isNetworkActivityIndicatorVisible = true
   }
 
   func onWebPageFinished(_ url: String?) {
