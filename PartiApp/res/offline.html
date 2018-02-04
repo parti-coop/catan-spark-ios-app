@@ -2,38 +2,38 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <title>iOS App Offline</title>
-    <style type="text/css">
-		/* Common */
-		*{box-sizing:border-box;}
-		html{font-size:30px;background:#f3f3f3;}
-		body,p,h2,h3,h4,h5,h6,{font-family:'Applegothic_sd',sans-serif;color:#3f3f3f;margin:0;padding:0;line-height:1.75rem}
+  <meta charset="utf-8">
+  <title>iOS App Offline</title>
+  <style type="text/css">
+  /* Common */
+  *{box-sizing:border-box;}
+  html{font-size:30px;background:#f3f3f3;}
+  body,p,h2,h3,h4,h5,h6,{font-family:'Applegothic_sd',sans-serif;color:#3f3f3f;margin:0;padding:0;line-height:1.75rem}
 
-		/* Vertical Align Center */
-		.outer { display: table;position: absolute;height: 100%;width: 100%; }
-		.middle { display: table-cell;vertical-align: middle; }
-		.inner { margin-left: auto; margin-right: auto; width: 100%;text-align:center; }
-		.inner .icon, .inner h1, .inner p { line-height:1; }
-		.inner .icon { font-size:4em; color:#82213c; }
-        .inner p { font-size:1.5em; }
-        .buttons { margin-left: auto; margin-right: auto; width: 100%; text-align:center; }
-        .buttons .button { display: inline-block; padding: 0.5em; background-color: #966fd6; color: white; font-size:1.5em;  }
-    </style>
+  /* Vertical Align Center */
+  .outer { display: table;position: absolute;height: 100%;width: 100%; }
+  .middle { display: table-cell;vertical-align: middle; }
+  .inner { margin-left: auto; margin-right: auto; width: 100%;text-align:center; }
+  .inner .icon, .inner h1, .inner p { line-height:1; }
+  .inner .icon { font-size:4em; color:#82213c; }
+  .inner p { font-size:1.5em; }
+  .buttons { margin-left: auto; margin-right: auto; width: 100%; text-align:center; }
+  .buttons .button { display: inline-block; padding: 0.5em; background-color: #966fd6; color: white; font-size:1.5em;  }
+</style>
 </head>
 
 <body>
-    <div class="outer">
-        <div class="middle">
-            <div class="inner">
-                <div class="icon">⚠︎</div>
-                <h1>네트워크 문제로<br>연결이 지연되고 있습니다.</h1>
-                <p>네트워크 확인 후 다시 시도해 주세요.</p>
-            </div>
-            <div class="buttons">
-                <button class="button" onclick="javascript:window.webkit.messageHandlers.ufop.postMessage({'method':'post', 'arg0':'reload'});">다시 시도하기</button>
-            </div>
-        </div>
+  <div class="outer">
+    <div class="middle">
+      <div class="inner">
+        <div class="icon">⚠︎</div>
+        <h1>네트워크 문제로<br>연결이 지연되고 있습니다.</h1>
+        <p>네트워크 확인 후 다시 시도해 주세요.</p>
+      </div>
+      <div class="buttons">
+        <button class="button" onclick="javascript:window.webkit.messageHandlers.ufop.postMessage({'method':'post', 'arg0':'reload'});">다시 시도하기</button>
+      </div>
     </div>
+  </div>
 </body>
 </html>
