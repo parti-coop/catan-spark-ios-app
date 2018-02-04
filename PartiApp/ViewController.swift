@@ -242,8 +242,6 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
         let appId = Bundle.main.bundleIdentifier!
         AppDelegate.getApiManager().requestRegisterToken(self as ApiResultDelegate, authkey: authkey, pushToken: pushToken, appId: appId)
 
-        //Crashlytics.sharedInstance().setUserEmail("user@fabric.io")
-        //Crashlytics.sharedInstance().setUserName("Test User")
         Crashlytics.sharedInstance().setUserIdentifier(authkey)
       }
 

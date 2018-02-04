@@ -20,10 +20,10 @@
   <string>0.0.6</string>
   <key>CFBundleVersion</key>
   <string>6</string>
-  <key>Fabric</key>
+    <key>Fabric</key>
   <dict>
     <key>APIKey</key>
-    <string>588857e4504813c53180f83cb16718446c7ed50f</string>
+    <string>61fec037830f072a57601a3e9f538a4a0f0d1ac3</string>
     <key>Kits</key>
     <array>
       <dict>

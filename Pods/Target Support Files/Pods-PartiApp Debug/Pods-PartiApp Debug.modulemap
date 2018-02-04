@@ -1,0 +1,6 @@
+framework module Pods_PartiApp_Debug {
+  umbrella header "Pods-PartiApp Debug-umbrella.h"
+
+  export *
+  module * { export * }
+}

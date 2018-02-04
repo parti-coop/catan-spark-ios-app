@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_PartiAppVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_PartiAppVersionString[];
+FOUNDATION_EXPORT double Pods_PartiApp_ReleaseVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_PartiApp_ReleaseVersionString[];
 
