@@ -50,7 +50,9 @@ class ApiMan : NSObject, HttpQueryDelegate
     spec.addParam(pushToken ?? "", forKey: "registration_id")
     spec.addParam(appId, forKey: "application_id")
 
-    print("registerToken(\(authkey),\(pushToken ?? "NoPushToken"),\(appId))")
+    #if DEBUG
+    log.debug("registerToken(\(authkey),\(pushToken ?? "NoPushToken"),\(appId))")
+    #endif
     sendRequest(spec, withJobId: ApiMan.JOBID_REGISTER_TOKEN, delegate: resDelegate)
   }
 
@@ -59,8 +61,9 @@ class ApiMan : NSObject, HttpQueryDelegate
     spec.methodType = .delete
     spec.addHeader("Bearer " + authkey, forKey: "Authorization")
     spec.addParam(pushToken ?? "", forKey: "registration_id")
-
-    print("deleteToken(\(authkey),\(pushToken ?? "NoPushToken"))")
+    #if DEBUG
+    log.debug("deleteToken(\(authkey),\(pushToken ?? "NoPushToken"))")
+    #endif
     sendRequest(spec, withJobId: ApiMan.JOBID_DELETE_TOKEN, delegate: resDelegate)
   }
 
@@ -73,7 +76,7 @@ class ApiMan : NSObject, HttpQueryDelegate
       spec.addHeader("Bearer " + _authkey, forKey: "Authorization")
     }
 
-    print("fileDownload(\(authkey ?? "noAuth"),\(spec.address))")
+    log.debug("fileDownload(\(authkey ?? "noAuth"),\(spec.address))")
     spec.userObj = resDelegate
     AppDelegate.getHttpManager().download(spec, ofJob:ApiMan.JOBID_DOWNLOAD_FILE, atPath:localPath, delegate:self)
   }
@@ -112,7 +115,7 @@ class ApiMan : NSObject, HttpQueryDelegate
 
     if resDelegate == nil {
       // success can be ignored without callback
-      print("job(\(jobId) succeeded but delegate is nil.")
+      log.debug("job(\(jobId) succeeded but delegate is nil.")
       return
     }
 

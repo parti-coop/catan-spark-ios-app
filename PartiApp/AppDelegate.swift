@@ -15,6 +15,9 @@ import FirebaseMessaging
 
 import Fabric
 import Crashlytics
+import SwiftyBeaver
+let log = SwiftyBeaver.self
+
 import Natrium
 typealias Config = Natrium.Config
 
@@ -56,10 +59,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     application.registerForRemoteNotifications()
 
     // Override point for customization after application launch.
+    setupLog()
+    
     return true
   }
 
-    //let gcmMessageIDKey = "gcm.message_id"
+  fileprivate func setupLog() {
+    let console = ConsoleDestination()  // log to Xcode Console
+    console.format = "$DHH:mm:ss$d $N.$F:$l $T $L: $M"
+    log.addDestination(console)
+  }
 
   func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
     // If you are receiving a notification message while your app is in the background,
@@ -76,7 +85,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     // Messaging.messaging().appDidReceiveMessage(userInfo)
     // Print message ID.
     if let messageID = userInfo[gcmMessageIDKey] {
-      print("Message ID: \(messageID)")
+      log.debug("Message ID: \(messageID)")
     }
 
     // Print full message.
@@ -86,14 +95,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate
   }*/
 
   func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-    print("Unable to register for remote notifications: \(error.localizedDescription)")
+    log.debug("Unable to register for remote notifications: \(error.localizedDescription)")
   }
 
   // This function is added here only for debugging purposes, and can be removed if swizzling is enabled.
   // If swizzling is disabled then this function must be implemented so that the APNs token can be paired to
   // the FCM registration token.
   func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-    print("APNs token retrieved: \(deviceToken)")
+    log.debug("APNs token retrieved: \(deviceToken)")
 
     // With swizzling disabled you must set the APNs token here.
     // Messaging.messaging().apnsToken = deviceToken
@@ -130,7 +139,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 
 
   func handlePushData(_ pushInfo: [AnyHashable : Any]) {
-    //print("handlePushData: ", Util.getPrettyJsonString(pushInfo) ?? "nil")
+    //log.debug("handlePushData: ", Util.getPrettyJsonString(pushInfo) ?? "nil")
 
     let url = pushInfo["url"]
 
@@ -149,7 +158,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         body = alertDic["body"] as? String
         title = alertDic["title"] as? String
       } else {
-        print("Unknown alert type: \(String(describing: alert))")
+        log.debug("Unknown alert type: \(String(describing: alert))")
         return
       }
 
@@ -196,7 +205,9 @@ extension AppDelegate : UNUserNotificationCenterDelegate
 extension AppDelegate : MessagingDelegate
 {
   func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
-    print("Firebase registration token: \(fcmToken)")
+    #if DEBUG
+    log.debug("Firebase registration token: \(fcmToken)")
+    #endif
 
     // TODO: If necessary send token to application server.
     // Note: This callback is fired at each app startup and whenever a new token is generated.
@@ -207,7 +218,7 @@ extension AppDelegate : MessagingDelegate
   // Receive data messages on iOS 10+ directly from FCM (bypassing APNs) when the app is in the foreground.
   // To enable direct data messages, you can set Messaging.messaging().shouldEstablishDirectChannel to true.
   func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
-    //print("Received data message: \(remoteMessage.appData)")
+    //log.debug("Received data message: \(remoteMessage.appData)")
     handlePushData(remoteMessage.appData)
   }
 }

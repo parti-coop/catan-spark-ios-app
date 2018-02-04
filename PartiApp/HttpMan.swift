@@ -59,7 +59,7 @@ class HttpQuerySpec : NSObject
 
   init(_ url: String) {
     guard let rng = url.range(of: "://") else {
-      print("HttpQuerySpec: invalid http url: \(url)")
+      log.warning("HttpQuerySpec: invalid http url: \(url)")
       address = ""
       return
       //throw NSError(domain: "Invalid HttpQuerySpec URL", code:1)
@@ -98,7 +98,7 @@ class HttpQuerySpec : NSObject
     }
 
     guard let escapedValue = value.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {
-      print("urlEncode(\(value)) failed")
+      log.warning("urlEncode(\(value)) failed")
       return
     }
 
@@ -334,29 +334,20 @@ fileprivate class HttpQueryJob : NSObject, URLSessionDataDelegate, URLSessionDow
   }
 
   func urlSession(_ session: URLSession, didBecomeInvalidWithError error: Error?) {
-    print("didBecomeInvalidWithError")
+    log.warning("didBecomeInvalidWithError")
   }
 
-    /*
-
-     테스트 환경을 위해 주석 처리합니다.
-
-    func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Swift.Void) {
-
-    }
-    */
-
   func urlSessionDidFinishEvents(forBackgroundURLSession session: URLSession) {
-    print("urlSessionDidFinishEvents_forBackgroundURLSession")
+    log.debug("urlSessionDidFinishEvents_forBackgroundURLSession")
   }
 
   func urlSession(_ session: URLSession, task: URLSessionTask, willPerformHTTPRedirection response: HTTPURLResponse, newRequest request: URLRequest, completionHandler: @escaping (URLRequest?) -> Swift.Void) {
-    print("willPerformHTTPRedirection");
+    log.debug("willPerformHTTPRedirection");
   }
 
   func urlSession(_ session: URLSession, task: URLSessionTask, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Swift.Void)
   {
-        print("didReceive completionHandler");
+        log.debug("didReceive completionHandler");
         #if DEBUG//_HTTPMAN_ENABLE_FAKE_SSL
             guard let serverTrust = challenge.protectionSpace.serverTrust else {
                 return completionHandler(.useCredential, nil)
@@ -368,7 +359,7 @@ fileprivate class HttpQueryJob : NSObject, URLSessionDataDelegate, URLSessionDow
   }
 
   func urlSession(_ session: URLSession, task: URLSessionTask, needNewBodyStream completionHandler: @escaping (InputStream?) -> Swift.Void) {
-    print("needNewBodyStream")
+    log.debug("needNewBodyStream")
   }
 
   func urlSession(_ session: URLSession, task: URLSessionTask, didSendBodyData bytesSent: Int64, totalBytesSent: Int64, totalBytesExpectedToSend: Int64) {
@@ -405,7 +396,7 @@ fileprivate class HttpQueryJob : NSObject, URLSessionDataDelegate, URLSessionDow
     }
 
     let nserr = error! as NSError
-    print("didCompleteWithError: \(nserr.localizedDescription)")
+    log.warning("didCompleteWithError: \(nserr.localizedDescription)")
 
     if m_statusCode == 0 {
       m_statusCode = nserr.code
@@ -431,11 +422,11 @@ fileprivate class HttpQueryJob : NSObject, URLSessionDataDelegate, URLSessionDow
   }
 
   func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didBecome downloadTask: URLSessionDownloadTask) {
-    print("dataTask didBecomeDownloadTask")
+    log.debug("dataTask didBecomeDownloadTask")
   }
 
   func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didBecome streamTask: URLSessionStreamTask) {
-    print("dataTask didBecomeStreamTask")
+    log.debug("dataTask didBecomeStreamTask")
   }
 
   func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
@@ -452,7 +443,6 @@ fileprivate class HttpQueryJob : NSObject, URLSessionDataDelegate, URLSessionDow
   }
 
   func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, willCacheResponse proposedResponse: CachedURLResponse, completionHandler: @escaping (CachedURLResponse?) -> Swift.Void) {
-        print("XXXX2")
     completionHandler(m_spec.isIgnoreCache ? nil : proposedResponse);
   }
 
@@ -465,29 +455,9 @@ fileprivate class HttpQueryJob : NSObject, URLSessionDataDelegate, URLSessionDow
 
     m_statusCode = httpResponse.statusCode
     if m_statusCode < 200 || m_statusCode >= 300 {
-      print("downloadTask didFinishDownloadingTo: failed \(m_statusCode)")
+      log.warning("downloadTask didFinishDownloadingTo: failed \(m_statusCode)")
       return
     }
-
-    /*let keyValues = httpResponse.allHeaderFields.map {
-      (String(describing: $0.key).lowercased(), String(describing: $0.value))
-    }
-    for (k,v) in httpResponse.allHeaderFields {
-      print("httpResponse.allHeaderFields[\(k),\(v)]")
-    }
-
-    var filename: String?
-    if let contentDisposition = httpResponse.allHeaderFields["Content-Disposition"] as? String {
-      let re = try! NSRegularExpression(pattern: "filename=\"(.+?)\"", options: .caseInsensitive)
-      let matches = re.matches(in: contentDisposition, range: NSMakeRange(0, contentDisposition.utf16.count))
-      if matches.count > 0 {
-        let nameRange = matches[0].range(at: 1)
-          let start = String.UTF16Index(encodedOffset: nameRange.location)
-          let end = String.UTF16Index(encodedOffset: nameRange.location + nameRange.length)
-
-          filename = String(contentDisposition.utf16[start..<end])
-      }
-    }*/
 
     assert(m_downJob != nil)
     do {
@@ -502,18 +472,18 @@ fileprivate class HttpQueryJob : NSObject, URLSessionDataDelegate, URLSessionDow
       m_downJob!.localFileUrl = nil
     }
 
-    print("downloadTask didFinishDownloadingTo")
+    log.debug("downloadTask didFinishDownloadingTo")
   }
 
   func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
-    //print("downloadTask didWriteData(written=\(bytesWritten), totalWritten=\(totalBytesWritten), expected=\(totalBytesExpectedToWrite))")
+//    log.debug("downloadTask didWriteData(written=\(bytesWritten), totalWritten=\(totalBytesWritten), expected=\(totalBytesExpectedToWrite))")
     m_downSoFar = totalBytesWritten
     m_expectedContentLength = totalBytesExpectedToWrite
     m_delegate?.httpQuery(m_spec, ofJob:m_jobId, progressSoFar:m_downSoFar, progressTotal:m_expectedContentLength)
   }
 
   func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didResumeAtOffset fileOffset: Int64, expectedTotalBytes: Int64) {
-    print("downloadTask didResumeAtOffset")
+    log.debug("downloadTask didResumeAtOffset")
   }
 
 
@@ -578,7 +548,7 @@ class HttpMan : NSObject
   func cancel(_ jobId:Int) {
     let job = m_dicJobs[jobId]
     if job != nil {
-      print("Cancel httpQueryJob id=\(jobId)")
+      log.debug("Cancel httpQueryJob id=\(jobId)")
       job!.cancel()
     }
   }
