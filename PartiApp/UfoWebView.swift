@@ -245,6 +245,12 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
       decisionHandler(.cancel)
       return
     }
+    
+    if requestUrlString.hasPrefix("mailto:") {
+      UIApplication.shared.open(requestUrl, options: [:], completionHandler: nil)
+      decisionHandler(.cancel)
+      return
+    }
 
     if requestUrlString.hasPrefix("http") {
       if let targetFrm = navigationAction.targetFrame, targetFrm.isMainFrame == false {
