@@ -1,0 +1,77 @@
+{
+    "default": {
+        "title": {
+            "color": "#545454",
+            "font": "./NanumBarunGothic.otf"
+        },
+        "keyword": {
+            "font": "./NanumBarunGothic.otf"
+        },
+        "background": "./background.jpg",
+        "stack_title" : true,
+        "padding": 50,
+        "show_complete_frame": false
+    },
+    "data": [
+        {
+            "filter": "0_MyFeed",
+            "keyword": {
+                "text": "내 피드",
+                "color": "#d21559"
+            },
+            "title": {
+                "text": "내가 관심있는 주제에 대해 여러 사람과 이야기 나눕니다"
+            }
+        },
+        {
+            "filter": "1_Parti",
+            "keyword": {
+                "text": "빠띠에서 만나세요",
+                "color": "#2980b9"
+            },
+            "title": {
+                "text": "회사, 단체, 동아리, 내 일상을 더 민주적으로 만들고 싶은 사람들과 빠띠를 시작해 보세요"
+            }
+        },
+        {
+            "filter": "2_Group",
+            "keyword": {
+                "text": "그룹",
+                "color": "#d21559"
+            },
+            "title": {
+                "text": "하나의 주제에 대해 여러 사람이 손쉽게 협력하고 참여할 수 있습니다"
+            }
+        },
+        {
+            "filter": "3_Post",
+            "keyword": {
+                "text": "일상 나누기",
+                "color": "#2980b9"
+            },
+            "title": {
+                "text": "나와 비슷한 관심 주제를 가진 사람들의 다양한 이야기를 만나 보세요"
+            }
+        },
+        {
+            "filter": "4_Poll",
+            "keyword": {
+                "text": "제안, 논의",
+                "color": "#d21559"
+            },
+            "title": {
+                "text": "우리 팀, 회사, 동아리의 논의를 누구나 제안하고 우리 결정을 기록으로 남길 수 있습니다"
+            }
+        },
+        {
+            "filter": "5_Discover",
+            "keyword": {
+                "text": "새로운 발견",
+                "color": "#2980b9"
+            },
+            "title": {
+                "text": "세상의 다양하고 수많은 이야기를 만날 수 있습니다"
+            }
+        }
+    ]
+}

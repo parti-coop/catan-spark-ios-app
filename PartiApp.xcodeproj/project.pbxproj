@@ -41,10 +41,21 @@
 		9805A1FB2026CE6E0011DE88 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1EB65DC71FF0056000E1B5A9 /* LaunchScreen.storyboard */; };
 		9805A1FC2026CE6E0011DE88 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1EB65DD91FF0075200E1B5A9 /* InfoPlist.strings */; };
 		9805A1FD2026CE6E0011DE88 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1EB65DC11FEFB63400E1B5A9 /* GoogleService-Info.plist */; };
+		98EC62782033DAE900A8BB4F /* PartiApp_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EC62772033DAE900A8BB4F /* PartiApp_UITests.swift */; };
+		98EC62832033DFB200A8BB4F /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EC62822033DFB200A8BB4F /* SnapshotHelper.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		98EC627A2033DAE900A8BB4F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1EB65D9D1FED29E600E1B5A9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9805A1E82026CE6E0011DE88;
+			remoteInfo = "PartiApp Release";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
-		1BE6E7AB59971B806E569940 /* Pods-PartiApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PartiApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PartiApp/Pods-PartiApp.debug.xcconfig"; sourceTree = "<group>"; };
 		1E13EAD8200B88B90063BF38 /* Bridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Bridge.h; sourceTree = "<group>"; };
 		1E24C48F200CCBE9004D0B4A /* PartiApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PartiApp.entitlements; sourceTree = "<group>"; };
 		1EB65DA51FED29E700E1B5A9 /* PartiApp Debug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PartiApp Debug.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -65,12 +76,13 @@
 		1EB65DDC1FF0075200E1B5A9 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = Localizable.strings; sourceTree = "<group>"; };
 		1EB65DE11FF0093D00E1B5A9 /* HttpMan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpMan.swift; sourceTree = "<group>"; };
 		1EB65DE31FF0095500E1B5A9 /* ApiMan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiMan.swift; sourceTree = "<group>"; };
-		4A4503D2E34DE811EA771C49 /* Pods-PartiApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PartiApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-PartiApp/Pods-PartiApp.release.xcconfig"; sourceTree = "<group>"; };
 		505A5984F11E33E2019191AE /* Pods-PartiApp Release.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PartiApp Release.release.xcconfig"; path = "Pods/Target Support Files/Pods-PartiApp Release/Pods-PartiApp Release.release.xcconfig"; sourceTree = "<group>"; };
 		67C5BC16AB28B3C3C3FFAAA7 /* Pods_PartiApp_Debug.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PartiApp_Debug.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9805A2042026CE6F0011DE88 /* PartiApp Release.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PartiApp Release.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		9805A2052026CE6F0011DE88 /* PartiApp copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "PartiApp copy-Info.plist"; path = "/Users/dalikim/workspace/catan-spark-ios-app/PartiApp copy-Info.plist"; sourceTree = "<absolute>"; };
-		B318D8E18B4267E9696D7FA7 /* Pods_PartiApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PartiApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		98EC62752033DAE900A8BB4F /* PartiApp UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PartiApp UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		98EC62772033DAE900A8BB4F /* PartiApp_UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartiApp_UITests.swift; sourceTree = "<group>"; };
+		98EC62792033DAE900A8BB4F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		98EC62822033DFB200A8BB4F /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		CA69C53C1BD62068D258B62F /* Pods_PartiApp_Release.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PartiApp_Release.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFB7F0B5B5809E5DD87C4FE6 /* Pods-PartiApp Debug.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PartiApp Debug.release.xcconfig"; path = "Pods/Target Support Files/Pods-PartiApp Debug/Pods-PartiApp Debug.release.xcconfig"; sourceTree = "<group>"; };
 		F38381283C8C83A3FB2A8E6A /* Pods-PartiApp Debug.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PartiApp Debug.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PartiApp Debug/Pods-PartiApp Debug.debug.xcconfig"; sourceTree = "<group>"; };
@@ -94,14 +106,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		98EC62722033DAE900A8BB4F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		0BC525D5755479AAF56D520C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				1BE6E7AB59971B806E569940 /* Pods-PartiApp.debug.xcconfig */,
-				4A4503D2E34DE811EA771C49 /* Pods-PartiApp.release.xcconfig */,
 				F38381283C8C83A3FB2A8E6A /* Pods-PartiApp Debug.debug.xcconfig */,
 				EFB7F0B5B5809E5DD87C4FE6 /* Pods-PartiApp Debug.release.xcconfig */,
 				FA41C40DD289609E8312B056 /* Pods-PartiApp Release.debug.xcconfig */,
@@ -114,10 +131,10 @@
 			isa = PBXGroup;
 			children = (
 				1EB65DA71FED29E700E1B5A9 /* PartiApp */,
+				98EC62762033DAE900A8BB4F /* PartiApp UITests */,
 				1EB65DA61FED29E700E1B5A9 /* Products */,
 				0BC525D5755479AAF56D520C /* Pods */,
 				D42524FEF6641DE241FB531C /* Frameworks */,
-				9805A2052026CE6F0011DE88 /* PartiApp copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -126,6 +143,7 @@
 			children = (
 				1EB65DA51FED29E700E1B5A9 /* PartiApp Debug.app */,
 				9805A2042026CE6F0011DE88 /* PartiApp Release.app */,
+				98EC62752033DAE900A8BB4F /* PartiApp UITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -133,6 +151,7 @@
 		1EB65DA71FED29E700E1B5A9 /* PartiApp */ = {
 			isa = PBXGroup;
 			children = (
+				98EC62822033DFB200A8BB4F /* SnapshotHelper.swift */,
 				1E24C48F200CCBE9004D0B4A /* PartiApp.entitlements */,
 				1EB65DD31FF0075200E1B5A9 /* en.lproj */,
 				1EB65DD81FF0075200E1B5A9 /* ko.lproj */,
@@ -180,10 +199,18 @@
 			path = ko.lproj;
 			sourceTree = "<group>";
 		};
+		98EC62762033DAE900A8BB4F /* PartiApp UITests */ = {
+			isa = PBXGroup;
+			children = (
+				98EC62772033DAE900A8BB4F /* PartiApp_UITests.swift */,
+				98EC62792033DAE900A8BB4F /* Info.plist */,
+			);
+			path = "PartiApp UITests";
+			sourceTree = "<group>";
+		};
 		D42524FEF6641DE241FB531C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B318D8E18B4267E9696D7FA7 /* Pods_PartiApp.framework */,
 				67C5BC16AB28B3C3C3FFAAA7 /* Pods_PartiApp_Debug.framework */,
 				CA69C53C1BD62068D258B62F /* Pods_PartiApp_Release.framework */,
 			);
@@ -235,13 +262,31 @@
 			productReference = 9805A2042026CE6F0011DE88 /* PartiApp Release.app */;
 			productType = "com.apple.product-type.application";
 		};
+		98EC62742033DAE900A8BB4F /* PartiApp UITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 98EC627E2033DAE900A8BB4F /* Build configuration list for PBXNativeTarget "PartiApp UITests" */;
+			buildPhases = (
+				98EC62712033DAE900A8BB4F /* Sources */,
+				98EC62722033DAE900A8BB4F /* Frameworks */,
+				98EC62732033DAE900A8BB4F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				98EC627B2033DAE900A8BB4F /* PBXTargetDependency */,
+			);
+			name = "PartiApp UITests";
+			productName = "PartiApp ReleaseUITests";
+			productReference = 98EC62752033DAE900A8BB4F /* PartiApp UITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		1EB65D9D1FED29E600E1B5A9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0910;
+				LastSwiftUpdateCheck = 0920;
 				LastUpgradeCheck = 0910;
 				ORGANIZATIONNAME = Slowalk;
 				TargetAttributes = {
@@ -259,6 +304,11 @@
 					};
 					9805A1E82026CE6E0011DE88 = {
 						ProvisioningStyle = Automatic;
+					};
+					98EC62742033DAE900A8BB4F = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 9805A1E82026CE6E0011DE88;
 					};
 				};
 			};
@@ -278,6 +328,7 @@
 			targets = (
 				1EB65DA41FED29E600E1B5A9 /* PartiApp Debug */,
 				9805A1E82026CE6E0011DE88 /* PartiApp Release */,
+				98EC62742033DAE900A8BB4F /* PartiApp UITests */,
 			);
 		};
 /* End PBXProject section */
@@ -314,6 +365,13 @@
 				9805A1FB2026CE6E0011DE88 /* LaunchScreen.storyboard in Resources */,
 				9805A1FC2026CE6E0011DE88 /* InfoPlist.strings in Resources */,
 				9805A1FD2026CE6E0011DE88 /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		98EC62732033DAE900A8BB4F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -378,6 +436,7 @@
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/Natrium/Natrium.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/SimulatorStatusMagic/SimulatorStatusMagic.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyBeaver/SwiftyBeaver.framework",
 				"${BUILT_PRODUCTS_DIR}/TMReachability/TMReachability.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
@@ -389,6 +448,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Natrium.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimulatorStatusMagic.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyBeaver.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TMReachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -428,6 +488,7 @@
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/Natrium/Natrium.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/SimulatorStatusMagic/SimulatorStatusMagic.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyBeaver/SwiftyBeaver.framework",
 				"${BUILT_PRODUCTS_DIR}/TMReachability/TMReachability.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
@@ -439,6 +500,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Natrium.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimulatorStatusMagic.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyBeaver.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TMReachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -505,7 +567,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		98EC62712033DAE900A8BB4F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				98EC62782033DAE900A8BB4F /* PartiApp_UITests.swift in Sources */,
+				98EC62832033DFB200A8BB4F /* SnapshotHelper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		98EC627B2033DAE900A8BB4F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9805A1E82026CE6E0011DE88 /* PartiApp Release */;
+			targetProxy = 98EC627A2033DAE900A8BB4F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		1EB65DC71FF0056000E1B5A9 /* LaunchScreen.storyboard */ = {
@@ -760,6 +839,37 @@
 			};
 			name = Release;
 		};
+		98EC627C2033DAE900A8BB4F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "PartiApp UITests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "xyz.parti.PartiApp-UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "PartiApp Debug";
+			};
+			name = Debug;
+		};
+		98EC627D2033DAE900A8BB4F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "PartiApp UITests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "xyz.parti.PartiApp-UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "PartiApp Debug";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -786,6 +896,15 @@
 			buildConfigurations = (
 				9805A2022026CE6E0011DE88 /* Debug */,
 				9805A2032026CE6E0011DE88 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		98EC627E2033DAE900A8BB4F /* Build configuration list for PBXNativeTarget "PartiApp UITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				98EC627C2033DAE900A8BB4F /* Debug */,
+				98EC627D2033DAE900A8BB4F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

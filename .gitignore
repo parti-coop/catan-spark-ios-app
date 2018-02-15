@@ -65,10 +65,18 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
+screenshots/ko/*
+screenshots/screenshots.html
 
 # cocoaPodsKeys
 Pods/CocoaPodsKeys
 env.yml
+
+### Xcode Patch ###
+*.xcodeproj/*
+!*.xcodeproj/project.pbxproj
+!*.xcodeproj/xcshareddata/
+!*.xcworkspace/contents.xcworkspacedata
 
 # googleservice info
 PartiApp/GoogleService-Info.plist

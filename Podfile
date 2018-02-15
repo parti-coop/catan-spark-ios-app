@@ -8,6 +8,7 @@ pod 'TMReachability', :git => 'https://github.com/albertbori/Reachability'
 pod 'Natrium'
 pod 'CrossroadRegex'
 pod 'SwiftyBeaver'
+pod 'SimulatorStatusMagic'
 
 target 'PartiApp Debug' do
 	use_frameworks!
