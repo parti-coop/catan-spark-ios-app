@@ -136,7 +136,7 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
         }
       } else if "goBack" == method {
         m_onlineUrlStrings.removeLast()
-        let urlString = m_onlineUrlStrings.popLast() ?? Config.apiBaseUrl
+        let urlString = m_onlineUrlStrings.last ?? Config.apiBaseUrl
         if urlString == self.backForwardList.backItem?.initialURL.absoluteString {
           goBack()
         } else {
