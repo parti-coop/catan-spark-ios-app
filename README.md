@@ -1,5 +1,18 @@
 # 빠띠앱
 
+## 스토어 출시 및 업그레이드
+
+natrium.files/Info-PRODUCTION.plist에 CFBundleShortVersionString과 CFBundleVersion 값을 적절히 업데이트 합니다
+
+"버전이름-rc"로 git 태깅합니다.
+
+PartiApp_UITests.swift와 screenshots/Framefile.json을 적당히 조정하고 아래 명령을 이용해 스냅샷을 만들고 itunesconnect에 등록합니다. 
+
+```
+$ fastlane snapshot
+$ fastlane frameit silver --verbose
+```
+
 ## 개발 환경 설정
 
 Info.plist를 설정합니다.
