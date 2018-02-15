@@ -21,8 +21,10 @@ let log = SwiftyBeaver.self
 import Natrium
 typealias Config = Natrium.Config
 
+#if DEBUG
 import SimulatorStatusMagic
-
+#endif
+  
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate
 {
@@ -63,9 +65,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     // Override point for customization after application launch.
     setupLog()
 
+    #if DEBUG
     if ProcessInfo.processInfo.arguments.contains("CATAN_SCREENSNAPSHOTS") {
       SDStatusBarManager.sharedInstance().enableOverrides()
     }
+    #endif
 
     return true
   }
