@@ -27,9 +27,11 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
   private static let FAKE_USER_AGENT_FOR_GOOGLE_OAUTH = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.75.14 (KHTML, like Gecko) Version/7.0.3 Safari/7046A194A" + CATAN_USER_AGENT
 
   public var ufoDelegate: UfoWebDelegate?
-  private var m_onlineUrlStrings = [String]()
+  
   private var m_wasOfflinePageShown: Bool = false
   private var m_originalUserAgent: String? = nil
+  private var m_basePageUrlString: String? = nil
+  private var m_currentUrlString: String? = nil
 
   public init() {
     let wkconf = WKWebViewConfiguration()
@@ -60,7 +62,7 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
   }
 
   func onNetworkReady() {
-    if m_wasOfflinePageShown, let lastOnlineUrlString = m_onlineUrlStrings.last {
+    if m_wasOfflinePageShown, let lastOnlineUrlString = m_currentUrlString  {
       m_wasOfflinePageShown = false
       log.debug("Recover online: \(lastOnlineUrlString)")
       loadRemoteUrl(lastOnlineUrlString)
@@ -89,7 +91,7 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
       return
     }
 
-    if !isControllUrl(targetUrlString) && (m_wasOfflinePageShown || m_onlineUrlStrings.isEmpty) {
+    if !isControllUrl(targetUrlString) && (m_wasOfflinePageShown || (m_currentUrlString ?? "").isEmpty) {
       let escapedString = targetUrlString.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
       loadRequest("\(UfoWebView.URL_MOBILE_APP_START)?after=\(escapedString)")
       return
@@ -128,15 +130,16 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
       let arg0 = body?["arg0"] as? String
       let arg1 = body?["arg1"] as? String
 
-      if "addOnlineUrl" == method {
-        log.debug("add addOnlineUrl!")
+      if "changeBasePageUrl" == method {
+        log.debug("changeBasePageUrl")
         guard let urlString = arg0 else { return }
-        if urlString != m_onlineUrlStrings.last {
-          m_onlineUrlStrings.append(urlString)
-        }
+        m_basePageUrlString = urlString
+      } else if "changeCurrentUrl" == method {
+          log.debug("changeCurrentUrl")
+          guard let urlString = arg0 else { return }
+          m_currentUrlString = urlString
       } else if "goBack" == method {
-        m_onlineUrlStrings.removeLast()
-        let urlString = m_onlineUrlStrings.last ?? Config.apiBaseUrl
+        let urlString = m_basePageUrlString ?? Config.apiBaseUrl
         if urlString == self.backForwardList.backItem?.initialURL.absoluteString {
           goBack()
         } else {
@@ -393,5 +396,10 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
 
   func isControllUrl(_ urlString: String?) -> Bool {
     return urlString == nil || UfoWebView.URL_MOBILE_APP_START == urlString || urlString == "about:blank"
+  }
+  
+  func clearHistory() {
+    m_basePageUrlString = nil
+    m_currentUrlString = nil
   }
 }

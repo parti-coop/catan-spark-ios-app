@@ -249,6 +249,8 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
         AppDelegate.getApiManager().requestRegisterToken(self as ApiResultDelegate, authkey: authkey, pushToken: pushToken, appId: appId)
 
         Crashlytics.sharedInstance().setUserIdentifier(authkey)
+        
+        m_webView.clearHistory()
       }
 
     } else if action == "logout" {
