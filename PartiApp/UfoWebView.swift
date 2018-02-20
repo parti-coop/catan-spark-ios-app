@@ -135,9 +135,9 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
         guard let urlString = arg0 else { return }
         m_basePageUrlString = urlString
       } else if "changeCurrentUrl" == method {
-          log.debug("changeCurrentUrl")
-          guard let urlString = arg0 else { return }
-          m_currentUrlString = urlString
+        log.debug("changeCurrentUrl")
+        guard let urlString = arg0 else { return }
+        m_currentUrlString = urlString
       } else if "goBack" == method {
         let urlString = m_basePageUrlString ?? Config.apiBaseUrl
         if urlString == self.backForwardList.backItem?.initialURL.absoluteString {
@@ -328,6 +328,12 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
       }
     }
 
+    if UIApplication.shared.canOpenURL(requestUrl) {
+      //urlscheme, tel, mailto, etc.
+      UIApplication.shared.open(requestUrl, options: [:], completionHandler: nil)
+      decisionHandler(.cancel)
+      return;
+    }
     // unknown scheme
     decisionHandler(.allow)
   }

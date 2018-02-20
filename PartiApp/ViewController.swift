@@ -267,13 +267,18 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
       }
     } else if action == "download" {
       handleDownload(json)
-        } else if action == "reload" {
-            if isConnectedToNetwork() {
-                m_webView.onNetworkReady()
-            } else {
-                showToast("연결이 지연되고 있습니다")
-            }
-        } else {
+    } else if action == "reload" {
+      if isConnectedToNetwork() {
+        m_webView.onNetworkReady()
+      } else {
+        showToast("연결이 지연되고 있습니다")
+      }
+    } else if action == "share" {
+      guard let textShare = json?["text"] else { showToast("공유 설정에 오류가 있습니다"); return }
+      let activityViewController = UIActivityViewController(activityItems: [textShare], applicationActivities: nil)
+      activityViewController.popoverPresentationController?.sourceView = self.view
+      self.present(activityViewController, animated: true, completion: nil)
+    } else {
       log.warning("unhandled post action: \(action)")
     }
   }
