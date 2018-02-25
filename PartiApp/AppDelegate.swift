@@ -154,37 +154,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     let url = pushInfo["url"]
 
     if let urlStr = url as? String, !Util.isNilOrEmpty(urlStr) {
-      ViewController.instance.safelyGoToUrl(urlStr)
+      ViewController.instance.handlePushNotification(urlStr)
     }
-/*
-    if let aps = pushInfo["aps"] as? NSDictionary {
-      var title: String?
-      var body: String?
-
-      let alert = aps["alert"]
-      if let alertStr = alert as? String {
-        body = alertStr
-      } else if let alertDic = alert as? NSDictionary {
-        body = alertDic["body"] as? String
-        title = alertDic["title"] as? String
-      } else {
-        log.debug("Unknown alert type: \(String(describing: alert))")
-        return
-      }
-
-      if aps["sound"] != nil {
-        AudioServicesPlaySystemSound(1315)
-      }
-
-      let alertController = UIAlertController(title: title, message:body, preferredStyle:.alert)
-      alertController.addAction(UIAlertAction(title: Util.getLocalizedString("ok"), style:.`default`, handler: { _ in
-        if let urlStr = url as? String {
-          ViewController.instance.safelyGoToUrl(urlStr)
-        }
-      }))
-      ViewController.instance.present(alertController, animated:true, completion:nil)
-    }
-*/
   }
 }
 

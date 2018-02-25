@@ -147,7 +147,7 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
     m_progressView.removeFromSuperview()
   }
 
-  func safelyGoToUrl(_ url: String) {
+  func handlePushNotification(_ url: String) {
     let urlToGo: String
     if url.hasPrefix("/") {
       urlToGo = ApiMan.getBaseUrl() + String(url.dropFirst())
@@ -155,7 +155,7 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
       urlToGo = url
     }
 
-    m_webView.loadRemoteUrl(urlToGo)
+    m_webView.loadPushNotifiedRemoteUrl(urlToGo)
   }
 
   //observer

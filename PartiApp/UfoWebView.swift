@@ -82,8 +82,12 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
     let fileUrl = URL.init(fileURLWithPath: path!)
     super.loadFileURL(fileUrl, allowingReadAccessTo: Bundle.main.bundleURL)
   }
+  
+  func loadPushNotifiedRemoteUrl(_ targetUrlString: String) {
+    loadRemoteUrl(targetUrlString, customHeaders: ["X-Catan-Push-Notified" : "true"])
+  }
 
-  func loadRemoteUrl(_ targetUrlString: String? = nil) {
+  func loadRemoteUrl(_ targetUrlString: String? = nil, customHeaders: [String: String] = [:]) {
     log.debug("loadRemoteUrl: \(targetUrlString ?? "nil")")
     m_wasOfflinePageShown = false
     guard let targetUrlString = targetUrlString else {
@@ -93,17 +97,20 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
 
     if !isControllUrl(targetUrlString) && (m_wasOfflinePageShown || (m_currentUrlString ?? "").isEmpty) {
       let escapedString = targetUrlString.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
-      loadRequest("\(UfoWebView.URL_MOBILE_APP_START)?after=\(escapedString)")
+      loadRequest("\(UfoWebView.URL_MOBILE_APP_START)?after=\(escapedString)", customHeaders: customHeaders)
       return
     }
 
-    loadRequest(targetUrlString)
+    loadRequest(targetUrlString, customHeaders: customHeaders)
   }
 
-  fileprivate func loadRequest(_ urlString: String) {
+  fileprivate func loadRequest(_ urlString: String, customHeaders: [String: String] = [:]) {
     guard let url = URL(string: urlString) else { return }
-    let req = URLRequest(url: url)
-    super.load(req)
+    let req = NSMutableURLRequest(url: url)
+    for customHeader in customHeaders {
+      req.addValue(customHeader.value, forHTTPHeaderField: customHeader.key)
+    }
+    super.load(req as URLRequest)
   }
 
   private func postJs(_ action: String, json jsonString: String?) {
