@@ -13,6 +13,7 @@ import TMReachability
 import FirebaseMessaging
 import Crashlytics
 import WebKit
+import NVActivityIndicatorView
 
 var myContext = 0
 
@@ -33,7 +34,8 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
   var m_curDownloadedFileUrl: URL?
 
   var m_remoteHostReach: TMReachability?
-
+  var m_indicator: NVActivityIndicatorView!
+  
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
@@ -184,8 +186,14 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
                           self?.m_progressView.setProgress(0.0, animated: false)
                         }
         })
+        hideLoadingIndicator()
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
       } else {
+        if m_webView.estimatedProgress >= 0.85 {
+          hideLoadingIndicator()
+        } else {
+          delayedShowLoadingIndicator()
+        }
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
       }
       return
@@ -222,6 +230,7 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
 
   func onWebPageFinally(_ url: String?) {
     log.debug("onWebPageFinally: \(url ?? "nil")")
+    hideLoadingIndicator()
     UIApplication.shared.isNetworkActivityIndicatorVisible = false
   }
 
@@ -443,5 +452,55 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
 
   func documentInteractionController(_ controller: UIDocumentInteractionController, didEndSendingToApplication application: String?) {
     log.debug("didEndSendingToApplication")
+  }
+  
+  func delayedShowLoadingIndicator() {
+    if m_indicator == nil {
+      m_indicator = NVActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 40.0, height: 40.0), type: NVActivityIndicatorType.ballPulse, color: UIColor.white, padding: 10)
+      m_indicator.backgroundColor = #colorLiteral(red: 0.5882352941, green: 0.4352941176, blue: 0.8392156863, alpha: 1)
+      m_indicator.layer.cornerRadius = 5
+      m_indicator.layer.masksToBounds = true
+      // add subview
+      view.addSubview(m_indicator)
+      // autoresizing mask
+      m_indicator.translatesAutoresizingMaskIntoConstraints = false
+      // constraints
+      view.addConstraint(NSLayoutConstraint(item: m_indicator, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: view, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0))
+      view.addConstraint(NSLayoutConstraint(item: m_indicator, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: view, attribute: NSLayoutAttribute.centerY, multiplier: 1, constant: 0))
+      
+      m_indicator.isUserInteractionEnabled = true
+      let gesture:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(loadingIndicatorTapped(_:)))
+      gesture.numberOfTapsRequired = 1
+      m_indicator.addGestureRecognizer(gesture)
+    }
+    
+    if m_webView.isCancelableLoading() {
+      perform(#selector(showLoadingIndicator), with: nil, afterDelay: 4)
+    }
+  }
+  
+  @objc func showLoadingIndicator(){
+    if !m_webView.isLoading { return }
+    
+    UIView.transition(with: m_indicator, duration: 0.4, options: .transitionCrossDissolve, animations: { [weak self] in
+        self?.m_indicator.isHidden = false
+        }, completion: nil)
+    
+    m_indicator.startAnimating()
+  }
+
+  func hideLoadingIndicator(){
+    stopLoadingIndicator()
+    if m_indicator != nil { m_indicator.isHidden = true }
+  }
+  
+  func stopLoadingIndicator(){
+    if m_indicator != nil { m_indicator.stopAnimating() }
+  }
+  
+  @objc func loadingIndicatorTapped(_ sender: NVActivityIndicatorView) {
+    if m_webView.isCancelableLoading() {
+      m_webView.stopLoading()
+    }
   }
 }

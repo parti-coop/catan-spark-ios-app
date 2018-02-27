@@ -261,7 +261,7 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
       decisionHandler(.cancel)
       return
     }
-
+    
     if requestUrlString.hasPrefix("http") {
       if let targetFrm = navigationAction.targetFrame, targetFrm.isMainFrame == false {
         allowHttpNavigationAction(decisionHandler, requestUrlString: requestUrlString)
@@ -414,5 +414,9 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
   func clearHistory() {
     m_basePageUrlString = nil
     m_currentUrlString = nil
+  }
+  
+  func isCancelableLoading() -> Bool {
+    return !isControllUrl(url?.absoluteString)
   }
 }

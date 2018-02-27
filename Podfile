@@ -9,6 +9,7 @@ pod 'Natrium'
 pod 'CrossroadRegex'
 pod 'SwiftyBeaver'
 pod 'SimulatorStatusMagic', :configurations => ['Debug']
+pod 'NVActivityIndicatorView'
 
 target 'PartiApp Debug' do
 	use_frameworks!
