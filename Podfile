@@ -1,7 +1,7 @@
 platform :ios, '9.0'
 
 pod 'Fabric'
-pod 'Crashlytics', '~>  3.9'
+pod 'Crashlytics', '~>  3.10'
 pod 'Firebase/Messaging'
 pod 'MBProgressHUD', '~> 1.1.0'
 pod 'TMReachability', :git => 'https://github.com/albertbori/Reachability'

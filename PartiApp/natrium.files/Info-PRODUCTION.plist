@@ -20,7 +20,7 @@
   <string>1.0.0</string>
   <key>CFBundleVersion</key>
   <string>15</string>
-    <key>Fabric</key>
+  <key>Fabric</key>
   <dict>
     <key>APIKey</key>
     <string>61fec037830f072a57601a3e9f538a4a0f0d1ac3</string>

@@ -91,3 +91,6 @@ PartiApp/natrium.files/*
 !PartiApp/natrium.files/info-PRODUCTION.plist
 !PartiApp/natrium.files/info-STAGING.plist
 !PartiApp/natrium.files/info-DEV.plist.sample
+
+# Fabric
+Fabric.framework
