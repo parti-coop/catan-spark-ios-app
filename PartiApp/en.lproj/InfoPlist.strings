@@ -1,3 +1,6 @@
 /* Localized versions of Info.plist keys */
 
 CFBundleDisplayName = "Parti";
+NSCameraUsageDescription = "Access the camera to create a post.";
+NSPhotoLibraryUsageDescription = "Access your photos to create a post.";
+NSPhotoLibraryAddUsageDescription = "Add your photos to manage a post.";
