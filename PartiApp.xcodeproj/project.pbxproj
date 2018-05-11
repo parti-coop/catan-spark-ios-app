@@ -41,6 +41,9 @@
 		9805A1FB2026CE6E0011DE88 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1EB65DC71FF0056000E1B5A9 /* LaunchScreen.storyboard */; };
 		9805A1FC2026CE6E0011DE88 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1EB65DD91FF0075200E1B5A9 /* InfoPlist.strings */; };
 		9805A1FD2026CE6E0011DE88 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1EB65DC11FEFB63400E1B5A9 /* GoogleService-Info.plist */; };
+		98BA529620A5348B0034327E /* CopyUrlToClipboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BA529520A5348B0034327E /* CopyUrlToClipboard.swift */; };
+		98BA529720A5348B0034327E /* CopyUrlToClipboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BA529520A5348B0034327E /* CopyUrlToClipboard.swift */; };
+		98BA529820A5348B0034327E /* CopyUrlToClipboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BA529520A5348B0034327E /* CopyUrlToClipboard.swift */; };
 		98EC62782033DAE900A8BB4F /* PartiApp_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EC62772033DAE900A8BB4F /* PartiApp_UITests.swift */; };
 		98EC62832033DFB200A8BB4F /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EC62822033DFB200A8BB4F /* SnapshotHelper.swift */; };
 /* End PBXBuildFile section */
@@ -79,6 +82,7 @@
 		505A5984F11E33E2019191AE /* Pods-PartiApp Release.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PartiApp Release.release.xcconfig"; path = "Pods/Target Support Files/Pods-PartiApp Release/Pods-PartiApp Release.release.xcconfig"; sourceTree = "<group>"; };
 		67C5BC16AB28B3C3C3FFAAA7 /* Pods_PartiApp_Debug.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PartiApp_Debug.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9805A2042026CE6F0011DE88 /* PartiApp Release.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PartiApp Release.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		98BA529520A5348B0034327E /* CopyUrlToClipboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyUrlToClipboard.swift; sourceTree = "<group>"; };
 		98EC62752033DAE900A8BB4F /* PartiApp UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PartiApp UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		98EC62772033DAE900A8BB4F /* PartiApp_UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartiApp_UITests.swift; sourceTree = "<group>"; };
 		98EC62792033DAE900A8BB4F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -168,6 +172,7 @@
 				1EB65DC51FEFB6BF00E1B5A9 /* UfoWebView.swift */,
 				1EB65DAA1FED29E700E1B5A9 /* ViewController.swift */,
 				1EB65DA81FED29E700E1B5A9 /* AppDelegate.swift */,
+				98BA529520A5348B0034327E /* CopyUrlToClipboard.swift */,
 			);
 			path = PartiApp;
 			sourceTree = "<group>";
@@ -559,6 +564,7 @@
 				1EB65DE41FF0095500E1B5A9 /* ApiMan.swift in Sources */,
 				1EB65DAB1FED29E700E1B5A9 /* ViewController.swift in Sources */,
 				1EB65DA91FED29E700E1B5A9 /* AppDelegate.swift in Sources */,
+				98BA529620A5348B0034327E /* CopyUrlToClipboard.swift in Sources */,
 				1EB65DBD1FEF97B600E1B5A9 /* Util.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -572,6 +578,7 @@
 				9805A1ED2026CE6E0011DE88 /* ApiMan.swift in Sources */,
 				9805A1EE2026CE6E0011DE88 /* ViewController.swift in Sources */,
 				9805A1EF2026CE6E0011DE88 /* AppDelegate.swift in Sources */,
+				98BA529720A5348B0034327E /* CopyUrlToClipboard.swift in Sources */,
 				9805A1F02026CE6E0011DE88 /* Util.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -581,6 +588,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				98EC62782033DAE900A8BB4F /* PartiApp_UITests.swift in Sources */,
+				98BA529820A5348B0034327E /* CopyUrlToClipboard.swift in Sources */,
 				98EC62832033DFB200A8BB4F /* SnapshotHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -283,8 +283,17 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
         showToast("연결이 지연되고 있습니다")
       }
     } else if action == "share" {
+      var activityItems = [Any]()
+      
       guard let textShare = json?["text"] else { showToast("공유 설정에 오류가 있습니다"); return }
-      let activityViewController = UIActivityViewController(activityItems: [textShare], applicationActivities: nil)
+      activityItems.append(textShare)
+      
+      if let urlString = (json?["url"] as? String), !Util.isNilOrEmpty(urlString), let url = NSURL(string: urlString) {
+        activityItems.append(url)
+      }
+      
+      let copyUrlToclipboard = CopyUrlToClipboardActivity()
+      let activityViewController = UIActivityViewController(activityItems: activityItems, applicationActivities: [copyUrlToclipboard])
       activityViewController.popoverPresentationController?.sourceView = self.view
       self.present(activityViewController, animated: true, completion: nil)
     } else {
@@ -504,3 +513,4 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
     }
   }
 }
+

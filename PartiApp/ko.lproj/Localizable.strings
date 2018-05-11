@@ -9,3 +9,4 @@ downloading = "다운로드중...";
 download_fail = "다운로드에 실패하였습니다.";
 wait_moment = "잠시만 기다려주세요.";
 inet_fail = "인터넷 연결에 실패하였습니다.";
+copy_link = "주소 복사";

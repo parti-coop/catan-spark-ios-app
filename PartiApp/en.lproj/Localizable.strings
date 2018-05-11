@@ -9,3 +9,4 @@ downloading = "Downloading...";
 download_fail = "Download failed";
 wait_moment = "Wait a moment...";
 inet_fail = "Failed to connect to Internet.";
+copy_link = "Copy Link";
