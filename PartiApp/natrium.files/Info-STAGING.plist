@@ -27,14 +27,14 @@
       <string>Editor</string>
       <key>CFBundleURLSchemes</key>
       <array>
-        <string>com.googleusercontent.apps.762145604577-kku7cjs8hn11pr3puuufffbhus4s9i88</string>
+        <string>$(GOOGLE_AUTH_BUNDLE_URL_SCHEME)</string>
       </array>
     </dict>
   </array>
   <key>Fabric</key>
   <dict>
     <key>APIKey</key>
-    <string>61fec037830f072a57601a3e9f538a4a0f0d1ac3</string>
+    <string>$(FABRIC_API_KEY)</string>
     <key>Kits</key>
     <array>
       <dict>

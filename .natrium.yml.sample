@@ -10,6 +10,16 @@ natrium_variables:
     Staging: STAGING
     Production: PRODUCTION
 
+xcconfig:
+  GOOGLE_AUTH_BUNDLE_URL_SCHEME:
+    "*":
+      com.googleusercontent.apps.xxx
+  FABRIC_API_KEY:
+    "*":
+      xx
+  LOCAL_TEST_HOST_NAME:
+    Development: parti.test
+
 variables:
   apiBaseUrl:
     Development: https://parti.test/
