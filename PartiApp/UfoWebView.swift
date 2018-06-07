@@ -23,13 +23,11 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
 {
   private static let URL_MOBILE_APP_START = ApiMan.getBaseUrl() + "mobile_app/start"
 
-  private static let CATAN_USER_AGENT = " CatanSparkIOS/2";
-  private static let FAKE_USER_AGENT_FOR_GOOGLE_OAUTH = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.75.14 (KHTML, like Gecko) Version/7.0.3 Safari/7046A194A" + CATAN_USER_AGENT
-
+  private static let CATAN_USER_AGENT = " CatanSparkIOS/3";
   public var ufoDelegate: UfoWebDelegate?
   
   private var m_wasOfflinePageShown: Bool = false
-  private var m_originalUserAgent: String? = nil
+  private var m_customUserAgent: String? = nil
   private var m_basePageUrlString: String? = nil
   private var m_currentUrlString: String? = nil
 
@@ -47,7 +45,7 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
     evaluateJavaScript("navigator.userAgent") { [weak self] (result, error) in
       if let strongSelf = self, let userAgent = result as? String {
         strongSelf.customUserAgent = userAgent + UfoWebView.CATAN_USER_AGENT
-        strongSelf.m_originalUserAgent = strongSelf.customUserAgent
+        strongSelf.m_customUserAgent = strongSelf.customUserAgent
       }
     }
   }
@@ -152,6 +150,8 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
         } else {
           loadRemoteUrl(urlString)
         }
+      } else if "startGoogleSignIn" == method {
+        ufoDelegate?.handleAction(method!, withJSON: nil)
       } else if "post" == method {
         postJs(arg0 ?? "", json: arg1)
       } else {
@@ -283,30 +283,14 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
           return
       }
       mutableRequest.setValue("processed", forHTTPHeaderField: "x-catan-spark-app")
-
-      #if DEBUG
-        // 구글 Oauth에서 parti.dev로 인증결과가 넘어오면 로컬 개발용이다.
-        // 그러므로 Config.apiBaseUrl로 주소를 바꾸어 인증하도록 한다
-        let GOOGLE_OAUTH_FOR_DEV_URL = "https://parti.dev/users/auth/google_oauth2/callback"
-        if requestUrl.absoluteString.hasPrefix(GOOGLE_OAUTH_FOR_DEV_URL) {
-          let newUrlString = requestUrlString.replacingOccurrences(of: "https://parti.dev/", with: Config.apiBaseUrl)
-          if let newUrl = URL(string: newUrlString) {
-            mutableRequest.url = newUrl
-            restartHttpNavigationAction(decisionHandler, request: mutableRequest)
-            return
-          }
-        }
-      #endif
-
-      let userAgentString = makeUserAgentString(webView, request: request)
-      webView.customUserAgent = userAgentString
+      webView.customUserAgent = self.m_customUserAgent
 
       // [ 빠띠 내의 주소인지 확인하고 처리 ]
       // 빠띠 내의 주소면 무조건 현재 웹뷰에서 처리
       //
       // [ _blank처리 ]
       //
-      // webView(_ webView, createWebViewWith: WKWebViewConfiguration, for: WKNavigationAction, windowFeatures: WKWindowFeatures) 보다 먼저 처리는 듯 보임
+      // webView(_ webView, createWebViewWith: WKWebViewConfiguration, for: WKNavigationAction, windowFeatures: WKWindowFeatures) 보다 먼저 처리됨
       //
       // WKNavigationAction#targetFrame
       // The target frame, or nil if this is a new window navigation.
@@ -316,11 +300,10 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
       if navigationAction.targetFrame != nil || isPartiPage {
         // 앱 내의 웹뷰에서 계속 진행합니다.
         // ex) webView.load(mutableRequest as URLRequest)
-        if userAgentString != request.value(forHTTPHeaderField: "User-Agent") {
+        if self.m_customUserAgent != request.value(forHTTPHeaderField: "User-Agent") {
           // user agent가 맞지 않으므로 새로운 요청을 시작한다
-          log.debug("Start new request with new user agent : \(requestUrlString) : user agent - \(userAgentString ?? "")");
-          mutableRequest.setValue(userAgentString, forHTTPHeaderField: "User-Agent")
-
+          log.debug("Start new request with new user agent : \(requestUrlString) : user agent - \(self.m_customUserAgent ?? "")");
+          mutableRequest.setValue(self.m_customUserAgent, forHTTPHeaderField: "User-Agent")
           restartHttpNavigationAction(decisionHandler, request: mutableRequest)
           return
         } else {
@@ -353,29 +336,6 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
   fileprivate func restartHttpNavigationAction(_ decisionHandler: @escaping (WKNavigationActionPolicy) -> Void, request: NSMutableURLRequest) {
     load(request as URLRequest)
     decisionHandler(.cancel)
-  }
-
-  fileprivate func makeUserAgentString(_ webView: WKWebView, request: URLRequest) -> String? {
-    guard let url = request.url else { return self.m_originalUserAgent }
-
-    let GOOGLE_OAUTH_START_URL = "\(Config.apiBaseUrl)users/auth/google_oauth2"
-    if url.absoluteString.hasPrefix(GOOGLE_OAUTH_START_URL) {
-      // 구글 인증이 시작되었다.
-      // 가짜 User-Agent 사용을 시작한다.
-      return UfoWebView.FAKE_USER_AGENT_FOR_GOOGLE_OAUTH
-    } else if request.value(forHTTPHeaderField: "User-Agent") == UfoWebView.FAKE_USER_AGENT_FOR_GOOGLE_OAUTH || webView.customUserAgent == UfoWebView.FAKE_USER_AGENT_FOR_GOOGLE_OAUTH {
-      // 가짜 User-Agent 사용하는 걸보니 이전 request에서 구글 인증이 시작된 상태이다.
-      if url.absoluteString.hasPrefix("https://accounts.google.com") {
-        return UfoWebView.FAKE_USER_AGENT_FOR_GOOGLE_OAUTH
-      } else {
-        // 구글 인증이 시작된 상태였다가
-        // 구글 인증 주소가 아닌 다른 페이지로 이동하는 중이다.
-        // 구글 인증이 끝났다고 보고 원래 "User-Agent"로 원복한다.
-        return self.m_originalUserAgent
-      }
-    } else {
-      return self.m_originalUserAgent
-    }
   }
 
   func evalJs(_ jsStr: String) {

@@ -13,6 +13,8 @@ import AVFoundation
 import Firebase
 import FirebaseMessaging
 
+import GoogleSignIn
+
 import Fabric
 import Crashlytics
 import SwiftyBeaver
@@ -24,14 +26,17 @@ typealias Config = Natrium.Config
 #if DEBUG
 import SimulatorStatusMagic
 #endif
-  
+
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate
+class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate
 {
   var window: UIWindow?
 
   private var httpMan: HttpMan = HttpMan()
   private var apiMan: ApiMan = ApiMan()
+
+  var googleSignInSuccessCallback: (() -> ())?
+  var googleSignInFailureCallback: ((_ error: Error) -> ())?
 
   static func getHttpManager() -> HttpMan {
     return (UIApplication.shared.delegate as! AppDelegate).httpMan
@@ -64,6 +69,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 
     // Override point for customization after application launch.
     setupLog()
+
+    // Initialize Google sign-in
+    GIDSignIn.sharedInstance().clientID = Config.authGoogleClientId
+    GIDSignIn.sharedInstance().serverClientID = Config.authGoogleServerClientId
+    GIDSignIn.sharedInstance().delegate = self
 
     #if DEBUG
     if ProcessInfo.processInfo.arguments.contains("CATAN_SCREENSNAPSHOTS") {
@@ -145,8 +155,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate
   func application(_ application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: @escaping () -> Void) {
     debugPrint("handleEventsForBackgroundURLSession: \(identifier)")
     completionHandler()
-    }
+  }
 
+  func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+    return GIDSignIn.sharedInstance().handle(url,
+                                             sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,
+                                             annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+  }
 
   func handlePushData(_ pushInfo: [AnyHashable : Any]) {
     //log.debug("handlePushData: ", Util.getPrettyJsonString(pushInfo) ?? "nil")
@@ -155,6 +170,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 
     if let urlStr = url as? String, !Util.isNilOrEmpty(urlStr) {
       ViewController.instance.handlePushNotification(urlStr)
+    }
+  }
+
+  func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+    if let error = error {
+      log.error("\(error.localizedDescription)")
+      googleSignInFailureCallback?(error)
+    } else {
+      googleSignInSuccessCallback?()
     }
   }
 }

@@ -20,6 +20,17 @@
   <string>0.1</string>
   <key>CFBundleVersion</key>
   <string>1</string>
+  <key>CFBundleURLTypes</key>
+  <array>
+    <dict>
+      <key>CFBundleTypeRole</key>
+      <string>Editor</string>
+      <key>CFBundleURLSchemes</key>
+      <array>
+        <string>com.googleusercontent.apps.xxx</string>
+      </array>
+    </dict>
+  </array>
   <key>Fabric</key>
   <dict>
     <key>APIKey</key>

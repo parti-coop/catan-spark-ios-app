@@ -10,6 +10,7 @@ pod 'CrossroadRegex'
 pod 'SwiftyBeaver'
 pod 'SimulatorStatusMagic', :configurations => ['Debug']
 pod 'NVActivityIndicatorView'
+pod 'GoogleSignIn'
 
 target 'PartiApp Debug' do
 	use_frameworks!

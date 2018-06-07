@@ -14,11 +14,12 @@ import FirebaseMessaging
 import Crashlytics
 import WebKit
 import NVActivityIndicatorView
+import GoogleSignIn
 
 var myContext = 0
 
 class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
-  ,UfoWebDelegate, ApiResultDelegate
+  ,UfoWebDelegate, ApiResultDelegate, GIDSignInUIDelegate
 {
   private static let KEY_AUTHKEY = "xAK"
   static var instance: ViewController!
@@ -64,6 +65,8 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
 
     m_progressView.isHidden = true
     m_webView.loadRemoteUrl()
+    
+    setupGoogleSignIn()
   }
 
   fileprivate func setupWebView() {
@@ -118,6 +121,26 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
     m_progressView.heightAnchor.constraint(equalToConstant: 3).isActive = true
 
     m_webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: .new, context: &myContext)
+  }
+  
+  func googleSignInSuccessCallback() {
+    guard let currentUser = GIDSignIn.sharedInstance().currentUser else {
+      return
+    }
+    
+    m_webView.evalJs("requestGoogleAuth('\(currentUser.authentication.idToken ?? "")')")
+  }
+  
+  func googleSignInFailureCallback(_ error: Error) {
+    print("Sign-in Error \(error)")
+    m_webView.goBack()
+    showToast("앗! 뭔가 잘못되었습니다")
+  }
+  
+  fileprivate func setupGoogleSignIn() {
+    GIDSignIn.sharedInstance().uiDelegate = self
+    (UIApplication.shared.delegate as! AppDelegate).googleSignInSuccessCallback = googleSignInSuccessCallback
+    (UIApplication.shared.delegate as! AppDelegate).googleSignInFailureCallback = googleSignInFailureCallback
   }
 
   private func setupReachability() {
@@ -296,11 +319,13 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
       let activityViewController = UIActivityViewController(activityItems: activityItems, applicationActivities: [copyUrlToclipboard])
       activityViewController.popoverPresentationController?.sourceView = self.view
       self.present(activityViewController, animated: true, completion: nil)
+    } else if action == "startGoogleSignIn" {
+      GIDSignIn.sharedInstance().signIn()
     } else {
       log.warning("unhandled post action: \(action)")
     }
   }
-
+  
   func isConnectedToNetwork() -> Bool {
     guard let flags = getFlags() else { return false }
     let isReachable = flags.contains(.reachable)

@@ -37,7 +37,7 @@ class Util
     CC_MD5_Init(context)
     CC_MD5_Update(context, string, CC_LONG(string.lengthOfBytes(using: String.Encoding.utf8)))
     CC_MD5_Final(&digest, context)
-    context.deallocate(capacity: 1)
+    context.deallocate()
 
     // make hex string
     return digest.map { String(format: "%02.2hhx", $0) }.joined()
