@@ -29,7 +29,7 @@ $ pod install
 $ cp .natrium.yml.sample .natrium.yml
 ```
 
-${PROJECT_DIR}/.natrium.yml을 열어서 xcconfig > GOOGLE_AUTH_BUNDLE_URL_SCHEME, xcconfig > FABRIC_API_KEY, xcconfig > LOCAL_TEST_HOST_NAME, variables > apiBaseUrl와 variables > apiBaseUrlRegex를 자신의 환경에 맞게 설정합니다.
+${PROJECT_DIR}/.natrium.yml을 열어서 xcconfig > GOOGLE_AUTH_BUNDLE_URL_SCHEME, xcconfig > FACEBOOK_AUTH_BUNDLE_URL_SCHEME, xcconfig > FABRIC_API_KEY, variables > apiBaseUrl와 variables > apiBaseUrlRegex를 자신의 환경에 맞게 설정합니다.
 
 ```
 xcconfig:
@@ -39,8 +39,6 @@ xcconfig:
   FABRIC_API_KEY:
     "*":
       xx # <-- 이부분
-  LOCAL_TEST_HOST_NAME:
-    Development: parti.test # <-- 이부분
 
 variables:
   apiBaseUrl:

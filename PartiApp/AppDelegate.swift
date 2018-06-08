@@ -14,6 +14,7 @@ import Firebase
 import FirebaseMessaging
 
 import GoogleSignIn
+import FBSDKCoreKit
 
 import Fabric
 import Crashlytics
@@ -74,6 +75,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate
     GIDSignIn.sharedInstance().clientID = Config.authGoogleClientId
     GIDSignIn.sharedInstance().serverClientID = Config.authGoogleServerClientId
     GIDSignIn.sharedInstance().delegate = self
+    
+    // Initialize Facebook sign-in
+    FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
 
     #if DEBUG
     if ProcessInfo.processInfo.arguments.contains("CATAN_SCREENSNAPSHOTS") {

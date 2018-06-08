@@ -1,8 +1,18 @@
 PODS:
+  - Bolts (1.9.0):
+    - Bolts/AppLinks (= 1.9.0)
+    - Bolts/Tasks (= 1.9.0)
+  - Bolts/AppLinks (1.9.0):
+    - Bolts/Tasks
+  - Bolts/Tasks (1.9.0)
   - Crashlytics (3.10.1):
     - Fabric (~> 1.7.5)
   - CrossroadRegex (1.1.0)
   - Fabric (1.7.6)
+  - FBSDKCoreKit (4.31.1):
+    - Bolts (~> 1.7)
+  - FBSDKLoginKit (4.31.1):
+    - FBSDKCoreKit
   - Firebase/Core (4.8.0):
     - FirebaseAnalytics (= 4.0.5)
     - FirebaseCore (= 4.0.13)
@@ -67,6 +77,7 @@ DEPENDENCIES:
   - Crashlytics (~> 3.10)
   - CrossroadRegex
   - Fabric
+  - FBSDKLoginKit
   - Firebase/Messaging
   - GoogleSignIn
   - MBProgressHUD (~> 1.1.0)
@@ -86,9 +97,12 @@ CHECKOUT OPTIONS:
     :git: https://github.com/albertbori/Reachability
 
 SPEC CHECKSUMS:
+  Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
   Crashlytics: aee1a064cbbf99b32efa3f056a5f458d846bc8ff
   CrossroadRegex: 5eaadb3f7b4014728f1cbd1014756b126c1dbd9a
   Fabric: f8d42c893bb187326a7968b62abe55c36a987a46
+  FBSDKCoreKit: e08ccfcefa7bc1347a07c276dac9bf6c7fe57024
+  FBSDKLoginKit: 99797ac39252fef6f72600b886f6ee60b4b29cab
   Firebase: 710decbbc6d9d48530e9a5dba3209740c3532e05
   FirebaseAnalytics: 5b02a63ead2c3f0259cfc7f15e053e440587ecf8
   FirebaseCore: 3c02ec652db3d03fdc8bc6d9154af3e20d64b6f5
@@ -107,6 +121,6 @@ SPEC CHECKSUMS:
   SwiftyBeaver: 4f74563624b2c1e821c522c54142b5dd5ebb0f30
   TMReachability: 48c99d728a8b0ad4493800592484b8cbb65c896c
 
-PODFILE CHECKSUM: 13e0a7d5957a744ece4b8f8d3a59ea76ded5676a
+PODFILE CHECKSUM: 42962bd458f7d8b810d9c53145bfaf75814bbfd2
 
 COCOAPODS: 1.3.1

@@ -15,6 +15,8 @@ import Crashlytics
 import WebKit
 import NVActivityIndicatorView
 import GoogleSignIn
+import FBSDKCoreKit
+import FBSDKLoginKit
 
 var myContext = 0
 
@@ -67,6 +69,7 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
     m_webView.loadRemoteUrl()
     
     setupGoogleSignIn()
+    setupFacebookSignIn()
   }
 
   fileprivate func setupWebView() {
@@ -123,6 +126,8 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
     m_webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: .new, context: &myContext)
   }
   
+  // Sign In
+  
   func googleSignInSuccessCallback() {
     guard let currentUser = GIDSignIn.sharedInstance().currentUser else {
       return
@@ -132,15 +137,37 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
   }
   
   func googleSignInFailureCallback(_ error: Error) {
-    print("Sign-in Error \(error)")
-    m_webView.goBack()
-    showToast("앗! 뭔가 잘못되었습니다")
+    omniAuthSignInFailureCallback(error)
   }
   
   fileprivate func setupGoogleSignIn() {
     GIDSignIn.sharedInstance().uiDelegate = self
     (UIApplication.shared.delegate as! AppDelegate).googleSignInSuccessCallback = googleSignInSuccessCallback
     (UIApplication.shared.delegate as! AppDelegate).googleSignInFailureCallback = googleSignInFailureCallback
+  }
+  
+  func facebookSignInSuccessCallback() {
+    guard let currentToken = FBSDKAccessToken.current() else { return }
+    m_webView.evalJs("requestFacebookAuth('\(currentToken.tokenString ?? "")')")
+  }
+  
+  func facebookSignInFailureCallback(_ error: Error) {
+    omniAuthSignInFailureCallback(error)
+  }
+  
+  func facebookSignInCancelCallback() {
+    m_webView.goBack()
+    showToast("로그인을 취소했습니다")
+  }
+  
+  fileprivate func setupFacebookSignIn() {
+    FBSDKSettings.setAppID(Config.authFacebookAppId)
+  }
+  
+  fileprivate func omniAuthSignInFailureCallback(_ error: Error) {
+    log.error("Sign-in Error \(error)")
+    m_webView.goBack()
+    showToast("앗! 뭔가 잘못되었습니다")
   }
 
   private func setupReachability() {
@@ -321,6 +348,19 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
       self.present(activityViewController, animated: true, completion: nil)
     } else if action == "startGoogleSignIn" {
       GIDSignIn.sharedInstance().signIn()
+    } else if action == "startFacebookSignIn" {
+      let login = FBSDKLoginManager.init()
+      login.logIn(withReadPermissions: ["email"], from: self) { [weak self] (result, error) in
+        guard let strongSelf = self else { return }
+        
+        if let error = error {
+          strongSelf.facebookSignInFailureCallback(error)
+        } else if (result?.isCancelled ?? false) {
+          strongSelf.facebookSignInCancelCallback()
+        } else {
+          strongSelf.facebookSignInSuccessCallback()
+        }
+      }
     } else {
       log.warning("unhandled post action: \(action)")
     }

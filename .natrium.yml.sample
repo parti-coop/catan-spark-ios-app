@@ -14,6 +14,9 @@ xcconfig:
   GOOGLE_AUTH_BUNDLE_URL_SCHEME:
     "*":
       com.googleusercontent.apps.xxx
+  FACEBOOK_AUTH_BUNDLE_URL_SCHEME:
+    "*":
+      fbxxxx
   FABRIC_API_KEY:
     "*":
       xx
@@ -29,6 +32,18 @@ variables:
     Development: ^https:\\/\\/(.*\\.)?parti\\.test(\\$|\\/)
     Staging: ^https:\\/\\/(.*\\.)?dev.parti\\.xyz(\\$|\\/)
     Production: ^https:\\/\\/(.*\\.)?parti\\.xyz(\\$|\\/)
+  authGoogleClientId:
+    Development: xx.apps.googleusercontent.com
+    Staging: xx.apps.googleusercontent.com
+    Production: xx.apps.googleusercontent.com
+  authGoogleServerClientId:
+    Development: xx.apps.googleusercontent.com
+    Staging: xx.apps.googleusercontent.com
+    Production: xx.apps.googleusercontent.com
+  authFacebookAppId:
+    Development: "xx"
+    Staging: "xx"
+    Production: "xx"
 
 files:
   PartiApp/Info.plist: PartiApp/natrium.files/Info-#{environmentSlug}.plist

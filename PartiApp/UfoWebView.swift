@@ -152,6 +152,8 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
         }
       } else if "startGoogleSignIn" == method {
         ufoDelegate?.handleAction(method!, withJSON: nil)
+      } else if "startFacebookSignIn" == method {
+        ufoDelegate?.handleAction(method!, withJSON: nil)
       } else if "post" == method {
         postJs(arg0 ?? "", json: arg1)
       } else {

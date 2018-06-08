@@ -11,6 +11,7 @@ pod 'SwiftyBeaver'
 pod 'SimulatorStatusMagic', :configurations => ['Debug']
 pod 'NVActivityIndicatorView'
 pod 'GoogleSignIn'
+pod 'FBSDKLoginKit'
 
 target 'PartiApp Debug' do
 	use_frameworks!
