@@ -127,18 +127,8 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
   }
   
   // Sign In
-  
-  func googleSignInSuccessCallback() {
-    guard let currentUser = GIDSignIn.sharedInstance().currentUser else {
-      return
-    }
-    
-    m_webView.evalJs("requestGoogleAuth('\(currentUser.authentication.idToken ?? "")')")
-  }
-  
-  func googleSignInFailureCallback(_ error: Error) {
-    omniAuthSignInFailureCallback(error)
-  }
+  private static let AUTH_PROVIDER_FACEBOOK = "facebook"
+  private static let AUTH_PROVIDER_GOOGLE = "google_oauth2"
   
   fileprivate func setupGoogleSignIn() {
     GIDSignIn.sharedInstance().uiDelegate = self
@@ -146,28 +136,83 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
     (UIApplication.shared.delegate as! AppDelegate).googleSignInFailureCallback = googleSignInFailureCallback
   }
   
-  func facebookSignInSuccessCallback() {
-    guard let currentToken = FBSDKAccessToken.current() else { return }
-    m_webView.evalJs("requestFacebookAuth('\(currentToken.tokenString ?? "")')")
-  }
-  
-  func facebookSignInFailureCallback(_ error: Error) {
-    omniAuthSignInFailureCallback(error)
-  }
-  
-  func facebookSignInCancelCallback() {
-    m_webView.goBack()
-    showToast("로그인을 취소했습니다")
-  }
-  
   fileprivate func setupFacebookSignIn() {
     FBSDKSettings.setAppID(Config.authFacebookAppId)
   }
   
-  fileprivate func omniAuthSignInFailureCallback(_ error: Error) {
-    log.error("Sign-in Error \(error)")
-    m_webView.goBack()
-    showToast("앗! 뭔가 잘못되었습니다")
+  func handleStartSocialSignIn(_ provider: String) {
+    if ViewController.AUTH_PROVIDER_FACEBOOK == provider {
+      let login = FBSDKLoginManager.init()
+      login.logIn(withReadPermissions: ["email"], from: self) { [weak self] (result, error) in
+        guard let strongSelf = self else { return }
+        
+        if let error = error {
+          strongSelf.facebookSignInFailureCallback(error)
+        } else if (result?.isCancelled ?? false) {
+          strongSelf.facebookSignInCancelCallback()
+        } else {
+          _ = strongSelf.facebookSignInSuccessCallback()
+        }
+      }
+    } else if(ViewController.AUTH_PROVIDER_GOOGLE == provider) {
+      GIDSignIn.sharedInstance().signIn()
+    }
+  }
+  
+  func handleCallbackSocialSignIn(_ provider: String) {
+    if ViewController.AUTH_PROVIDER_FACEBOOK == provider {
+      if(facebookSignInSuccessCallback()) {
+        return
+      } else {
+        socialAuthSignInFailureCallback()
+      }
+    } else if ViewController.AUTH_PROVIDER_GOOGLE == provider {
+      socialAuthSignInFailureCallback()
+    }
+  }
+  
+  func googleSignInSuccessCallback() {
+    guard let currentUser = GIDSignIn.sharedInstance().currentUser else {
+      return
+    }
+    
+    m_webView.evalJs("ufo.successAuth('\(ViewController.AUTH_PROVIDER_GOOGLE)', '\(currentUser.authentication.idToken ?? "")')")
+  }
+  
+  func googleSignInFailureCallback(_ error: NSError) {
+    let errorCode = GIDSignInErrorCode(rawValue: error.code)
+    if errorCode == .canceled {
+      socialAuthSignInCancelCallback()
+    } else {
+      socialAuthSignInFailureCallback(error)
+    }
+  }
+  
+  func facebookSignInSuccessCallback() -> Bool {
+    guard let currentToken = FBSDKAccessToken.current() else { return false }
+    m_webView.evalJs("ufo.successAuth('\(ViewController.AUTH_PROVIDER_FACEBOOK)', '\(currentToken.tokenString ?? "")')")
+    return true
+  }
+  
+  func facebookSignInFailureCallback(_ error: Error) {
+    socialAuthSignInFailureCallback(error)
+  }
+  
+  func facebookSignInCancelCallback() {
+    socialAuthSignInCancelCallback()
+  }
+  
+  fileprivate func socialAuthSignInCancelCallback() {
+    showToast("로그인을 취소했습니다")
+    m_webView.evalJs("ufo.failureAuth()")
+  }
+  
+  fileprivate func socialAuthSignInFailureCallback(_ error: Error? = nil) {
+    if let description = error?.localizedDescription {
+      log.error("Sign-in Error \(description)")
+    }
+    showToast("다시 시도해 주세요")
+    m_webView.evalJs("ufo.failureAuth()")
   }
 
   private func setupReachability() {
@@ -324,6 +369,10 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
           AppDelegate.getApiManager().requestDeleteToken(self as ApiResultDelegate, authkey: lastAuthKey!, pushToken: pushToken)
         }
       }
+      
+      // Facebook & Google logout
+      FBSDKLoginManager().logOut()
+      GIDSignIn.sharedInstance().signOut()
     } else if action == "download" {
       handleDownload(json)
     } else if action == "reload" {
@@ -346,21 +395,6 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
       let activityViewController = UIActivityViewController(activityItems: activityItems, applicationActivities: [copyUrlToclipboard])
       activityViewController.popoverPresentationController?.sourceView = self.view
       self.present(activityViewController, animated: true, completion: nil)
-    } else if action == "startGoogleSignIn" {
-      GIDSignIn.sharedInstance().signIn()
-    } else if action == "startFacebookSignIn" {
-      let login = FBSDKLoginManager.init()
-      login.logIn(withReadPermissions: ["email"], from: self) { [weak self] (result, error) in
-        guard let strongSelf = self else { return }
-        
-        if let error = error {
-          strongSelf.facebookSignInFailureCallback(error)
-        } else if (result?.isCancelled ?? false) {
-          strongSelf.facebookSignInCancelCallback()
-        } else {
-          strongSelf.facebookSignInSuccessCallback()
-        }
-      }
     } else {
       log.warning("unhandled post action: \(action)")
     }

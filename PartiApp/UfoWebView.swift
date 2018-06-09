@@ -17,6 +17,8 @@ protocol UfoWebDelegate : NSObjectProtocol
   func onWebPageNetworkError(_ urlString: String?)
   func onWebPageFinally(_ urlString: String?)
   func handleAction(_ action: String, withJSON json: [String:Any]?)
+  func handleStartSocialSignIn(_ provider: String)
+  func handleCallbackSocialSignIn(_ provider: String)
 }
 
 class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUIDelegate
@@ -150,10 +152,12 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
         } else {
           loadRemoteUrl(urlString)
         }
-      } else if "startGoogleSignIn" == method {
-        ufoDelegate?.handleAction(method!, withJSON: nil)
-      } else if "startFacebookSignIn" == method {
-        ufoDelegate?.handleAction(method!, withJSON: nil)
+      } else if "startSocialSignIn" == method {
+        guard let provider = arg0 else { return }
+        ufoDelegate?.handleStartSocialSignIn(provider)
+      } else if "callbackSocialSignIn" == method {
+        guard let provider = arg0 else { return }
+        ufoDelegate?.handleCallbackSocialSignIn(provider)
       } else if "post" == method {
         postJs(arg0 ?? "", json: arg1)
       } else {

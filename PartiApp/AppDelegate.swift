@@ -37,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate
   private var apiMan: ApiMan = ApiMan()
 
   var googleSignInSuccessCallback: (() -> ())?
-  var googleSignInFailureCallback: ((_ error: Error) -> ())?
+  var googleSignInFailureCallback: ((_ error: NSError) -> ())?
 
   static func getHttpManager() -> HttpMan {
     return (UIApplication.shared.delegate as! AppDelegate).httpMan
@@ -178,7 +178,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate
   }
 
   func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-    if let error = error {
+    if let error = error as NSError? {
       log.error("\(error.localizedDescription)")
       googleSignInFailureCallback?(error)
     } else {
