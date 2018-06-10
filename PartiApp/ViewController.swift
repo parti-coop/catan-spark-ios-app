@@ -39,6 +39,8 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
   var m_remoteHostReach: TMReachability?
   var m_indicator: NVActivityIndicatorView!
   
+  var m_docIC = UIDocumentInteractionController.init()
+
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
@@ -70,6 +72,8 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
     
     setupGoogleSignIn()
     setupFacebookSignIn()
+    
+    self.m_docIC.delegate = self
   }
 
   fileprivate func setupWebView() {
@@ -530,15 +534,13 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
 
   private func openDownloadedFile(_ fileUrl: URL) {
     log.debug("openDownloadedFile: \(fileUrl)")
-    let m_docIC: UIDocumentInteractionController = UIDocumentInteractionController.init(url: fileUrl)
-    m_docIC.delegate = self
-    m_docIC.name = m_curDownloadFilename
-    m_curDownloadedFileUrl = fileUrl
-
-    if !m_docIC.presentPreview(animated: true) {
-      showToast("파일을 열 수 있는 앱이 없습니다.")
+    
+    self.m_docIC.url = fileUrl
+    self.m_docIC.uti = fileUrl.typeIdentifier ?? "public.data, public.content"
+    self.m_docIC.name = fileUrl.localizedName ?? fileUrl.lastPathComponent
+    if !self.m_docIC.presentPreview(animated: true) {
+      self.m_docIC.presentOptionsMenu(from: self.view.frame, in: self.view, animated: true)
     }
-//  m_docIC.presentOpenInMenu(from: CGRect.zero, in: m_webView, animated: true)
   }
 
   func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
@@ -613,3 +615,11 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
   }
 }
 
+extension URL {
+  var typeIdentifier: String? {
+    return (try? resourceValues(forKeys: [.typeIdentifierKey]))?.typeIdentifier
+  }
+  var localizedName: String? {
+    return (try? resourceValues(forKeys: [.localizedNameKey]))?.localizedName
+  }
+}
