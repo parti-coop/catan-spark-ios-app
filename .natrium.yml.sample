@@ -10,19 +10,6 @@ natrium_variables:
     Staging: STAGING
     Production: PRODUCTION
 
-xcconfig:
-  GOOGLE_AUTH_BUNDLE_URL_SCHEME:
-    "*":
-      com.googleusercontent.apps.xxx
-  FACEBOOK_AUTH_BUNDLE_URL_SCHEME:
-    "*":
-      fbxxxx
-  FABRIC_API_KEY:
-    "*":
-      xx
-  LOCAL_TEST_HOST_NAME:
-    Development: parti.test
-
 variables:
   apiBaseUrl:
     Development: https://parti.test/
@@ -33,18 +20,29 @@ variables:
     Staging: ^https:\\/\\/(.*\\.)?dev.parti\\.xyz(\\$|\\/)
     Production: ^https:\\/\\/(.*\\.)?parti\\.xyz(\\$|\\/)
   authGoogleClientId:
-    Development: xx.apps.googleusercontent.com
-    Staging: xx.apps.googleusercontent.com
-    Production: xx.apps.googleusercontent.com
+    Development: xxx.apps.googleusercontent.com
+    Staging: xxx.apps.googleusercontent.com
+    Production: xxx.apps.googleusercontent.com
   authGoogleServerClientId:
-    Development: xx.apps.googleusercontent.com
-    Staging: xx.apps.googleusercontent.com
-    Production: xx.apps.googleusercontent.com
+    Development: xxx.apps.googleusercontent.com
+    Staging: xxx.apps.googleusercontent.com
+    Production: xxx.apps.googleusercontent.com
   authFacebookAppId:
-    Development: "xx"
-    Staging: "xx"
-    Production: "xx"
+    Development: "xxx"
+    Staging: "xxx"
+    Production: "xxx"
+
+plists:
+  "PartiApp/Info.plist":
+    CFBundleDisplayName:
+      Development: 빠띠-개발
+      Staging: 빠띠-테스트
+      Production: 빠띠
+    CFBundleShortVersionString: "0.0.2"
+    CFBundleVersion: "1"
+    "CFBundleURLTypes:0:CFBundleURLSchemes:0": com.googleusercontent.apps.xxx
+    "CFBundleURLTypes:0:CFBundleURLSchemes:1": xxx
+    "Fabric:APIKey": xxx
 
 files:
-  PartiApp/Info.plist: PartiApp/natrium.files/Info-#{environmentSlug}.plist
   PartiApp/GoogleService-Info.plist: PartiApp/natrium.files/GoogleService-Info-#{environmentSlug}.plist
