@@ -68,7 +68,7 @@ class ApiMan : NSObject, HttpQueryDelegate
   }
 
   func requestFileDownload(_ resDelegate: ApiResultDelegate?, authkey: String?, postId: Int, fileId: Int, atLocalPath localPath: String) {
-    let spec = ApiMan.getEmptySpec("api/v1/posts/\(postId)/download_file/\(fileId)")
+    let spec = ApiMan.getEmptySpec("api/v1/file_sources/download_file/\(fileId)")
     spec.methodType = .get
     spec.resultType = .fileWithProgress
 
