@@ -189,6 +189,7 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
       socialAuthSignInCancelCallback()
     } else {
       socialAuthSignInFailureCallback(error)
+      Crashlytics.sharedInstance().recordError(NSError(domain: "Google Login Error", code: error.code, userInfo: error.userInfo))
     }
   }
   
