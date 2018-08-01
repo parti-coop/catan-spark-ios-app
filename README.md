@@ -15,7 +15,7 @@ $ fastlane frameit silver --verbose
 
 ## 개발 환경 설정
 
-GoogleService-Info.plist 을 준비해서 PartiApp/natrium.files/GoogleService-Info-DEV.plist에 복사해 둡니다.
+GoogleService-Info.plist 을 준비해서 PartiApp/natrium.files/GoogleService-Info-DEV.plist에 복사해 둡니다. 릴리즈용을 빌드할 때에 필요한 GoogleService-Info-PRODUCTION.plist 도 만듭니다.
 
 pod를 설치합니다. pod로 관련된 라이브러리를 설치합니다. 소스 레포지토리에 이미 들어가 있기는 합니다. 그래도 아래 명령어로 라이브러리를 다시 설치하는게 좋습니다.
 
@@ -30,6 +30,8 @@ $ cp .natrium.yml.sample .natrium.yml
 ```
 
 ${PROJECT_DIR}/.natrium.yml을 열어서 자신의 환경에 맞게 설정합니다.
+Fabric[https://fabric.io/kits/ios/crashlytics/install]의 API 키를 참조합니다.
+Development Key와 Production Key가 다르게 설정되었는지 확인합니다.
 
 ```
 xcconfig:
