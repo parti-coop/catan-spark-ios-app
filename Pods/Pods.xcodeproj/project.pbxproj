@@ -113,7 +113,6 @@
 		3F1A5D10778AAD482D977798476727A9 /* FBSDKMaleSilhouetteIcon.h in Headers */ = {isa = PBXBuildFile; fileRef = 1CC044FAF5DA14A21FB2DA19CF571E45 /* FBSDKMaleSilhouetteIcon.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		3F888AD30840AC0999B4E7227556FC59 /* BFCancellationTokenRegistration.h in Headers */ = {isa = PBXBuildFile; fileRef = FC8255D35248BD3EDAA67B95A39BEA26 /* BFCancellationTokenRegistration.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3FBF4BD75331D5A5FB1233CEB2D9B199 /* String+Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C0E4D3F3646AB45801981E2C28B194 /* String+Regex.swift */; };
-		3FCF639429A5A63F09C8736042DAFA29 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2954C26493E16A2039F8F1F9F11D4C82 /* Config.swift */; };
 		3FD8A12B4BA580D8ECF810ED7FD9495B /* FBSDKAppEvents.h in Headers */ = {isa = PBXBuildFile; fileRef = 2AFD58E48B6DE552CF7613194BF78137 /* FBSDKAppEvents.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4030554E25309FBF6886A5722736668F /* FBSDKCrypto.h in Headers */ = {isa = PBXBuildFile; fileRef = 3DA37BBE0B491B203BE2721A40726ED6 /* FBSDKCrypto.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		4044A2E6F601BC9EC577F3ECF616AE42 /* Bolts.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CA465D45DC641F9EF3AB0B37C776FBD /* Bolts.m */; };
@@ -143,7 +142,6 @@
 		4890F5DA6CCE3D517DFCA4C365AE40E6 /* BFCancellationTokenRegistration.m in Sources */ = {isa = PBXBuildFile; fileRef = D78FBE2A930679CCD51369760A8C719C /* BFCancellationTokenRegistration.m */; };
 		4905FAB08AE41BB9C94F10772472AB1F /* GTMSessionFetcherLogging.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FDDDE948B1ADE093260374FBF168B05 /* GTMSessionFetcherLogging.m */; };
 		4AC4A757DFB894F921E15C8E17183B54 /* GPBMessage_PackagePrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 6889E442C93BEBD9894CC1FC41D63CBF /* GPBMessage_PackagePrivate.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4B3F617C3A1F053FC7BAEC2911F90529 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC1467BE25AF27A817FA8BA347933306 /* Foundation.framework */; };
 		4BA262A5B0E51523B71A926AB5B2333F /* GTMOAuth2-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = AC497A86F2858972393BF2F623BEEE28 /* GTMOAuth2-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4BB25D865AC617D9089CF937FD1A98E8 /* FBSDKCoreKit.h in Headers */ = {isa = PBXBuildFile; fileRef = CE82E1AB8D78ED359E6083B9CEC1140E /* FBSDKCoreKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4BEA399135FB2E03963CDE4001BEC6E6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC1467BE25AF27A817FA8BA347933306 /* Foundation.framework */; };
@@ -208,6 +206,7 @@
 		768C8652FEF1CB4AA9CAEF22E77A09AC /* NVActivityIndicatorAnimationBallSpinFadeLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A8ADBCAE1DA968EC4ECBD569BA289A /* NVActivityIndicatorAnimationBallSpinFadeLoader.swift */; };
 		76A80DD2CD1629835DA9FC6AA7A5C732 /* GTMSessionFetcher-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B969AF716F813969A2BD2EBC9D9692E9 /* GTMSessionFetcher-dummy.m */; };
 		76D7703633A3251C3517CDA1C7D59C14 /* AES256CBC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F09B70458CD513DE283AFE2D2605EDD /* AES256CBC.swift */; };
+		770ACC316B5180305774804619A8B896 /* Natrium.h in Headers */ = {isa = PBXBuildFile; fileRef = 6985251946C0FB8260A70DAF3B9C764E /* Natrium.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7759CC688A23175F42D0A59FDB6B8EF8 /* Pods-PartiApp Debug-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4543A93A149D919480291BD06DB3565C /* Pods-PartiApp Debug-dummy.m */; };
 		7759F03900D1BCD7639F11F69DBBFD52 /* FBSDKAudioResourceLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 1996E828A018D731FC0A522B8DAF554B /* FBSDKAudioResourceLoader.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		78D5B968C3B53347D34EEA7FF857C300 /* Reachability.h in Headers */ = {isa = PBXBuildFile; fileRef = E2D831A7642C9E7EE4060E0F3CF0DB84 /* Reachability.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -288,6 +287,7 @@
 		9D791F343266D22BC7495F6F7DB8E848 /* SDStatusBarOverriderPost10_0.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DDE069AAEB239B8571B93A0C5F28A0E /* SDStatusBarOverriderPost10_0.m */; };
 		9DC529E719DB6506138A980F878381CD /* FBSDKCrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = F031806E5AF86FADF03A6629B2063F76 /* FBSDKCrypto.m */; };
 		9E04897DC27E8CFB6E58A6255687D9D8 /* GTMGatherInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1597EB04BC73F285D656B71F3B999A52 /* GTMGatherInputStream.m */; };
+		9E999B3985F30666113B7D5E118F2F6B /* Natrium-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C2685D53AE93D7BB2CA0C1F60AF3E7A6 /* Natrium-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9F503F6D490C64A5240A050AAB14D42F /* GPBMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 68093604B9B8478A6A1906E8E43E93F6 /* GPBMessage.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9FE7B426DCB711A471EAF1AD5019DBF7 /* GTMSessionFetcher-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7802FCE6C357311715CBC38693D6E521 /* GTMSessionFetcher-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A0B54340EB8A02336452DBD2AABE3207 /* FBSDKGraphRequestBody.h in Headers */ = {isa = PBXBuildFile; fileRef = A464260B9CFD6D20F34EB7353988A6EA /* FBSDKGraphRequestBody.h */; settings = {ATTRIBUTES = (Project, ); }; };
@@ -309,7 +309,6 @@
 		A8678EC26345A714D4EC247CB7319A1C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC1467BE25AF27A817FA8BA347933306 /* Foundation.framework */; };
 		A8A10642A82DA3D565C8D4D14840A2B0 /* NVActivityIndicatorAnimationBallScaleMultiple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7E1F5852007D6C23572A52CB7D1966 /* NVActivityIndicatorAnimationBallScaleMultiple.swift */; };
 		A8B9DF26E3F071AB70238E9EAF6D18C0 /* FBSDKGraphErrorRecoveryProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 11F884267B6C816D11E00521C5DF84CE /* FBSDKGraphErrorRecoveryProcessor.m */; };
-		A9C13C3EC581182DDD132F4E522961A7 /* Natrium-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = CED048943BAD2E8E8FA99FEB1BE1B03D /* Natrium-dummy.m */; };
 		A9C2B803BFDDADE42F647E7FDB4FCA0A /* FBSDKLoginTooltipView.h in Headers */ = {isa = PBXBuildFile; fileRef = FAE2BC31FD53CFE967CFFE9010AA8950 /* FBSDKLoginTooltipView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AB006B4F9A51241A910856BFBAD1607E /* SwiftyBeaver-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D82DCAF84A78764E16B0820279F5E41C /* SwiftyBeaver-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AB859DD367036A83C6C5BAB558EC7929 /* FBSDKGraphRequestDataAttachment.h in Headers */ = {isa = PBXBuildFile; fileRef = 912056C72382BF0B755676F2C853E40D /* FBSDKGraphRequestDataAttachment.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -323,6 +322,7 @@
 		AF4FD9E1F3963745FEB3E9B631CC687E /* FBSDKLoginKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 25F85A2EB3DFFFA9607FBC8AB940B191 /* FBSDKLoginKit-dummy.m */; };
 		AFC2C2597C05F97B4C5A0167DE6AF710 /* FBSDKTypeUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A023AD247C40681A47116ADB90F6DD3 /* FBSDKTypeUtility.m */; };
 		AFD1DD86904CF8D49DAC28EEF38E75DA /* FBSDKLoginButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 15A44DFD1CEEB31BE9F9CC9D8969411D /* FBSDKLoginButton.m */; };
+		B004DE24FCA51224BFBE84F56E84B95F /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B45139FE525450F4BCE7268BE209A4 /* Config.swift */; };
 		B022A54FD2423E7FED70CFE6B8FF5E43 /* FBSDKViewImpressionTracker.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B1150ACB7E269FC9F2811C750426764 /* FBSDKViewImpressionTracker.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		B0A7A50A142486F0653BE1A644A88A56 /* Protobuf-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A9F0C206B764E926034EC39C0106F96 /* Protobuf-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0E477FD3669D1B2C743725B6572F00F /* FBSDKURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = E9DF8C1FCE5B5C2528E773A3C7B219A0 /* FBSDKURLConnection.m */; };
@@ -377,10 +377,12 @@
 		CB8DEAB39CEA8CBFA79C0EE66C0B119A /* GTMSessionFetcher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87B4ABAD4AB789964DD81A5B6BF5BFDE /* GTMSessionFetcher.framework */; };
 		CB96E97231683EAE7D8B1256D98B287B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC1467BE25AF27A817FA8BA347933306 /* Foundation.framework */; };
 		CC762FB99CB65B71C0172135C27E1DD1 /* BFURL.h in Headers */ = {isa = PBXBuildFile; fileRef = 42D22D80A66AF55C37B50EA6F3D2D411 /* BFURL.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CCDBAA2AC0FC5E5C2592362035875A28 /* Natrium-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C4417C060F57AF65B552803DA202CD5 /* Natrium-dummy.m */; };
 		CD02EFF91211DCC1DE607F885831F891 /* GTMOAuth2-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B1E821F9AD154A2DF2FDD350B8EF75 /* GTMOAuth2-dummy.m */; };
 		CD1242C187AD0A23D0B9BA0A39C8742F /* SDStatusBarOverriderPost11_0.h in Headers */ = {isa = PBXBuildFile; fileRef = 685B8EA4C950AF6F4B620F05088DA5F0 /* SDStatusBarOverriderPost11_0.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CDFAB450FAA6E886319880FA075BD72F /* Wrappers.pbobjc.h in Headers */ = {isa = PBXBuildFile; fileRef = 2194F3B93C81D2B5FBCBB5DE57E4DADD /* Wrappers.pbobjc.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CF55C4B05762466B099E32E75B4E90EB /* GPBDescriptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 84B0CECFEB61FBE524C14D302782333E /* GPBDescriptor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CF5EF0D407D541B44F17CEADD703871E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC1467BE25AF27A817FA8BA347933306 /* Foundation.framework */; };
 		CF706CB3C8E0A84C62AAA6F31982F4BF /* GPBExtensionInternals.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CE4DB16657CA1943D750FB96B26AA1E /* GPBExtensionInternals.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D0204CCB31003F4F2FE7C94932213C6B /* GoogleToolboxForMac-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D37C6B6C01C495BCAA89D9A657CEF27 /* GoogleToolboxForMac-dummy.m */; };
 		D09627F6419B41FF42D89103525DC72D /* FBSDKConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = F5EB78E7D5DDD8CA2F7D745E230AB879 /* FBSDKConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -437,7 +439,6 @@
 		EB2CF17870BB89A3EB473DBFE8C3D249 /* FBSDKDialogConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = EB00994DD4409A8F4A683AC6E22B946E /* FBSDKDialogConfiguration.m */; };
 		EB8CE90003139D73977562D1129F077D /* GoogleToolboxForMac-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C47ED3C372C036C7B80813984FE29F3 /* GoogleToolboxForMac-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EB9CD84E424D94E8D6B4E30F6EB04B6C /* BFAppLink.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A28756D862EFF464F17792928C9F7BE /* BFAppLink.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EBFA62EFDBC5C84463D2ECC85E2F145F /* Natrium-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = EC55B3D9356960955F4A0C3C39DE8AAB /* Natrium-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC144A04997C33A51FB5C10CF8B4AC30 /* Pods-PartiApp Debug-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 8ED4CFFE5204DC9DD2F8AE163E8402A5 /* Pods-PartiApp Debug-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC1707751A2DBCB466E29764EC7ECB86 /* GTMDebugThreadValidation.h in Headers */ = {isa = PBXBuildFile; fileRef = BF45A493B8A996465F5804F6E57161F3 /* GTMDebugThreadValidation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EE0EECF23E214900C0D675CAEB98C376 /* FBSDKAppEventsState.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E3D739A8735F637A3F14379E7B14C0 /* FBSDKAppEventsState.m */; };
@@ -505,7 +506,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = BBE1EDB30EB1FE40A61066A6F9A3B7F1;
+			remoteGlobalIDString = 211A66FF43AF51D1247891863525CF0D;
 			remoteInfo = Natrium;
 		};
 		25EB212C139013134F187543AD82DE32 /* PBXContainerItemProxy */ = {
@@ -568,7 +569,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = BBE1EDB30EB1FE40A61066A6F9A3B7F1;
+			remoteGlobalIDString = 211A66FF43AF51D1247891863525CF0D;
 			remoteInfo = Natrium;
 		};
 		6C7CF45B4CBD813C77E3A912F2EE726A /* PBXContainerItemProxy */ = {
@@ -786,6 +787,7 @@
 		1A32D2BCE887588A4E8E7E0E6F2CCF01 /* SwiftyBeaver.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftyBeaver.xcconfig; sourceTree = "<group>"; };
 		1A9F0C206B764E926034EC39C0106F96 /* Protobuf-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Protobuf-umbrella.h"; sourceTree = "<group>"; };
 		1B1ECD920480024E105345C87FBCEABC /* GTMLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GTMLogger.h; path = Foundation/GTMLogger.h; sourceTree = "<group>"; };
+		1C4417C060F57AF65B552803DA202CD5 /* Natrium-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Natrium-dummy.m"; sourceTree = "<group>"; };
 		1C891D57291E5F2596B0804F7FAA7673 /* Pods-PartiApp Release.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-PartiApp Release.release.xcconfig"; sourceTree = "<group>"; };
 		1CA465D45DC641F9EF3AB0B37C776FBD /* Bolts.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = Bolts.m; path = Bolts/Common/Bolts.m; sourceTree = "<group>"; };
 		1CC044FAF5DA14A21FB2DA19CF571E45 /* FBSDKMaleSilhouetteIcon.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBSDKMaleSilhouetteIcon.h; path = FBSDKCoreKit/FBSDKCoreKit/Internal/UI/FBSDKMaleSilhouetteIcon.h; sourceTree = "<group>"; };
@@ -806,6 +808,7 @@
 		2344487F5D844DB0AEE3880D5A2D580A /* FBSDKGraphRequest.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBSDKGraphRequest.h; path = FBSDKCoreKit/FBSDKCoreKit/FBSDKGraphRequest.h; sourceTree = "<group>"; };
 		234D6C72E25FDFC76F6CBA87EF610529 /* BFAppLinkNavigation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = BFAppLinkNavigation.m; path = Bolts/iOS/BFAppLinkNavigation.m; sourceTree = "<group>"; };
 		237A9EB145D13CC09B8A8AA43B32F47B /* GPBWellKnownTypes.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GPBWellKnownTypes.m; path = objectivec/GPBWellKnownTypes.m; sourceTree = "<group>"; };
+		23B5AFFB629C00B9AA96AEC706A78E6A /* Natrium.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Natrium.modulemap; sourceTree = "<group>"; };
 		23CA861B4D5CCDF36147432D2FED399E /* GTMNSString+URLArguments.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "GTMNSString+URLArguments.h"; path = "Foundation/GTMNSString+URLArguments.h"; sourceTree = "<group>"; };
 		23D8AAB7C2E619BF203ED138678FCF27 /* FBSDKWebDialogView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FBSDKWebDialogView.m; path = FBSDKCoreKit/FBSDKCoreKit/Internal/WebDialog/FBSDKWebDialogView.m; sourceTree = "<group>"; };
 		23DD7DDE2FC328010AE046E075B07647 /* FBSDKGraphRequestMetadata.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FBSDKGraphRequestMetadata.m; path = FBSDKCoreKit/FBSDKCoreKit/Internal/Network/FBSDKGraphRequestMetadata.m; sourceTree = "<group>"; };
@@ -817,9 +820,9 @@
 		25F85A2EB3DFFFA9607FBC8AB940B191 /* FBSDKLoginKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "FBSDKLoginKit-dummy.m"; sourceTree = "<group>"; };
 		2692DF281A6C1CBDB64B6D4801ED6F6D /* FBSDKInternalUtility.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FBSDKInternalUtility.m; path = FBSDKCoreKit/FBSDKCoreKit/Internal/FBSDKInternalUtility.m; sourceTree = "<group>"; };
 		2702A32BB6C10725B543C802BB09D861 /* GPBDescriptor_PackagePrivate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GPBDescriptor_PackagePrivate.h; path = objectivec/GPBDescriptor_PackagePrivate.h; sourceTree = "<group>"; };
+		28578FD44422B8BE0F4E6336D447B5A8 /* Natrium.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Natrium.xcconfig; sourceTree = "<group>"; };
 		28E4FAC6A63346688291FBDA54615F91 /* FBSDKTriStateBOOL.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FBSDKTriStateBOOL.m; path = FBSDKCoreKit/FBSDKCoreKit/Internal/FBSDKTriStateBOOL.m; sourceTree = "<group>"; };
 		2900EFF2148B957D181621F02A5A6EAE /* SDStatusBarManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDStatusBarManager.m; path = SDStatusBarManager/SDStatusBarManager.m; sourceTree = "<group>"; };
-		2954C26493E16A2039F8F1F9F11D4C82 /* Config.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Config.swift; path = bin/Config.swift; sourceTree = "<group>"; };
 		296CE7B7955005146484C21C5800D86B /* BFAppLinkReturnToRefererView_Internal.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BFAppLinkReturnToRefererView_Internal.h; path = Bolts/iOS/Internal/BFAppLinkReturnToRefererView_Internal.h; sourceTree = "<group>"; };
 		2A023AD247C40681A47116ADB90F6DD3 /* FBSDKTypeUtility.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FBSDKTypeUtility.m; path = FBSDKCoreKit/FBSDKCoreKit/Internal/FBSDKTypeUtility.m; sourceTree = "<group>"; };
 		2A40E6AB1BEC5D72EAFEA4C47877EB22 /* FBSDKLogo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBSDKLogo.h; path = FBSDKCoreKit/FBSDKCoreKit/Internal/UI/FBSDKLogo.h; sourceTree = "<group>"; };
@@ -870,6 +873,7 @@
 		3C23AC0F9671C79350796B75A31A369D /* NVActivityIndicatorAnimationBallZigZagDeflect.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NVActivityIndicatorAnimationBallZigZagDeflect.swift; path = NVActivityIndicatorView/NVActivityIndicatorView/Animations/NVActivityIndicatorAnimationBallZigZagDeflect.swift; sourceTree = "<group>"; };
 		3D37C6B6C01C495BCAA89D9A657CEF27 /* GoogleToolboxForMac-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "GoogleToolboxForMac-dummy.m"; sourceTree = "<group>"; };
 		3D4AEC88BCA6CCACD2E2F224E092AB4F /* NVActivityIndicatorView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = NVActivityIndicatorView.framework; path = NVActivityIndicatorView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D856495FFD52780DB476DE72581D54A /* Natrium-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Natrium-prefix.pch"; sourceTree = "<group>"; };
 		3DA36976F1BC5E776B5C32FCD287748D /* FBSDKTimeSpentData.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBSDKTimeSpentData.h; path = FBSDKCoreKit/FBSDKCoreKit/Internal/AppEvents/FBSDKTimeSpentData.h; sourceTree = "<group>"; };
 		3DA37BBE0B491B203BE2721A40726ED6 /* FBSDKCrypto.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBSDKCrypto.h; path = FBSDKCoreKit/FBSDKCoreKit/Internal/Cryptography/FBSDKCrypto.h; sourceTree = "<group>"; };
 		3E0F50263951DCE6C137FA5840A4DA6D /* FBSDKGraphRequestPiggybackManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBSDKGraphRequestPiggybackManager.h; path = FBSDKCoreKit/FBSDKCoreKit/Internal/Network/FBSDKGraphRequestPiggybackManager.h; sourceTree = "<group>"; };
@@ -913,6 +917,7 @@
 		4EDE9D8B9498967343A0122D806E4B99 /* Pods-PartiApp Release-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-PartiApp Release-frameworks.sh"; sourceTree = "<group>"; };
 		4EE9DAEFD0CD1DFEAFBC3FE1FBDC5067 /* TMReachability.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = TMReachability.xcconfig; sourceTree = "<group>"; };
 		4F1E538E961A2892299D727CC08CEAFF /* Bolts.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Bolts.xcconfig; sourceTree = "<group>"; };
+		4F4D1636CC80F10641F1A09784D54B74 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4F56BFB05AF917B5A8A37C36A09A0107 /* NVActivityIndicatorAnimationAudioEqualizer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NVActivityIndicatorAnimationAudioEqualizer.swift; path = NVActivityIndicatorView/NVActivityIndicatorView/Animations/NVActivityIndicatorAnimationAudioEqualizer.swift; sourceTree = "<group>"; };
 		4FA256538A0D271159A5B743B07B8EFC /* FBSDKBridgeAPIProtocolWebV1.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBSDKBridgeAPIProtocolWebV1.h; path = FBSDKCoreKit/FBSDKCoreKit/Internal/BridgeAPI/ProtocolVersions/FBSDKBridgeAPIProtocolWebV1.h; sourceTree = "<group>"; };
 		505E6DA902AC477C6D421D6A366C62A5 /* FBSDKBridgeAPIProtocolNativeV1.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FBSDKBridgeAPIProtocolNativeV1.m; path = FBSDKCoreKit/FBSDKCoreKit/Internal/BridgeAPI/ProtocolVersions/FBSDKBridgeAPIProtocolNativeV1.m; sourceTree = "<group>"; };
@@ -967,6 +972,7 @@
 		6889E442C93BEBD9894CC1FC41D63CBF /* GPBMessage_PackagePrivate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GPBMessage_PackagePrivate.h; path = objectivec/GPBMessage_PackagePrivate.h; sourceTree = "<group>"; };
 		690D326FCF937B97E1856C52AEAA088A /* FBSDKApplicationDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBSDKApplicationDelegate.h; path = FBSDKCoreKit/FBSDKCoreKit/FBSDKApplicationDelegate.h; sourceTree = "<group>"; };
 		694FB0EE251ACCB56BDB9246E0B516A1 /* FBSDKImageDownloader.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBSDKImageDownloader.h; path = FBSDKCoreKit/FBSDKCoreKit/Internal/FBSDKImageDownloader.h; sourceTree = "<group>"; };
+		6985251946C0FB8260A70DAF3B9C764E /* Natrium.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Natrium.h; path = bin/Natrium.h; sourceTree = "<group>"; };
 		6999F71025A5D42242EDA45F4453B58D /* pb_decode.c */ = {isa = PBXFileReference; includeInIndex = 1; path = pb_decode.c; sourceTree = "<group>"; };
 		6A4588D1F5C4B84E195B06F50096ED5E /* Pods-PartiApp Release-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-PartiApp Release-umbrella.h"; sourceTree = "<group>"; };
 		6A668B6C71EFA4109307B1FB5ABDCB3F /* Protobuf-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Protobuf-prefix.pch"; sourceTree = "<group>"; };
@@ -1024,7 +1030,6 @@
 		8684B9F369C66F514AF3F2E4BD270CD0 /* FBSDKCoreKit-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FBSDKCoreKit-umbrella.h"; sourceTree = "<group>"; };
 		87B4ABAD4AB789964DD81A5B6BF5BFDE /* GTMSessionFetcher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GTMSessionFetcher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		888BAEC275E7887290E8BF0FE8A1DA95 /* BFCancellationToken.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = BFCancellationToken.m; path = Bolts/Common/BFCancellationToken.m; sourceTree = "<group>"; };
-		88919DBDB0958E01A25F60C7C69F3AA8 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88B1FA5F7967B9D22B1B63B122C9146A /* MBProgressHUD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = MBProgressHUD.framework; path = MBProgressHUD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		89058FA118C6B2178603DBAC867B75E5 /* SDStatusBarOverriderPost9_0.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDStatusBarOverriderPost9_0.m; path = SDStatusBarManager/SDStatusBarOverriderPost9_0.m; sourceTree = "<group>"; };
 		892EFCCFE2605DE24A8A5899A665070A /* Base64.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Base64.swift; path = Sources/Base64.swift; sourceTree = "<group>"; };
@@ -1050,11 +1055,11 @@
 		9524A0DD81F768E5D6FFEB76CAA569DE /* FBSDKLoginKit.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBSDKLoginKit.h; path = FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit.h; sourceTree = "<group>"; };
 		95AE464B38EA38B67A223208E4712703 /* GTMMethodCheck.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GTMMethodCheck.h; path = DebugUtils/GTMMethodCheck.h; sourceTree = "<group>"; };
 		95B0A7AF6E133C3999DFFA6D43D8DECC /* SimulatorStatusMagic.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SimulatorStatusMagic.modulemap; sourceTree = "<group>"; };
+		96B45139FE525450F4BCE7268BE209A4 /* Config.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Config.swift; path = bin/Config.swift; sourceTree = "<group>"; };
 		97417B9C62B2E4BFECD24E76F2B5B8CC /* FieldMask.pbobjc.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FieldMask.pbobjc.m; path = objectivec/google/protobuf/FieldMask.pbobjc.m; sourceTree = "<group>"; };
 		97F356608348BB6CE3365B5BC8D26CA7 /* FBSDKMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBSDKMacros.h; path = FBSDKCoreKit/FBSDKCoreKit/FBSDKMacros.h; sourceTree = "<group>"; };
 		994FBB9667C8BC2C51F5393D557BC7CE /* Pods-PartiApp Release-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-PartiApp Release-resources.sh"; sourceTree = "<group>"; };
 		99B968C9BB71F71FA79E9152EDC7EBAC /* FBSDKBase64.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBSDKBase64.h; path = FBSDKCoreKit/FBSDKCoreKit/Internal/Base64/FBSDKBase64.h; sourceTree = "<group>"; };
-		9A1EF72185C020BBE1CEA52B1553700F /* Natrium.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Natrium.xcconfig; sourceTree = "<group>"; };
 		9AFF7470E683458686FEDBF0F188DBDD /* FBSDKAppLinkResolver.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FBSDKAppLinkResolver.m; path = FBSDKCoreKit/FBSDKCoreKit/FBSDKAppLinkResolver.m; sourceTree = "<group>"; };
 		9C813EC32FCA62161F88C61CE04228A2 /* BFAppLinkNavigation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BFAppLinkNavigation.h; path = Bolts/iOS/BFAppLinkNavigation.h; sourceTree = "<group>"; };
 		9C99155579774CA415D3B769C59177D2 /* NVActivityIndicatorAnimationBallPulseRise.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NVActivityIndicatorAnimationBallPulseRise.swift; path = NVActivityIndicatorView/NVActivityIndicatorView/Animations/NVActivityIndicatorAnimationBallPulseRise.swift; sourceTree = "<group>"; };
@@ -1113,7 +1118,6 @@
 		BADF317E3DF6EB251D0E26BF9749EC31 /* FBSDKMaleSilhouetteIcon.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FBSDKMaleSilhouetteIcon.m; path = FBSDKCoreKit/FBSDKCoreKit/Internal/UI/FBSDKMaleSilhouetteIcon.m; sourceTree = "<group>"; };
 		BC33DE1BEC7814E8F5AEB2B2F45FD098 /* FBSDKImageDownloader.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FBSDKImageDownloader.m; path = FBSDKCoreKit/FBSDKCoreKit/Internal/FBSDKImageDownloader.m; sourceTree = "<group>"; };
 		BC652EFA3D614AA43ECDB41CD71F0E34 /* GPBUnknownFieldSet.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GPBUnknownFieldSet.h; path = objectivec/GPBUnknownFieldSet.h; sourceTree = "<group>"; };
-		BCE27876157B93D4AEEBEFE034357824 /* Natrium.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Natrium.modulemap; sourceTree = "<group>"; };
 		BDA4880E839954DF939F5B5BF5A13881 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
 		BDBDEBAAFFBE7023D5F13CA394A807B4 /* FBSDKLoginManagerLoginResult.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBSDKLoginManagerLoginResult.h; path = FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginManagerLoginResult.h; sourceTree = "<group>"; };
 		BE26D5F7BF0AA59C0EED4A953E26EAA6 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1126,6 +1130,7 @@
 		C08B930918209C7C7A92F6309715FF26 /* FBSDKBridgeAPIResponse.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBSDKBridgeAPIResponse.h; path = FBSDKCoreKit/FBSDKCoreKit/Internal/BridgeAPI/FBSDKBridgeAPIResponse.h; sourceTree = "<group>"; };
 		C184ABBE4EE9B4A4486D4E74718DD5A2 /* FBSDKAppLinkUtility.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBSDKAppLinkUtility.h; path = FBSDKCoreKit/FBSDKCoreKit/FBSDKAppLinkUtility.h; sourceTree = "<group>"; };
 		C1AF46F45B252C1019BC693B887C80C3 /* FBSDKInternalUtility.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBSDKInternalUtility.h; path = FBSDKCoreKit/FBSDKCoreKit/Internal/FBSDKInternalUtility.h; sourceTree = "<group>"; };
+		C2685D53AE93D7BB2CA0C1F60AF3E7A6 /* Natrium-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Natrium-umbrella.h"; sourceTree = "<group>"; };
 		C271B18559EA5C3B8266FF3577DB013E /* GTMMIMEDocument.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GTMMIMEDocument.m; path = Source/GTMMIMEDocument.m; sourceTree = "<group>"; };
 		C2AAD03EAA44AC529521064FE385B2FD /* GTMOAuth2ViewControllerTouch.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GTMOAuth2ViewControllerTouch.m; path = Source/Touch/GTMOAuth2ViewControllerTouch.m; sourceTree = "<group>"; };
 		C2C938E6087BF78200B0CA8E18E7807B /* FBSDKWebDialogView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBSDKWebDialogView.h; path = FBSDKCoreKit/FBSDKCoreKit/Internal/WebDialog/FBSDKWebDialogView.h; sourceTree = "<group>"; };
@@ -1137,7 +1142,6 @@
 		C4881DE805B7654CDA48F17338713CDC /* GPBCodedInputStream.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GPBCodedInputStream.h; path = objectivec/GPBCodedInputStream.h; sourceTree = "<group>"; };
 		C4E08470FE7BF6C47621FB116EF7A4E7 /* FBSDKBridgeAPIRequest.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FBSDKBridgeAPIRequest.m; path = FBSDKCoreKit/FBSDKCoreKit/Internal/BridgeAPI/FBSDKBridgeAPIRequest.m; sourceTree = "<group>"; };
 		C4F9E560C6878942DA2050C121DA6314 /* FBSDKLoginTooltipView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FBSDKLoginTooltipView.m; path = FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginTooltipView.m; sourceTree = "<group>"; };
-		C568E21FC9F2BCF8194279FB5545500D /* Natrium-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Natrium-prefix.pch"; sourceTree = "<group>"; };
 		C6297D309C05044215A0E7C823DFB3C0 /* GPBDictionary.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GPBDictionary.h; path = objectivec/GPBDictionary.h; sourceTree = "<group>"; };
 		C6C7AE5CCCE71429A272FF1D1BBE7227 /* GoogleToolboxForMac.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = GoogleToolboxForMac.modulemap; sourceTree = "<group>"; };
 		C7555176D4AB950D39E40D475A112EE1 /* Pods-PartiApp Release-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-PartiApp Release-acknowledgements.plist"; sourceTree = "<group>"; };
@@ -1165,7 +1169,6 @@
 		CE0E57E92D81FF0F21A784DD455C7579 /* FBSDKBridgeAPIProtocolWebV2.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBSDKBridgeAPIProtocolWebV2.h; path = FBSDKCoreKit/FBSDKCoreKit/Internal/BridgeAPI/ProtocolVersions/FBSDKBridgeAPIProtocolWebV2.h; sourceTree = "<group>"; };
 		CE391C290FC99054B3E50CF7961E2E12 /* FBSDKTriStateBOOL.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBSDKTriStateBOOL.h; path = FBSDKCoreKit/FBSDKCoreKit/Internal/FBSDKTriStateBOOL.h; sourceTree = "<group>"; };
 		CE82E1AB8D78ED359E6083B9CEC1140E /* FBSDKCoreKit.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBSDKCoreKit.h; path = FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit.h; sourceTree = "<group>"; };
-		CED048943BAD2E8E8FA99FEB1BE1B03D /* Natrium-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Natrium-dummy.m"; sourceTree = "<group>"; };
 		CF6C630FFD3FA9C543DAF8057D537474 /* SDStatusBarOverriderPost10_3.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDStatusBarOverriderPost10_3.h; path = SDStatusBarManager/SDStatusBarOverriderPost10_3.h; sourceTree = "<group>"; };
 		D0688F4307E0FCF0D2C8B3B4C7BD9861 /* FBSDKLoginError.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBSDKLoginError.h; path = FBSDKLoginKit/FBSDKLoginKit/Internal/FBSDKLoginError.h; sourceTree = "<group>"; };
 		D0C9819B4843FEB83ACAFE90E085C0A3 /* NVActivityIndicatorAnimationBallRotate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NVActivityIndicatorAnimationBallRotate.swift; path = NVActivityIndicatorView/NVActivityIndicatorView/Animations/NVActivityIndicatorAnimationBallRotate.swift; sourceTree = "<group>"; };
@@ -1232,7 +1235,6 @@
 		EAE24544EC9606D4A335F945E6CC1610 /* Protobuf.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Protobuf.framework; path = Protobuf.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB00994DD4409A8F4A683AC6E22B946E /* FBSDKDialogConfiguration.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FBSDKDialogConfiguration.m; path = FBSDKCoreKit/FBSDKCoreKit/Internal/ServerConfiguration/FBSDKDialogConfiguration.m; sourceTree = "<group>"; };
 		EBA5FD1F9D1DC21FDFBE0A08FB857D9E /* FBSDKDeviceRequestsHelper.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FBSDKDeviceRequestsHelper.m; path = FBSDKCoreKit/FBSDKCoreKit/Internal/FBSDKDeviceRequestsHelper.m; sourceTree = "<group>"; };
-		EC55B3D9356960955F4A0C3C39DE8AAB /* Natrium-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Natrium-umbrella.h"; sourceTree = "<group>"; };
 		EDB0A38F4CAAB5817CB7233C994B2C84 /* FBSDKAppEvents+Internal.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "FBSDKAppEvents+Internal.h"; path = "FBSDKCoreKit/FBSDKCoreKit/Internal/AppEvents/FBSDKAppEvents+Internal.h"; sourceTree = "<group>"; };
 		EE5DE1BB6CB57286F546FD9506C8B481 /* GTMSessionFetcherService.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GTMSessionFetcherService.h; path = Source/GTMSessionFetcherService.h; sourceTree = "<group>"; };
 		EEA16C53CF0EB3C1054CDF9A72F8EC21 /* SwiftyBeaver-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftyBeaver-dummy.m"; sourceTree = "<group>"; };
@@ -1340,6 +1342,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		5694F10578775AB1A88680A17ADCECF2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CF5EF0D407D541B44F17CEADD703871E /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		76119BFC3F7D28885FDCC80458A5B292 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1348,14 +1358,6 @@
 				CB8DEAB39CEA8CBFA79C0EE66C0B119A /* GTMSessionFetcher.framework in Frameworks */,
 				C86C2ADAE2DF5C7B8EA5C9B74F7C7A79 /* Security.framework in Frameworks */,
 				EA372B74AEFF6424327A6C964B67916B /* SystemConfiguration.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		83ABC2360C9E294C92162334607F0F46 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				4B3F617C3A1F053FC7BAEC2911F90529 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1439,16 +1441,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		01A2AD50A190D7E78D134FB7F28A689C /* Natrium */ = {
-			isa = PBXGroup;
-			children = (
-				2954C26493E16A2039F8F1F9F11D4C82 /* Config.swift */,
-				0955869F369B26F059378E8607FE29B6 /* Support Files */,
-			);
-			name = Natrium;
-			path = Natrium;
-			sourceTree = "<group>";
-		};
 		061E194DA2AD0BCF2C65267B846D26A9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -1666,20 +1658,6 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		0955869F369B26F059378E8607FE29B6 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				88919DBDB0958E01A25F60C7C69F3AA8 /* Info.plist */,
-				BCE27876157B93D4AEEBEFE034357824 /* Natrium.modulemap */,
-				9A1EF72185C020BBE1CEA52B1553700F /* Natrium.xcconfig */,
-				CED048943BAD2E8E8FA99FEB1BE1B03D /* Natrium-dummy.m */,
-				C568E21FC9F2BCF8194279FB5545500D /* Natrium-prefix.pch */,
-				EC55B3D9356960955F4A0C3C39DE8AAB /* Natrium-umbrella.h */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/Natrium";
-			sourceTree = "<group>";
-		};
 		0F3B8D5047E66F4EC1833E8C4DF46DC3 /* MBProgressHUD */ = {
 			isa = PBXGroup;
 			children = (
@@ -1716,6 +1694,16 @@
 			);
 			name = FirebaseAnalytics;
 			path = FirebaseAnalytics;
+			sourceTree = "<group>";
+		};
+		19DBD35A1565DB169C44C480F4459C9C /* Natrium */ = {
+			isa = PBXGroup;
+			children = (
+				B08CB73E3C73B7B55C11AD21B2F30ED5 /* Support Files */,
+				F21FB902AD16DB45637E4F2D5D475DA1 /* Swift */,
+			);
+			name = Natrium;
+			path = Natrium;
 			sourceTree = "<group>";
 		};
 		21E4D81C84B6A9EAB5D676988465566E /* SwiftyBeaver */ = {
@@ -2393,6 +2381,20 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B08CB73E3C73B7B55C11AD21B2F30ED5 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				4F4D1636CC80F10641F1A09784D54B74 /* Info.plist */,
+				23B5AFFB629C00B9AA96AEC706A78E6A /* Natrium.modulemap */,
+				28578FD44422B8BE0F4E6336D447B5A8 /* Natrium.xcconfig */,
+				1C4417C060F57AF65B552803DA202CD5 /* Natrium-dummy.m */,
+				3D856495FFD52780DB476DE72581D54A /* Natrium-prefix.pch */,
+				C2685D53AE93D7BB2CA0C1F60AF3E7A6 /* Natrium-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/Natrium";
+			sourceTree = "<group>";
+		};
 		B7522DD7B23A6F2F6BD12BC6E4FBEFD8 /* Pods-PartiApp Release */ = {
 			isa = PBXGroup;
 			children = (
@@ -2439,7 +2441,7 @@
 				76B90CC47E965B3B524B62BF6A485EBC /* GTMSessionFetcher */,
 				0F3B8D5047E66F4EC1833E8C4DF46DC3 /* MBProgressHUD */,
 				575C49861139DA7AA022AA7A8EE84047 /* nanopb */,
-				01A2AD50A190D7E78D134FB7F28A689C /* Natrium */,
+				19DBD35A1565DB169C44C480F4459C9C /* Natrium */,
 				82BC0AA8EAC373FBF1E940D01079746A /* NVActivityIndicatorView */,
 				356F594A0EE0BE870CD689B169085363 /* Protobuf */,
 				FFFE6F1827F31C4516C4FAD952DEDEA0 /* SimulatorStatusMagic */,
@@ -2536,6 +2538,15 @@
 			);
 			name = "Support Files";
 			path = "../Target Support Files/SwiftyBeaver";
+			sourceTree = "<group>";
+		};
+		F21FB902AD16DB45637E4F2D5D475DA1 /* Swift */ = {
+			isa = PBXGroup;
+			children = (
+				96B45139FE525450F4BCE7268BE209A4 /* Config.swift */,
+				6985251946C0FB8260A70DAF3B9C764E /* Natrium.h */,
+			);
+			name = Swift;
 			sourceTree = "<group>";
 		};
 		F2D559AE05229654D4126A3AD817C220 /* Support Files */ = {
@@ -2643,6 +2654,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0D4BC43CD38395236301503B35F08877 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9E999B3985F30666113B7D5E118F2F6B /* Natrium-umbrella.h in Headers */,
+				770ACC316B5180305774804619A8B896 /* Natrium.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		197B7877D5D346F405BDD059EF96DBDC /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -2741,14 +2761,6 @@
 				C501E17E9E8501752B99011E17E41412 /* GTMNSData+zlib.h in Headers */,
 				162F73650877177FAB96CC08BE515C97 /* GTMNSDictionary+URLArguments.h in Headers */,
 				43EB5608A304AAA6D221B2E5CC0ED6B0 /* GTMNSString+URLArguments.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		905628692725E9A8DC5FF60DAF1327A7 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				EBFA62EFDBC5C84463D2ECC85E2F145F /* Natrium-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2958,6 +2970,23 @@
 			productReference = 3D4AEC88BCA6CCACD2E2F224E092AB4F /* NVActivityIndicatorView.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		211A66FF43AF51D1247891863525CF0D /* Natrium */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C497781E292BF246B3C9B654979793EB /* Build configuration list for PBXNativeTarget "Natrium" */;
+			buildPhases = (
+				F2AFB187718CF5E38770955AB77191E1 /* Sources */,
+				5694F10578775AB1A88680A17ADCECF2 /* Frameworks */,
+				0D4BC43CD38395236301503B35F08877 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Natrium;
+			productName = Natrium;
+			productReference = 3504724D2EF85F49F6E222D88E258DAF /* Natrium.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		243BD9E6F38F57FB46922B54B4F1BF7A /* SimulatorStatusMagic */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 39DAFF9DDA5490124E9622D92D929BAC /* Build configuration list for PBXNativeTarget "SimulatorStatusMagic" */;
@@ -3128,23 +3157,6 @@
 			productReference = 121FAEDF6A4E62563D20199550D4762D /* GTMOAuth2.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		BBE1EDB30EB1FE40A61066A6F9A3B7F1 /* Natrium */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = CDE4ACB7BA7444502FEB038A20443773 /* Build configuration list for PBXNativeTarget "Natrium" */;
-			buildPhases = (
-				373FCB95F0C6CC21985A400EEC4CA4FC /* Sources */,
-				83ABC2360C9E294C92162334607F0F46 /* Frameworks */,
-				905628692725E9A8DC5FF60DAF1327A7 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = Natrium;
-			productName = Natrium;
-			productReference = 3504724D2EF85F49F6E222D88E258DAF /* Natrium.framework */;
-			productType = "com.apple.product-type.framework";
-		};
 		BC5000D645EEAF961C85907CDC796FE1 /* FBSDKLoginKit */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7D2FA5E0483FE3E3A52046EEFCEDDB53 /* Build configuration list for PBXNativeTarget "FBSDKLoginKit" */;
@@ -3296,7 +3308,7 @@
 				681BE6E3D02A43F9BA63777AC435C8FD /* GTMSessionFetcher */,
 				41FA54D12162DAD51D02FC58A2CD5034 /* MBProgressHUD */,
 				E4DD95323C54A78F879DAB0F1508B8E7 /* nanopb */,
-				BBE1EDB30EB1FE40A61066A6F9A3B7F1 /* Natrium */,
+				211A66FF43AF51D1247891863525CF0D /* Natrium */,
 				123F89F7E8DB3444EAD2F61E835952E2 /* NVActivityIndicatorView */,
 				CB5B0B39FDC7B75C5CAC26A5E2584C13 /* Pods-PartiApp Debug */,
 				A6D68282FDADA260D1E60C2354B09609 /* Pods-PartiApp Release */,
@@ -3466,15 +3478,6 @@
 				3A50F5C8ECED9627F2EBD97F61BD376D /* pb_common.c in Sources */,
 				54F580BF4588159D6A61F21D15591805 /* pb_decode.c in Sources */,
 				55D8D5D912CFD2F3584E4553C2EAD734 /* pb_encode.c in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		373FCB95F0C6CC21985A400EEC4CA4FC /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3FCF639429A5A63F09C8736042DAFA29 /* Config.swift in Sources */,
-				A9C13C3EC581182DDD132F4E522961A7 /* Natrium-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3660,6 +3663,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F2AFB187718CF5E38770955AB77191E1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B004DE24FCA51224BFBE84F56E84B95F /* Config.swift in Sources */,
+				CCDBAA2AC0FC5E5C2592362035875A28 /* Natrium-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FE8E0446C3B3B52779E8DE373E495A61 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -3777,7 +3789,7 @@
 		988644BCC8FCADC212A6C6E34B73874F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Natrium;
-			target = BBE1EDB30EB1FE40A61066A6F9A3B7F1 /* Natrium */;
+			target = 211A66FF43AF51D1247891863525CF0D /* Natrium */;
 			targetProxy = 5470B23589C5CC4849404DE1A0C4395E /* PBXContainerItemProxy */;
 		};
 		A874A4455414EC3B3AF7BD12A5827F23 /* PBXTargetDependency */ = {
@@ -3861,7 +3873,7 @@
 		EAB707E1E44701F03FCBE60FB298094D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Natrium;
-			target = BBE1EDB30EB1FE40A61066A6F9A3B7F1 /* Natrium */;
+			target = 211A66FF43AF51D1247891863525CF0D /* Natrium */;
 			targetProxy = 1FCDF96D26DF8583A9EC1191655776D7 /* PBXContainerItemProxy */;
 		};
 		EAEF876260FAC11BC0B4699ED22BD2C4 /* PBXTargetDependency */ = {
@@ -4135,38 +4147,6 @@
 			};
 			name = Debug;
 		};
-		1F8A4F0FE1E163473DB42BEF17045A46 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9A1EF72185C020BBE1CEA52B1553700F /* Natrium.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/Natrium/Natrium-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Natrium/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Natrium/Natrium.modulemap";
-				PRODUCT_MODULE_NAME = Natrium;
-				PRODUCT_NAME = Natrium;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 		20F7322BA67874F27EF857CB53F66C67 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4F1E538E961A2892299D727CC08CEAFF /* Bolts.xcconfig */;
@@ -4257,39 +4237,6 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		451CDAC99950A54B71AD222431636BC8 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9A1EF72185C020BBE1CEA52B1553700F /* Natrium.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/Natrium/Natrium-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Natrium/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Natrium/Natrium.modulemap";
-				PRODUCT_MODULE_NAME = Natrium;
-				PRODUCT_NAME = Natrium;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -4715,6 +4662,39 @@
 			};
 			name = Release;
 		};
+		BBE28A11287B45A0CC3D15246B714D94 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 28578FD44422B8BE0F4E6336D447B5A8 /* Natrium.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/Natrium/Natrium-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Natrium/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Natrium/Natrium.modulemap";
+				PRODUCT_MODULE_NAME = Natrium;
+				PRODUCT_NAME = Natrium;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		C376BFEF22A4BC4A4E50947264EB256C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 742A17708B318366B0B1DB87C2AB1526 /* GTMSessionFetcher.xcconfig */;
@@ -4932,6 +4912,38 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		EBE43400B406D18E22467F38FDF86A95 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 28578FD44422B8BE0F4E6336D447B5A8 /* Natrium.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/Natrium/Natrium-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Natrium/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Natrium/Natrium.modulemap";
+				PRODUCT_MODULE_NAME = Natrium;
+				PRODUCT_NAME = Natrium;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -5186,20 +5198,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		C497781E292BF246B3C9B654979793EB /* Build configuration list for PBXNativeTarget "Natrium" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EBE43400B406D18E22467F38FDF86A95 /* Debug */,
+				BBE28A11287B45A0CC3D15246B714D94 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		CC1874913BA1F82C4953C3C7F551AB22 /* Build configuration list for PBXNativeTarget "MBProgressHUD" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C8AF34ED53D4A85EB922321777C889F0 /* Debug */,
 				BAA2E479EC70F24BB9AE752A95108C62 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		CDE4ACB7BA7444502FEB038A20443773 /* Build configuration list for PBXNativeTarget "Natrium" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				1F8A4F0FE1E163473DB42BEF17045A46 /* Debug */,
-				451CDAC99950A54B71AD222431636BC8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -64,7 +64,9 @@ PODS:
     - nanopb/encode (= 0.3.8)
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
-  - Natrium (5.6.0)
+  - Natrium (5.8.1):
+    - Natrium/Swift (= 5.8.1)
+  - Natrium/Swift (5.8.1)
   - NVActivityIndicatorView (4.1.1):
     - NVActivityIndicatorView/Presenter (= 4.1.1)
   - NVActivityIndicatorView/Presenter (4.1.1)
@@ -139,7 +141,7 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 390ea358e5a0d0133153806f744662dad933d06b
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
-  Natrium: 6c30e44eb6c19b02eee1ac00cded09a9cfa8fe1d
+  Natrium: 1ee5ecc47785eee126161f81470be1f73c71639d
   NVActivityIndicatorView: 60109b9bf46efc2e71ab81453196ccdfdfeea870
   Protobuf: 8a9838fba8dae3389230e1b7f8c104aa32389c03
   SimulatorStatusMagic: 481558caf2b9ccb2ceba2cc193728d4db3dcac07

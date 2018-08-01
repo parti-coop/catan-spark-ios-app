@@ -1,6 +1,10 @@
 ![Natrium](Assets/logo.png)
 
-A pre-build swift script to alter your Xcode project at build time per environment and build configuration in combination with CocoaPods. (Swift only)
+Natrium is part of the **[E-sites iOS Suite](https://github.com/e-sites/iOS-Suite)**.
+
+---
+
+A pre-build (Swift) script to alter your Xcode project at build-time per environment and build configuration.
 
 [![forthebadge](http://forthebadge.com/images/badges/made-with-swift.svg)](http://forthebadge.com) [![forthebadge](http://forthebadge.com/images/badges/built-with-swag.svg)](http://forthebadge.com)
 
@@ -34,6 +38,8 @@ A pre-build swift script to alter your Xcode project at build time per environme
 
 If you installed it from cocoapods:
 
+**Swift:**
+
 ```swift
 // AppDelegate.swift
 
@@ -45,6 +51,13 @@ _This step is optional, but this way you can use the `Config` class through your
 
 You can now use the `Config.swift` file and its underlying class.
 
+**Objective-c:**
+
+```objc
+#import <Natrium/Natrium.h>
+
+[NatriumConfig environment];
+```
 # Configuration
 
 Configuration documentation can be found [here](docs/CONFIGURATION.md).

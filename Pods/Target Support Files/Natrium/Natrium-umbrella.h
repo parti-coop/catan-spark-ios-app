@@ -10,6 +10,7 @@
 #endif
 #endif
 
+#import "Natrium.h"
 
 FOUNDATION_EXPORT double NatriumVersionNumber;
 FOUNDATION_EXPORT const unsigned char NatriumVersionString[];
