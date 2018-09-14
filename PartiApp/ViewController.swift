@@ -259,6 +259,10 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
 
     m_webView.loadPushNotifiedRemoteUrl(urlToGo)
   }
+  
+  func handleUniversalLink(_ url: String) {
+    m_webView.loadRemoteUrl(url)
+  }
 
   //observer
   override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {

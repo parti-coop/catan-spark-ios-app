@@ -305,6 +305,9 @@
 							com.apple.Push = {
 								enabled = 1;
 							};
+							com.apple.SafariKeychain = {
+								enabled = 1;
+							};
 						};
 					};
 					9805A1E82026CE6E0011DE88 = {
@@ -312,6 +315,9 @@
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
+							};
+							com.apple.SafariKeychain = {
+								enabled = 1;
 							};
 						};
 					};

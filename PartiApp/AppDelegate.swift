@@ -166,6 +166,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate
                                              sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,
                                              annotation: options[UIApplicationOpenURLOptionsKey.annotation])
   }
+  
+  func application(_ app: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+    if userActivity.activityType == NSUserActivityTypeBrowsingWeb {
+      let url = userActivity.webpageURL!
+      ViewController.instance.handleUniversalLink(url.absoluteString)
+    }
+    return true
+  }
 
   func handlePushData(_ pushInfo: [AnyHashable : Any]) {
     //log.debug("handlePushData: ", Util.getPrettyJsonString(pushInfo) ?? "nil")
