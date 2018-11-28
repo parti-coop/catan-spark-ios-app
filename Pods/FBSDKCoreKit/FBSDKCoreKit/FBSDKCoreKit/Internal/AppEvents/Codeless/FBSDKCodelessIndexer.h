@@ -18,34 +18,8 @@
 
 #import <Foundation/Foundation.h>
 
-@class FBSDKURLConnection;
+@interface FBSDKCodelessIndexer : NSObject
 
-typedef void (^FBSDKURLConnectionHandler)(FBSDKURLConnection *connection,
-                                          NSError *error,
-                                          NSURLResponse *response,
-                                          NSData *responseData);
-
-@protocol FBSDKURLConnectionDelegate <NSObject>
-
-@optional
-
-- (void)facebookURLConnection:(FBSDKURLConnection *)connection
-              didSendBodyData:(NSInteger)bytesWritten
-            totalBytesWritten:(NSInteger)totalBytesWritten
-    totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite;
-
-@end
-
-@interface FBSDKURLConnection : NSObject
-
-- (FBSDKURLConnection *)initWithRequest:(NSURLRequest *)request
-                      completionHandler:(FBSDKURLConnectionHandler)handler
-NS_DESIGNATED_INITIALIZER;
-
-@property (nonatomic, weak) id<FBSDKURLConnectionDelegate> delegate;
-
-- (void)cancel;
-- (void)start;
-- (void)setDelegateQueue:(NSOperationQueue *)queue;
++ (NSString *)extInfo;
 
 @end

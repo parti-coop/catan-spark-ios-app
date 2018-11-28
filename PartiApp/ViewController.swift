@@ -81,7 +81,7 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
     m_webView.ufoDelegate = self
     m_webView.translatesAutoresizingMaskIntoConstraints = false
     self.view.addSubview(m_webView)
-
+    
     self.view.addConstraint(NSLayoutConstraint(item:m_webView,
                                                attribute:.top,
                                                relatedBy:.equal,
@@ -147,9 +147,13 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
   func handleStartSocialSignIn(_ provider: String) {
     if ViewController.AUTH_PROVIDER_FACEBOOK == provider {
       let login = FBSDKLoginManager.init()
+      login.loginBehavior = FBSDKLoginBehavior.web
+      self.isStatusBarHidden = true
       login.logIn(withReadPermissions: ["email"], from: self) { [weak self] (result, error) in
         guard let strongSelf = self else { return }
         
+        strongSelf.isStatusBarHidden = false
+
         if let error = error {
           strongSelf.facebookSignInFailureCallback(error)
         } else if (result?.isCancelled ?? false) {
@@ -161,6 +165,16 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
     } else if(ViewController.AUTH_PROVIDER_GOOGLE == provider) {
       GIDSignIn.sharedInstance().signIn()
     }
+  }
+  
+  var isStatusBarHidden = false {
+    didSet{
+      self.setNeedsStatusBarAppearanceUpdate()
+    }
+  }
+  
+  override var prefersStatusBarHidden: Bool {
+    return isStatusBarHidden
   }
   
   func handleCallbackSocialSignIn(_ provider: String) {
