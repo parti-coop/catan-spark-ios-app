@@ -11,7 +11,8 @@ import UIKit
 import MBProgressHUD
 import TMReachability
 import FirebaseMessaging
-import Crashlytics
+import Firebase
+import FirebaseCrashlytics
 import WebKit
 import NVActivityIndicatorView
 import GoogleSignIn
@@ -141,15 +142,15 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
   }
   
   fileprivate func setupFacebookSignIn() {
-    FBSDKSettings.setAppID(Config.authFacebookAppId)
+    Settings.appID = Config.authFacebookAppId
   }
   
   func handleStartSocialSignIn(_ provider: String) {
     if ViewController.AUTH_PROVIDER_FACEBOOK == provider {
-      let login = FBSDKLoginManager.init()
-      login.loginBehavior = FBSDKLoginBehavior.web
+      let login = LoginManager.init()
+      // login.loginBehavior = LoginBehavior.browser
       self.isStatusBarHidden = true
-      login.logIn(withReadPermissions: ["email"], from: self) { [weak self] (result, error) in
+      login.logIn(permissions: ["email"], from: self) { [weak self] (result, error) in
         guard let strongSelf = self else { return }
         
         strongSelf.isStatusBarHidden = false
@@ -203,13 +204,13 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
       socialAuthSignInCancelCallback()
     } else {
       socialAuthSignInFailureCallback(error)
-      Crashlytics.sharedInstance().recordError(NSError(domain: "Google Login Error", code: error.code, userInfo: error.userInfo))
+        Crashlytics.crashlytics().record(error: NSError(domain: "Google Login Error", code: error.code, userInfo: error.userInfo))
     }
   }
   
   func facebookSignInSuccessCallback() -> Bool {
-    guard let currentToken = FBSDKAccessToken.current() else { return false }
-    m_webView.evalJs("ufo.successAuth('\(ViewController.AUTH_PROVIDER_FACEBOOK)', '\(currentToken.tokenString ?? "")')")
+    guard let currentToken = AccessToken.current else { return false }
+    m_webView.evalJs("ufo.successAuth('\(ViewController.AUTH_PROVIDER_FACEBOOK)', '\(currentToken.tokenString )')")
     return true
   }
   
@@ -375,7 +376,7 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
         #endif
         AppDelegate.getApiManager().requestRegisterToken(self as ApiResultDelegate, authkey: authkey, pushToken: pushToken, appId: appId)
 
-        Crashlytics.sharedInstance().setUserIdentifier(authkey)
+        Crashlytics.crashlytics().setUserID(authkey)
         
         m_webView.clearHistory()
       }
@@ -394,7 +395,7 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
       }
       
       // Facebook & Google logout
-      FBSDKLoginManager().logOut()
+      LoginManager().logOut()
       GIDSignIn.sharedInstance().signOut()
     } else if action == "download" {
       handleDownload(json)

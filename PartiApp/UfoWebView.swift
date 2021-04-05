@@ -35,6 +35,11 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
 
   public init() {
     let wkconf = WKWebViewConfiguration()
+    if let cookies = HTTPCookieStorage.shared.cookies {
+      let script = UfoWebView.getJSCookiesString(for: cookies)
+      let cookieScript = WKUserScript(source: script, injectionTime: .atDocumentStart, forMainFrameOnly: false)
+      wkconf.userContentController.addUserScript(cookieScript)
+    }
     super.init(frame:CGRect.zero, configuration:wkconf)
     wkconf.userContentController.add(self, name:"ufop")
     self.navigationDelegate = self
@@ -50,6 +55,25 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
         strongSelf.m_customUserAgent = strongSelf.customUserAgent
       }
     }
+  }
+  
+  public static func getJSCookiesString(for cookies: [HTTPCookie]) -> String {
+    var result = ""
+    let dateFormatter = DateFormatter()
+    dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+    dateFormatter.dateFormat = "EEE, d MMM yyyy HH:mm:ss zzz"
+    
+    for cookie in cookies {
+      result += "document.cookie='\(cookie.name)=\(cookie.value); domain=\(cookie.domain); path=\(cookie.path); "
+      if let date = cookie.expiresDate {
+        result += "expires=\(dateFormatter.string(from: date)); "
+      }
+      if (cookie.isSecure) {
+        result += "secure; "
+      }
+      result += "'; "
+    }
+    return result
   }
 
   required init?(coder: NSCoder) {
@@ -240,7 +264,7 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
 #endif
 
   func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-    var request = navigationAction.request
+    let request = navigationAction.request
     guard let requestUrl = request.url else {
       // failed to get url
       decisionHandler(.cancel)
@@ -369,7 +393,7 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
         evalJs(param!)
       }
     } else  {
-      log.warning("Unhandled action: \(action) param=\(param ?? "nil")")
+        log.warning("Unhandled action: \(String(describing: action)) param=\(param ?? "nil")")
     }
   }
 

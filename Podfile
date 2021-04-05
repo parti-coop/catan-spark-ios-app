@@ -1,22 +1,39 @@
-platform :ios, '9.0'
+platform :ios, '10.0'
+use_frameworks!
+inhibit_all_warnings!
 
-pod 'Fabric'
-pod 'Crashlytics', '~>  3.10'
-pod 'Firebase/Messaging'
-pod 'MBProgressHUD', '~> 1.1.0'
-pod 'TMReachability', :git => 'https://github.com/albertbori/Reachability'
-pod 'Natrium'
-pod 'CrossroadRegex'
-pod 'SwiftyBeaver'
-pod 'SimulatorStatusMagic', :configurations => ['Debug']
-pod 'NVActivityIndicatorView'
-pod 'GoogleSignIn'
-pod 'FBSDKLoginKit'
+def install_all
+  pod 'Firebase/Crashlytics', '~> 6.27.0'
+  pod 'Firebase/Messaging', '~> 6.27.0'
+  pod 'MBProgressHUD', '~> 1.1.0'
+  pod 'TMReachability', :git => 'https://github.com/albertbori/Reachability'
+  pod 'Natrium', '~> 8.0.0'
+  pod 'CrossroadRegex', '~> 1.1.0'
+  pod 'SwiftyBeaver', '~> 1.5.1'
+  pod 'SimulatorStatusMagic', :configurations => ['Debug']
+  pod 'NVActivityIndicatorView', '~> 4.1.1'
+  pod 'GoogleSignIn', '~> 4.1.2'
+  pod 'FBSDKCoreKit', '~> 5.15.1'
+  pod 'FBSDKLoginKit', '~> 5.15.1'
+end
 
 target 'PartiApp Debug' do
-	use_frameworks!
+  install_all
 end
 
 target 'PartiApp Release' do
-  use_frameworks!
+  install_all
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    puts target.name
+    target.build_configurations.each do |config|
+      config.build_settings['SWIFT_VERSION'] = '4.0'
+      if config.name != 'Release'
+        config.build_settings["VALID_ARCHS[sdk=iphonesimulator*]"] = "arm64, arm64e, armv7, armv6, i386, x86_64"
+      end
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '9.0'
+    end
+  end
 end

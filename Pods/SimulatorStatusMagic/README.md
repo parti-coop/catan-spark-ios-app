@@ -4,8 +4,12 @@ Modify the iOS Simulator so that it has a perfect status bar, then run your app 
 
 * 9:41 AM is displayed for the time.
 * The battery is full and shows 100%.
-* On iPhone: The carrier text is removed, 5 bars of cellular signal and full WiFi bars are displayed.
-* On iPad: The carrier text is set to "iPad" and full WiFi bars are displayed.
+* 5 bars of cellular signal and full WiFi bars are displayed.
+* Tue Jan 9 is displayed for the date (iPad only)
+
+## Can't I just use `xcrun simctl status_bar`? 🚀
+
+Starting in Xcode 11, the `simctl` command line tool includes a `status_bar` option that allows you to override the appearance of the status bar in the simulator. Hopefully this will eventually supercede the need for SimulatorStatusMagic, but at the moment it still has holes that make this project continue to be relevant. In particular, `simctl status_bar` does not currently provide a way to add localized date and time strings in the status bar.
 
 ### How do I use it?
 
@@ -21,9 +25,9 @@ Run the app again and click "Restore Default Status Bar". Resetting the iOS Simu
 
 ### I have a script to take my screenshots, can I automate this?
 
-Yes! SimulatorStatusMagic is available via [CocoaPods](http://cocoapods.org), [Carthage](https://github.com/Carthage/Carthage) and as a standalone source release. [Installation instructions](https://github.com/shinydevelopment/SimulatorStatusMagic/blob/master/INSTALLATION.md) are available for each method.
+Yes! SimulatorStatusMagic is available via [CocoaPods](http://cocoapods.org), [Carthage](https://github.com/Carthage/Carthage) and as a standalone source release. [Installation instructions](https://github.com/shinydevelopment/SimulatorStatusMagic/blob/master/INSTALLATION.md) are available.
 
-It is recommended to only include `SDStatusBarManager` in your debug configuration so that the code is never included in release builds. Then, when you want to apply a perfect status bar, call `[[SDStatusBarManager sharedInstance] enableOverrides]`. To restore the standard status bar, call `[[SDStatusBarManager sharedInstance] disableOverrides]`.
+It is recommended to **only** include `SDStatusBarManager` in your debug configuration so that the code is **never** included in release builds. When you want to apply a perfect status bar, call `[[SDStatusBarManager sharedInstance] enableOverrides]`. To restore the standard status bar, call `[[SDStatusBarManager sharedInstance] disableOverrides]`.
 
 ### What about automation of the sample app?
 
@@ -45,7 +49,7 @@ The overrides will be automatically enabled or disabled on launch.
 
 ### Does this work on device?
 
-No. The status bar server is blocked on devices. However, [this post contains more information on taking perfect screenshots on real devices](http://shinydevelopment.com/blog/status-magic-and-iphone6-screen-sizes/).
+No. The status bar server is blocked on devices. However, macOS includes the facility to include a perfect status bar when recording your device screen with QuickTime ([Read more](https://appadvice.com/appnn/2014/08/quicktime-in-os-x-yosemite-reveals-that-apple-cares-about-status-bars)).
 
 ### How does this work?
 
@@ -53,9 +57,6 @@ The best idea is to check [the source code](https://github.com/shinydevelopment/
 
 ## Contributing
 
-We'd love contributions and even have some suggestions for things that might need working on:
-
-* Found a bug? If you report it with a pull request attached then you get a gold star :)
-* ~~Non-English language support. We'd love it to work with more languages.~~ Now works with every language!
+We'd love contributions! Found a bug? If you report it with a pull request attached then you get a gold star :)
 
 However, the scope of this project is intentionally limited. We're not planning to add options to this to allow ultimate customisation of the status bar. It's intended to do just one job really well, change the status bar to match [Apple's marketing materials](http://www.apple.com/ios/).

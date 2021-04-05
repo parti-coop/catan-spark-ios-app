@@ -31,7 +31,7 @@ typedef NS_ENUM(NSInteger, SDStatusBarManagerBluetoothState)
   SDStatusBarManagerBluetoothVisibleConnected
 };
 
-typedef NS_ENUM(NSInteger, SDStatusBarManagerNetworkType)
+typedef NS_ENUM(unsigned int, SDStatusBarManagerNetworkType)
 {
   SDStatusBarManagerNetworkTypeWiFi = 0,
   SDStatusBarManagerNetworkTypeGPRS,
@@ -45,10 +45,13 @@ typedef NS_ENUM(NSInteger, SDStatusBarManagerNetworkType)
 
 @property (copy, nonatomic) NSString *carrierName;
 @property (copy, nonatomic) NSString *timeString;
+@property (copy, nonatomic) NSString *dateString;
 @property (assign, nonatomic, readonly) BOOL usingOverrides;
 @property (assign, nonatomic) SDStatusBarManagerBluetoothState bluetoothState;
 @property (assign, nonatomic) SDStatusBarManagerNetworkType networkType;
 @property (assign, nonatomic) BOOL batteryDetailEnabled;
+@property (assign, nonatomic) BOOL iPadDateEnabled;
+@property (assign, nonatomic) BOOL iPadGsmSignalEnabled;
 
 - (void)enableOverrides;
 - (void)disableOverrides;

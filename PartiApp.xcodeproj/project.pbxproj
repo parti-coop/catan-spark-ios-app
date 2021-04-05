@@ -41,6 +41,9 @@
 		9805A1FB2026CE6E0011DE88 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1EB65DC71FF0056000E1B5A9 /* LaunchScreen.storyboard */; };
 		9805A1FC2026CE6E0011DE88 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1EB65DD91FF0075200E1B5A9 /* InfoPlist.strings */; };
 		9805A1FD2026CE6E0011DE88 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1EB65DC11FEFB63400E1B5A9 /* GoogleService-Info.plist */; };
+		982344CA26184F620098CDBF /* Natrium.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982344C926184F620098CDBF /* Natrium.swift */; };
+		982344CB26184F620098CDBF /* Natrium.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982344C926184F620098CDBF /* Natrium.swift */; };
+		982344CC26184F620098CDBF /* Natrium.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982344C926184F620098CDBF /* Natrium.swift */; };
 		98BA529620A5348B0034327E /* CopyUrlToClipboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BA529520A5348B0034327E /* CopyUrlToClipboard.swift */; };
 		98BA529720A5348B0034327E /* CopyUrlToClipboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BA529520A5348B0034327E /* CopyUrlToClipboard.swift */; };
 		98BA529820A5348B0034327E /* CopyUrlToClipboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BA529520A5348B0034327E /* CopyUrlToClipboard.swift */; };
@@ -65,7 +68,6 @@
 		1EB65DA81FED29E700E1B5A9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1EB65DAA1FED29E700E1B5A9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		1EB65DAF1FED29E700E1B5A9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		1EB65DB41FED29E700E1B5A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1EB65DBC1FEF97B600E1B5A9 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		1EB65DBF1FEFB63400E1B5A9 /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
 		1EB65DC01FEFB63400E1B5A9 /* offline.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = offline.html; sourceTree = "<group>"; };
@@ -81,12 +83,14 @@
 		1EB65DE31FF0095500E1B5A9 /* ApiMan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiMan.swift; sourceTree = "<group>"; };
 		505A5984F11E33E2019191AE /* Pods-PartiApp Release.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PartiApp Release.release.xcconfig"; path = "Pods/Target Support Files/Pods-PartiApp Release/Pods-PartiApp Release.release.xcconfig"; sourceTree = "<group>"; };
 		67C5BC16AB28B3C3C3FFAAA7 /* Pods_PartiApp_Debug.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PartiApp_Debug.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9805A2042026CE6F0011DE88 /* PartiApp Release.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PartiApp Release.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9805A2042026CE6F0011DE88 /* Parti.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Parti.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		982344C926184F620098CDBF /* Natrium.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Natrium.swift; path = Pods/Natrium/Natrium/Natrium.swift; sourceTree = SOURCE_ROOT; };
 		98BA529520A5348B0034327E /* CopyUrlToClipboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyUrlToClipboard.swift; sourceTree = "<group>"; };
 		98EC62752033DAE900A8BB4F /* PartiApp UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PartiApp UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		98EC62772033DAE900A8BB4F /* PartiApp_UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartiApp_UITests.swift; sourceTree = "<group>"; };
 		98EC62792033DAE900A8BB4F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		98EC62822033DFB200A8BB4F /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
+		98EC95CC26186EA100E81B4D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CA69C53C1BD62068D258B62F /* Pods_PartiApp_Release.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PartiApp_Release.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFB7F0B5B5809E5DD87C4FE6 /* Pods-PartiApp Debug.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PartiApp Debug.release.xcconfig"; path = "Pods/Target Support Files/Pods-PartiApp Debug/Pods-PartiApp Debug.release.xcconfig"; sourceTree = "<group>"; };
 		F38381283C8C83A3FB2A8E6A /* Pods-PartiApp Debug.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PartiApp Debug.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PartiApp Debug/Pods-PartiApp Debug.debug.xcconfig"; sourceTree = "<group>"; };
@@ -146,7 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				1EB65DA51FED29E700E1B5A9 /* PartiApp Debug.app */,
-				9805A2042026CE6F0011DE88 /* PartiApp Release.app */,
+				9805A2042026CE6F0011DE88 /* Parti.app */,
 				98EC62752033DAE900A8BB4F /* PartiApp UITests.xctest */,
 			);
 			name = Products;
@@ -155,16 +159,17 @@
 		1EB65DA71FED29E700E1B5A9 /* PartiApp */ = {
 			isa = PBXGroup;
 			children = (
+				982344C926184F620098CDBF /* Natrium.swift */,
 				98EC62822033DFB200A8BB4F /* SnapshotHelper.swift */,
 				1E24C48F200CCBE9004D0B4A /* PartiApp.entitlements */,
 				1EB65DD31FF0075200E1B5A9 /* en.lproj */,
 				1EB65DD81FF0075200E1B5A9 /* ko.lproj */,
 				1EB65DC71FF0056000E1B5A9 /* LaunchScreen.storyboard */,
 				1EB65DC91FF0056000E1B5A9 /* Main.storyboard */,
+				98EC95CC26186EA100E81B4D /* Info.plist */,
 				1EB65DC11FEFB63400E1B5A9 /* GoogleService-Info.plist */,
 				1EB65DAF1FED29E700E1B5A9 /* Assets.xcassets */,
 				1EB65DBE1FEFB63400E1B5A9 /* res */,
-				1EB65DB41FED29E700E1B5A9 /* Info.plist */,
 				1EB65DBC1FEF97B600E1B5A9 /* Util.swift */,
 				1E13EAD8200B88B90063BF38 /* Bridge.h */,
 				1EB65DE11FF0093D00E1B5A9 /* HttpMan.swift */,
@@ -264,7 +269,7 @@
 			);
 			name = "PartiApp Release";
 			productName = PartiApp;
-			productReference = 9805A2042026CE6F0011DE88 /* PartiApp Release.app */;
+			productReference = 9805A2042026CE6F0011DE88 /* Parti.app */;
 			productType = "com.apple.product-type.application";
 		};
 		98EC62742033DAE900A8BB4F /* PartiApp UITests */ = {
@@ -405,7 +410,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\" 767a814309d5e5b2803f20b7e992ad890513b53d 38132cf79ea4bbeea14c7b0f4012e8e58b7b6222a706d43adf8229dbaf652cb7";
+			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"";
 		};
 		4C11D00990753CFAE7ACC4BF /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -413,7 +418,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-PartiApp Debug/Pods-PartiApp Debug-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-PartiApp Debug/Pods-PartiApp Debug-resources.sh",
 				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -422,7 +427,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PartiApp Debug/Pods-PartiApp Debug-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PartiApp Debug/Pods-PartiApp Debug-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		917B7F4B90842B0AE2A683EA /* [CP] Check Pods Manifest.lock */ = {
@@ -449,17 +454,18 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-PartiApp Debug/Pods-PartiApp Debug-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-PartiApp Debug/Pods-PartiApp Debug-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/CrossroadRegex/Regex.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/Natrium/Natrium.framework",
+				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/SimulatorStatusMagic/SimulatorStatusMagic.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyBeaver/SwiftyBeaver.framework",
@@ -468,16 +474,17 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Regex.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Natrium.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimulatorStatusMagic.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyBeaver.framework",
@@ -486,7 +493,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PartiApp Debug/Pods-PartiApp Debug-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PartiApp Debug/Pods-PartiApp Debug-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		9805A1E92026CE6E0011DE88 /* [CP] Check Pods Manifest.lock */ = {
@@ -513,17 +520,18 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-PartiApp Release/Pods-PartiApp Release-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-PartiApp Release/Pods-PartiApp Release-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/CrossroadRegex/Regex.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/Natrium/Natrium.framework",
+				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/SimulatorStatusMagic/SimulatorStatusMagic.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyBeaver/SwiftyBeaver.framework",
@@ -532,16 +540,17 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Regex.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Natrium.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimulatorStatusMagic.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyBeaver.framework",
@@ -550,7 +559,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PartiApp Release/Pods-PartiApp Release-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PartiApp Release/Pods-PartiApp Release-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		9805A1FF2026CE6E0011DE88 /* [CP] Copy Pods Resources */ = {
@@ -559,7 +568,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-PartiApp Release/Pods-PartiApp Release-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-PartiApp Release/Pods-PartiApp Release-resources.sh",
 				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -568,7 +577,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PartiApp Release/Pods-PartiApp Release-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PartiApp Release/Pods-PartiApp Release-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		9805A2002026CE6E0011DE88 /* ShellScript */ = {
@@ -582,7 +591,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\" 61fec037830f072a57601a3e9f538a4a0f0d1ac3 06f0adc16fa65c7b6ec6725aa7d5febbf603a6d03bc7caefc2d30cc52b51db52";
+			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -591,6 +600,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				982344CA26184F620098CDBF /* Natrium.swift in Sources */,
 				1EB65DE21FF0093D00E1B5A9 /* HttpMan.swift in Sources */,
 				1EB65DC61FEFB6BF00E1B5A9 /* UfoWebView.swift in Sources */,
 				1EB65DE41FF0095500E1B5A9 /* ApiMan.swift in Sources */,
@@ -605,6 +615,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				982344CB26184F620098CDBF /* Natrium.swift in Sources */,
 				9805A1EB2026CE6E0011DE88 /* HttpMan.swift in Sources */,
 				9805A1EC2026CE6E0011DE88 /* UfoWebView.swift in Sources */,
 				9805A1ED2026CE6E0011DE88 /* ApiMan.swift in Sources */,
@@ -619,6 +630,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				982344CC26184F620098CDBF /* Natrium.swift in Sources */,
 				98EC62782033DAE900A8BB4F /* PartiApp_UITests.swift in Sources */,
 				98BA529820A5348B0034327E /* CopyUrlToClipboard.swift in Sources */,
 				98EC62832033DFB200A8BB4F /* SnapshotHelper.swift in Sources */,
@@ -811,6 +823,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 5MS33RVRLW;
+				EXCLUDED_ARCHS = "";
 				INFOPLIST_FILE = PartiApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -830,10 +843,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = PartiApp/PartiApp.entitlements;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5MS33RVRLW;
+				EXCLUDED_ARCHS = "";
 				INFOPLIST_FILE = PartiApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -876,13 +890,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = PartiApp/PartiApp.entitlements;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5MS33RVRLW;
 				INFOPLIST_FILE = PartiApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = xyz.parti;
 				PRODUCT_NAME = Parti;
 				PROVISIONING_PROFILE = "";

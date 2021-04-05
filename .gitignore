@@ -94,3 +94,6 @@ PartiApp/natrium.files/*
 
 # Fabric
 Fabric.framework
+
+.DS_Store
+Pods/Natrium/Natrium/natrium.log

@@ -16,8 +16,8 @@ import FirebaseMessaging
 import GoogleSignIn
 import FBSDKCoreKit
 
-import Fabric
-import Crashlytics
+import Firebase
+import FirebaseCrashlytics
 import SwiftyBeaver
 let log = SwiftyBeaver.self
 
@@ -48,7 +48,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate
   }
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-    Fabric.with([Crashlytics.self])
     FirebaseApp.configure()
 
     Messaging.messaging().delegate = self
@@ -77,7 +76,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate
     GIDSignIn.sharedInstance().delegate = self
     
     // Initialize Facebook sign-in
-    FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+    ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
 
     #if DEBUG
     if ProcessInfo.processInfo.arguments.contains("CATAN_SCREENSNAPSHOTS") {
@@ -221,21 +220,12 @@ extension AppDelegate : UNUserNotificationCenterDelegate
 
 extension AppDelegate : MessagingDelegate
 {
-  func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
     #if DEBUG
-    log.debug("Firebase registration token: \(fcmToken)")
+        log.debug("Firebase registration token: \(fcmToken)")
     #endif
 
     // TODO: If necessary send token to application server.
     // Note: This callback is fired at each app startup and whenever a new token is generated.
-  }
-
-  // [END refresh_token]
-  // [START ios_10_data_message]
-  // Receive data messages on iOS 10+ directly from FCM (bypassing APNs) when the app is in the foreground.
-  // To enable direct data messages, you can set Messaging.messaging().shouldEstablishDirectChannel to true.
-  func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
-    //log.debug("Received data message: \(remoteMessage.appData)")
-    handlePushData(remoteMessage.appData)
   }
 }

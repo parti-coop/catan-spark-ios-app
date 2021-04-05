@@ -1,6 +1,6 @@
 /* Localized versions of Info.plist keys */
 
-CFBundleDisplayName = "빠띠";
+CFBundleDisplayName = "빠띠 카누";
 NSCameraUsageDescription = "게시물을 작성하기 위해 카메라 기능에 접근합니다.";
 NSPhotoLibraryUsageDescription = "게시글을 작성하기 위해 사용자의 사진에 접근합니다.";
 NSPhotoLibraryAddUsageDescription = "게시글을 관리하기 위해 사용자의 사진을 추가합니다.";
