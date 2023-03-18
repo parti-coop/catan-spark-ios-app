@@ -1,4 +1,4 @@
-platform :ios, '10.0'
+platform :ios, '12.0'
 use_frameworks!
 inhibit_all_warnings!
 
@@ -11,10 +11,10 @@ def install_all
   pod 'CrossroadRegex', '~> 1.1.0'
   pod 'SwiftyBeaver', '~> 1.5.1'
   pod 'SimulatorStatusMagic', :configurations => ['Debug']
-  pod 'NVActivityIndicatorView', '~> 4.1.1'
+  pod 'NVActivityIndicatorView', '4.8.0'
   pod 'GoogleSignIn', '~> 4.1.2'
-  pod 'FBSDKCoreKit', '~> 5.15.1'
-  pod 'FBSDKLoginKit', '~> 5.15.1'
+  pod 'FacebookCore', '~> 0.9.0'
+  pod 'FacebookLogin', '~> 0.9.0'
 end
 
 target 'PartiApp Debug' do
@@ -33,7 +33,7 @@ post_install do |installer|
       if config.name != 'Release'
         config.build_settings["VALID_ARCHS[sdk=iphonesimulator*]"] = "arm64, arm64e, armv7, armv6, i386, x86_64"
       end
-      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '9.0'
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '12.0'
     end
   end
 end

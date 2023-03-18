@@ -1,5 +1,11 @@
 PODS:
   - CrossroadRegex (1.1.0)
+  - FacebookCore (0.9.0):
+    - FBSDKCoreKit (~> 5.0)
+  - FacebookLogin (0.9.0):
+    - FacebookCore (~> 0.9.0)
+    - FBSDKCoreKit (~> 5.0)
+    - FBSDKLoginKit (~> 5.0)
   - FBSDKCoreKit (5.15.1):
     - FBSDKCoreKit/Basics (= 5.15.1)
     - FBSDKCoreKit/Core (= 5.15.1)
@@ -61,14 +67,14 @@ PODS:
     - "GoogleToolboxForMac/NSString+URLArguments (~> 2.1)"
     - GTMOAuth2 (~> 1.0)
     - GTMSessionFetcher/Core (~> 1.1)
-  - GoogleToolboxForMac/DebugUtils (2.3.1):
-    - GoogleToolboxForMac/Defines (= 2.3.1)
-  - GoogleToolboxForMac/Defines (2.3.1)
-  - "GoogleToolboxForMac/NSDictionary+URLArguments (2.3.1)":
-    - GoogleToolboxForMac/DebugUtils (= 2.3.1)
-    - GoogleToolboxForMac/Defines (= 2.3.1)
-    - "GoogleToolboxForMac/NSString+URLArguments (= 2.3.1)"
-  - "GoogleToolboxForMac/NSString+URLArguments (2.3.1)"
+  - GoogleToolboxForMac/DebugUtils (2.3.2):
+    - GoogleToolboxForMac/Defines (= 2.3.2)
+  - GoogleToolboxForMac/Defines (2.3.2)
+  - "GoogleToolboxForMac/NSDictionary+URLArguments (2.3.2)":
+    - GoogleToolboxForMac/DebugUtils (= 2.3.2)
+    - GoogleToolboxForMac/Defines (= 2.3.2)
+    - "GoogleToolboxForMac/NSString+URLArguments (= 2.3.2)"
+  - "GoogleToolboxForMac/NSString+URLArguments (2.3.2)"
   - GoogleUtilities/AppDelegateSwizzler (6.7.2):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
@@ -88,37 +94,37 @@ PODS:
     - GoogleUtilities/Logger
   - GTMOAuth2 (1.1.6):
     - GTMSessionFetcher (~> 1.1)
-  - GTMSessionFetcher (1.5.0):
-    - GTMSessionFetcher/Full (= 1.5.0)
-  - GTMSessionFetcher/Core (1.5.0)
-  - GTMSessionFetcher/Full (1.5.0):
-    - GTMSessionFetcher/Core (= 1.5.0)
+  - GTMSessionFetcher (1.7.2):
+    - GTMSessionFetcher/Full (= 1.7.2)
+  - GTMSessionFetcher/Core (1.7.2)
+  - GTMSessionFetcher/Full (1.7.2):
+    - GTMSessionFetcher/Core (= 1.7.2)
   - MBProgressHUD (1.1.0)
   - nanopb (1.30905.0):
     - nanopb/decode (= 1.30905.0)
     - nanopb/encode (= 1.30905.0)
   - nanopb/decode (1.30905.0)
   - nanopb/encode (1.30905.0)
-  - Natrium (8.0.3)
-  - NVActivityIndicatorView (4.1.1):
-    - NVActivityIndicatorView/Presenter (= 4.1.1)
-  - NVActivityIndicatorView/Presenter (4.1.1)
+  - Natrium (8.0.5)
+  - NVActivityIndicatorView (4.8.0):
+    - NVActivityIndicatorView/Presenter (= 4.8.0)
+  - NVActivityIndicatorView/Presenter (4.8.0)
   - PromisesObjC (1.2.12)
-  - Protobuf (3.14.0)
-  - SimulatorStatusMagic (2.5)
+  - Protobuf (3.22.0)
+  - SimulatorStatusMagic (2.7)
   - SwiftyBeaver (1.5.2)
   - TMReachability (3.2)
 
 DEPENDENCIES:
   - CrossroadRegex (~> 1.1.0)
-  - FBSDKCoreKit (~> 5.15.1)
-  - FBSDKLoginKit (~> 5.15.1)
+  - FacebookCore (~> 0.9.0)
+  - FacebookLogin (~> 0.9.0)
   - Firebase/Crashlytics (~> 6.27.0)
   - Firebase/Messaging (~> 6.27.0)
   - GoogleSignIn (~> 4.1.2)
   - MBProgressHUD (~> 1.1.0)
   - Natrium (~> 8.0.0)
-  - NVActivityIndicatorView (~> 4.1.1)
+  - NVActivityIndicatorView (= 4.8.0)
   - SimulatorStatusMagic
   - SwiftyBeaver (~> 1.5.1)
   - TMReachability (from `https://github.com/albertbori/Reachability`)
@@ -126,6 +132,8 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - CrossroadRegex
+    - FacebookCore
+    - FacebookLogin
     - FBSDKCoreKit
     - FBSDKLoginKit
     - Firebase
@@ -162,6 +170,8 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   CrossroadRegex: 5eaadb3f7b4014728f1cbd1014756b126c1dbd9a
+  FacebookCore: ba86524b66cfa86d0f8e65d08faa8504a9f732dd
+  FacebookLogin: 6cee9fd6e1fe976fe8f7eec199e27b28b14f5d63
   FBSDKCoreKit: 1d5acf7c9d7a2f92bb1a242dc60cae5b7adb91df
   FBSDKLoginKit: f1ea8026a58b52d30c9f2e6a58ca7d813619fb83
   Firebase: 919186c8e119dd9372a45fd1dd17a8a942bc1892
@@ -174,20 +184,20 @@ SPEC CHECKSUMS:
   GoogleDataTransport: 9a8a16f79feffc7f42096743de2a7c4815e84020
   GoogleDataTransportCCTSupport: 489c1265d2c85b68187a83a911913d190012158d
   GoogleSignIn: d9ef55b10f0aa401a5de2747f59b725e4b9732ac
-  GoogleToolboxForMac: 471e0c05d39506e50e6398f46fa9a12ae0efeff9
+  GoogleToolboxForMac: 8bef7c7c5cf7291c687cf5354f39f9db6399ad34
   GoogleUtilities: 7f2f5a07f888cdb145101d6042bc4422f57e70b3
   GTMOAuth2: e8b6512c896235149df975c41d9a36c868ab7fba
-  GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
+  GTMSessionFetcher: 5595ec75acf5be50814f81e9189490412bad82ba
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
-  Natrium: b95da611f5f20932685e401c87a18317d84c42da
-  NVActivityIndicatorView: 60109b9bf46efc2e71ab81453196ccdfdfeea870
+  Natrium: 63dff726eebe3dc9a9ca0d861430461d3db537b4
+  NVActivityIndicatorView: d24b7ebcf80af5dcd994adb650e2b6c93379270f
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
-  Protobuf: 0cde852566359049847168e51bd1c690e0f70056
-  SimulatorStatusMagic: 71cfcea1df017e8f0fa8e48bc182d86976376f84
+  Protobuf: 5e6cbc143d02fe08585d86b0098f8b755d2caaab
+  SimulatorStatusMagic: 4e15e56530b367e90dcd3b94fd272e833e9d8a44
   SwiftyBeaver: 85daaaa2b3ae6e31b7b55c99430e8b91dac088af
   TMReachability: 48c99d728a8b0ad4493800592484b8cbb65c896c
 
-PODFILE CHECKSUM: 7759c8f0bac7339fcb48d447d499968e3e81d96e
+PODFILE CHECKSUM: 09a616564d626b755766fe82085a1f8dde6e14e6
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.12.0

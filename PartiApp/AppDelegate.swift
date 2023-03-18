@@ -21,7 +21,6 @@ import FirebaseCrashlytics
 import SwiftyBeaver
 let log = SwiftyBeaver.self
 
-import Natrium
 typealias Config = Natrium.Config
 
 #if DEBUG
