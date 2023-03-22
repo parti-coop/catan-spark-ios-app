@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 48;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -23,8 +23,28 @@
 		1EB65DE01FF0075200E1B5A9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1EB65DDB1FF0075200E1B5A9 /* Localizable.strings */; };
 		1EB65DE21FF0093D00E1B5A9 /* HttpMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB65DE11FF0093D00E1B5A9 /* HttpMan.swift */; };
 		1EB65DE41FF0095500E1B5A9 /* ApiMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB65DE31FF0095500E1B5A9 /* ApiMan.swift */; };
-		562EF3924CE11D3FA5612DBE /* Pods_PartiApp_Release.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA69C53C1BD62068D258B62F /* Pods_PartiApp_Release.framework */; };
-		635ED9BC63B590AAB8D33D3E /* Pods_PartiApp_Debug.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67C5BC16AB28B3C3C3FFAAA7 /* Pods_PartiApp_Debug.framework */; };
+		2A3BD18629C57A86006983F2 /* MBProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 2A3BD18529C57A86006983F2 /* MBProgressHUD */; };
+		2A3BD19129C5973D006983F2 /* NVActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = 2A3BD19029C5973D006983F2 /* NVActivityIndicatorView */; };
+		2A3BD19329C5973D006983F2 /* NVActivityIndicatorViewExtended in Frameworks */ = {isa = PBXBuildFile; productRef = 2A3BD19229C5973D006983F2 /* NVActivityIndicatorViewExtended */; };
+		2A3BD19629C5B468006983F2 /* FacebookBasics in Frameworks */ = {isa = PBXBuildFile; productRef = 2A3BD19529C5B468006983F2 /* FacebookBasics */; };
+		2A3BD19829C5B468006983F2 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 2A3BD19729C5B468006983F2 /* FacebookCore */; };
+		2A3BD19A29C5B468006983F2 /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 2A3BD19929C5B468006983F2 /* FacebookLogin */; };
+		2A3BD19C29C689B6006983F2 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3BD19B29C689B6006983F2 /* Reachability.swift */; };
+		2A3BD19D29C689B6006983F2 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3BD19B29C689B6006983F2 /* Reachability.swift */; };
+		2A3BD19E29C689B6006983F2 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3BD19B29C689B6006983F2 /* Reachability.swift */; };
+		2A3BD1A129C68B69006983F2 /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = 2A3BD1A029C68B69006983F2 /* SwiftyBeaver */; };
+		2A3BD1A329C76E28006983F2 /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3BD1A229C76E28006983F2 /* NotificationName.swift */; };
+		2A3BD1A429C76E28006983F2 /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3BD1A229C76E28006983F2 /* NotificationName.swift */; };
+		2A3BD1A529C76E28006983F2 /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3BD1A229C76E28006983F2 /* NotificationName.swift */; };
+		2A3BD1A829C77141006983F2 /* SimulatorStatusMagic in Frameworks */ = {isa = PBXBuildFile; productRef = 2A3BD1A729C77141006983F2 /* SimulatorStatusMagic */; };
+		2A3BD1AB29C77475006983F2 /* Natrium in Frameworks */ = {isa = PBXBuildFile; productRef = 2A3BD1AA29C77475006983F2 /* Natrium */; };
+		2A3BD1AD29C77504006983F2 /* Natrium.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3BD1AC29C77504006983F2 /* Natrium.swift */; };
+		2A3BD1AE29C77504006983F2 /* Natrium.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3BD1AC29C77504006983F2 /* Natrium.swift */; };
+		2A3BD1AF29C77504006983F2 /* Natrium.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3BD1AC29C77504006983F2 /* Natrium.swift */; };
+		2A54158529C578F10019DB8B /* Regex in Frameworks */ = {isa = PBXBuildFile; productRef = 2A54158429C578F10019DB8B /* Regex */; };
+		2AE913AD29C778EE00A48377 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 2AE913AC29C778EE00A48377 /* FirebaseCrashlytics */; };
+		2AE913AF29C778EE00A48377 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 2AE913AE29C778EE00A48377 /* FirebaseMessaging */; };
+		2AE913B229C779D400A48377 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 2AE913B129C779D400A48377 /* GoogleSignIn */; };
 		9805A1EB2026CE6E0011DE88 /* HttpMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB65DE11FF0093D00E1B5A9 /* HttpMan.swift */; };
 		9805A1EC2026CE6E0011DE88 /* UfoWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB65DC51FEFB6BF00E1B5A9 /* UfoWebView.swift */; };
 		9805A1ED2026CE6E0011DE88 /* ApiMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB65DE31FF0095500E1B5A9 /* ApiMan.swift */; };
@@ -41,9 +61,6 @@
 		9805A1FB2026CE6E0011DE88 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1EB65DC71FF0056000E1B5A9 /* LaunchScreen.storyboard */; };
 		9805A1FC2026CE6E0011DE88 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1EB65DD91FF0075200E1B5A9 /* InfoPlist.strings */; };
 		9805A1FD2026CE6E0011DE88 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1EB65DC11FEFB63400E1B5A9 /* GoogleService-Info.plist */; };
-		982344CA26184F620098CDBF /* Natrium.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982344C926184F620098CDBF /* Natrium.swift */; };
-		982344CB26184F620098CDBF /* Natrium.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982344C926184F620098CDBF /* Natrium.swift */; };
-		982344CC26184F620098CDBF /* Natrium.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982344C926184F620098CDBF /* Natrium.swift */; };
 		98BA529620A5348B0034327E /* CopyUrlToClipboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BA529520A5348B0034327E /* CopyUrlToClipboard.swift */; };
 		98BA529720A5348B0034327E /* CopyUrlToClipboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BA529520A5348B0034327E /* CopyUrlToClipboard.swift */; };
 		98BA529820A5348B0034327E /* CopyUrlToClipboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BA529520A5348B0034327E /* CopyUrlToClipboard.swift */; };
@@ -81,20 +98,18 @@
 		1EB65DDC1FF0075200E1B5A9 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = Localizable.strings; sourceTree = "<group>"; };
 		1EB65DE11FF0093D00E1B5A9 /* HttpMan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpMan.swift; sourceTree = "<group>"; };
 		1EB65DE31FF0095500E1B5A9 /* ApiMan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiMan.swift; sourceTree = "<group>"; };
-		505A5984F11E33E2019191AE /* Pods-PartiApp Release.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PartiApp Release.release.xcconfig"; path = "Pods/Target Support Files/Pods-PartiApp Release/Pods-PartiApp Release.release.xcconfig"; sourceTree = "<group>"; };
-		67C5BC16AB28B3C3C3FFAAA7 /* Pods_PartiApp_Debug.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PartiApp_Debug.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2A3BD19B29C689B6006983F2 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		2A3BD1A229C76E28006983F2 /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
+		2A3BD1AC29C77504006983F2 /* Natrium.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Natrium.swift; path = .natrium/Natrium.swift; sourceTree = SOURCE_ROOT; };
+		2A3BD1B029C7751A006983F2 /* ProjectEnvironment.release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = ProjectEnvironment.release.xcconfig; path = .natrium/ProjectEnvironment.release.xcconfig; sourceTree = SOURCE_ROOT; };
+		2A3BD1B129C7751A006983F2 /* ProjectEnvironment.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = ProjectEnvironment.debug.xcconfig; path = .natrium/ProjectEnvironment.debug.xcconfig; sourceTree = SOURCE_ROOT; };
 		9805A2042026CE6F0011DE88 /* Parti.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Parti.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		982344C926184F620098CDBF /* Natrium.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Natrium.swift; path = Pods/Natrium/Natrium/Natrium.swift; sourceTree = SOURCE_ROOT; };
 		98BA529520A5348B0034327E /* CopyUrlToClipboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyUrlToClipboard.swift; sourceTree = "<group>"; };
 		98EC62752033DAE900A8BB4F /* PartiApp UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PartiApp UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		98EC62772033DAE900A8BB4F /* PartiApp_UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartiApp_UITests.swift; sourceTree = "<group>"; };
 		98EC62792033DAE900A8BB4F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		98EC62822033DFB200A8BB4F /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		98EC95CC26186EA100E81B4D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CA69C53C1BD62068D258B62F /* Pods_PartiApp_Release.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PartiApp_Release.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		EFB7F0B5B5809E5DD87C4FE6 /* Pods-PartiApp Debug.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PartiApp Debug.release.xcconfig"; path = "Pods/Target Support Files/Pods-PartiApp Debug/Pods-PartiApp Debug.release.xcconfig"; sourceTree = "<group>"; };
-		F38381283C8C83A3FB2A8E6A /* Pods-PartiApp Debug.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PartiApp Debug.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PartiApp Debug/Pods-PartiApp Debug.debug.xcconfig"; sourceTree = "<group>"; };
-		FA41C40DD289609E8312B056 /* Pods-PartiApp Release.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PartiApp Release.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PartiApp Release/Pods-PartiApp Release.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,7 +117,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				635ED9BC63B590AAB8D33D3E /* Pods_PartiApp_Debug.framework in Frameworks */,
+				2AE913AF29C778EE00A48377 /* FirebaseMessaging in Frameworks */,
+				2A3BD19629C5B468006983F2 /* FacebookBasics in Frameworks */,
+				2A3BD19829C5B468006983F2 /* FacebookCore in Frameworks */,
+				2AE913B229C779D400A48377 /* GoogleSignIn in Frameworks */,
+				2A3BD19329C5973D006983F2 /* NVActivityIndicatorViewExtended in Frameworks */,
+				2A3BD18629C57A86006983F2 /* MBProgressHUD in Frameworks */,
+				2A3BD1AB29C77475006983F2 /* Natrium in Frameworks */,
+				2AE913AD29C778EE00A48377 /* FirebaseCrashlytics in Frameworks */,
+				2A3BD19A29C5B468006983F2 /* FacebookLogin in Frameworks */,
+				2A3BD19129C5973D006983F2 /* NVActivityIndicatorView in Frameworks */,
+				2A3BD1A129C68B69006983F2 /* SwiftyBeaver in Frameworks */,
+				2A54158529C578F10019DB8B /* Regex in Frameworks */,
+				2A3BD1A829C77141006983F2 /* SimulatorStatusMagic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,7 +137,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				562EF3924CE11D3FA5612DBE /* Pods_PartiApp_Release.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,25 +150,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0BC525D5755479AAF56D520C /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				F38381283C8C83A3FB2A8E6A /* Pods-PartiApp Debug.debug.xcconfig */,
-				EFB7F0B5B5809E5DD87C4FE6 /* Pods-PartiApp Debug.release.xcconfig */,
-				FA41C40DD289609E8312B056 /* Pods-PartiApp Release.debug.xcconfig */,
-				505A5984F11E33E2019191AE /* Pods-PartiApp Release.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		1EB65D9C1FED29E600E1B5A9 = {
 			isa = PBXGroup;
 			children = (
 				1EB65DA71FED29E700E1B5A9 /* PartiApp */,
 				98EC62762033DAE900A8BB4F /* PartiApp UITests */,
 				1EB65DA61FED29E700E1B5A9 /* Products */,
-				0BC525D5755479AAF56D520C /* Pods */,
-				D42524FEF6641DE241FB531C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -159,7 +172,9 @@
 		1EB65DA71FED29E700E1B5A9 /* PartiApp */ = {
 			isa = PBXGroup;
 			children = (
-				982344C926184F620098CDBF /* Natrium.swift */,
+				2A3BD1B129C7751A006983F2 /* ProjectEnvironment.debug.xcconfig */,
+				2A3BD1B029C7751A006983F2 /* ProjectEnvironment.release.xcconfig */,
+				2A3BD1AC29C77504006983F2 /* Natrium.swift */,
 				98EC62822033DFB200A8BB4F /* SnapshotHelper.swift */,
 				1E24C48F200CCBE9004D0B4A /* PartiApp.entitlements */,
 				1EB65DD31FF0075200E1B5A9 /* en.lproj */,
@@ -178,6 +193,8 @@
 				1EB65DAA1FED29E700E1B5A9 /* ViewController.swift */,
 				1EB65DA81FED29E700E1B5A9 /* AppDelegate.swift */,
 				98BA529520A5348B0034327E /* CopyUrlToClipboard.swift */,
+				2A3BD19B29C689B6006983F2 /* Reachability.swift */,
+				2A3BD1A229C76E28006983F2 /* NotificationName.swift */,
 			);
 			path = PartiApp;
 			sourceTree = "<group>";
@@ -218,15 +235,6 @@
 			path = "PartiApp UITests";
 			sourceTree = "<group>";
 		};
-		D42524FEF6641DE241FB531C /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				67C5BC16AB28B3C3C3FFAAA7 /* Pods_PartiApp_Debug.framework */,
-				CA69C53C1BD62068D258B62F /* Pods_PartiApp_Release.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -234,12 +242,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1EB65DB71FED29E700E1B5A9 /* Build configuration list for PBXNativeTarget "PartiApp Debug" */;
 			buildPhases = (
-				917B7F4B90842B0AE2A683EA /* [CP] Check Pods Manifest.lock */,
 				1EB65DA11FED29E600E1B5A9 /* Sources */,
 				1EB65DA21FED29E600E1B5A9 /* Frameworks */,
 				1EB65DA31FED29E600E1B5A9 /* Resources */,
-				9391F6EF92800C1EBB83BC95 /* [CP] Embed Pods Frameworks */,
-				4C11D00990753CFAE7ACC4BF /* [CP] Copy Pods Resources */,
 				1E13EAD7200B30670063BF38 /* ShellScript */,
 			);
 			buildRules = (
@@ -247,6 +252,21 @@
 			dependencies = (
 			);
 			name = "PartiApp Debug";
+			packageProductDependencies = (
+				2A54158429C578F10019DB8B /* Regex */,
+				2A3BD18529C57A86006983F2 /* MBProgressHUD */,
+				2A3BD19029C5973D006983F2 /* NVActivityIndicatorView */,
+				2A3BD19229C5973D006983F2 /* NVActivityIndicatorViewExtended */,
+				2A3BD19529C5B468006983F2 /* FacebookBasics */,
+				2A3BD19729C5B468006983F2 /* FacebookCore */,
+				2A3BD19929C5B468006983F2 /* FacebookLogin */,
+				2A3BD1A029C68B69006983F2 /* SwiftyBeaver */,
+				2A3BD1A729C77141006983F2 /* SimulatorStatusMagic */,
+				2A3BD1AA29C77475006983F2 /* Natrium */,
+				2AE913AC29C778EE00A48377 /* FirebaseCrashlytics */,
+				2AE913AE29C778EE00A48377 /* FirebaseMessaging */,
+				2AE913B129C779D400A48377 /* GoogleSignIn */,
+			);
 			productName = PartiApp;
 			productReference = 1EB65DA51FED29E700E1B5A9 /* PartiApp Debug.app */;
 			productType = "com.apple.product-type.application";
@@ -255,12 +275,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9805A2012026CE6E0011DE88 /* Build configuration list for PBXNativeTarget "PartiApp Release" */;
 			buildPhases = (
-				9805A1E92026CE6E0011DE88 /* [CP] Check Pods Manifest.lock */,
 				9805A1EA2026CE6E0011DE88 /* Sources */,
 				9805A1F12026CE6E0011DE88 /* Frameworks */,
 				9805A1F32026CE6E0011DE88 /* Resources */,
-				9805A1FE2026CE6E0011DE88 /* [CP] Embed Pods Frameworks */,
-				9805A1FF2026CE6E0011DE88 /* [CP] Copy Pods Resources */,
 				9805A2002026CE6E0011DE88 /* ShellScript */,
 			);
 			buildRules = (
@@ -343,6 +360,17 @@
 				ko,
 			);
 			mainGroup = 1EB65D9C1FED29E600E1B5A9;
+			packageReferences = (
+				2A54158329C578F10019DB8B /* XCRemoteSwiftPackageReference "Regex" */,
+				2A3BD18429C57A86006983F2 /* XCRemoteSwiftPackageReference "MBProgressHUD" */,
+				2A3BD18F29C5973D006983F2 /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */,
+				2A3BD19429C5B468006983F2 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
+				2A3BD19F29C68B69006983F2 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */,
+				2A3BD1A629C77141006983F2 /* XCRemoteSwiftPackageReference "SimulatorStatusMagic" */,
+				2A3BD1A929C77475006983F2 /* XCRemoteSwiftPackageReference "Natrium" */,
+				2AE913AB29C778EE00A48377 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				2AE913B029C779D400A48377 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+			);
 			productRefGroup = 1EB65DA61FED29E700E1B5A9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -398,219 +426,20 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		1E13EAD7200B30670063BF38 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"";
-		};
-		4C11D00990753CFAE7ACC4BF /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PartiApp Debug/Pods-PartiApp Debug-resources.sh",
-				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PartiApp Debug/Pods-PartiApp Debug-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		917B7F4B90842B0AE2A683EA /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-PartiApp Debug-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9391F6EF92800C1EBB83BC95 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PartiApp Debug/Pods-PartiApp Debug-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/CrossroadRegex/Regex.framework",
-				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
-				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
-				"${BUILT_PRODUCTS_DIR}/FacebookCore/FacebookCore.framework",
-				"${BUILT_PRODUCTS_DIR}/FacebookLogin/FacebookLogin.framework",
-				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
-				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
-				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
-				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
-				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
-				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
-				"${BUILT_PRODUCTS_DIR}/SimulatorStatusMagic/SimulatorStatusMagic.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyBeaver/SwiftyBeaver.framework",
-				"${BUILT_PRODUCTS_DIR}/TMReachability/TMReachability.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Regex.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookCore.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookLogin.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimulatorStatusMagic.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyBeaver.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TMReachability.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PartiApp Debug/Pods-PartiApp Debug-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9805A1E92026CE6E0011DE88 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-PartiApp Release-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9805A1FE2026CE6E0011DE88 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PartiApp Release/Pods-PartiApp Release-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/CrossroadRegex/Regex.framework",
-				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
-				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
-				"${BUILT_PRODUCTS_DIR}/FacebookCore/FacebookCore.framework",
-				"${BUILT_PRODUCTS_DIR}/FacebookLogin/FacebookLogin.framework",
-				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
-				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
-				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
-				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
-				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
-				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
-				"${BUILT_PRODUCTS_DIR}/SimulatorStatusMagic/SimulatorStatusMagic.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyBeaver/SwiftyBeaver.framework",
-				"${BUILT_PRODUCTS_DIR}/TMReachability/TMReachability.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Regex.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookCore.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookLogin.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimulatorStatusMagic.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyBeaver.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TMReachability.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PartiApp Release/Pods-PartiApp Release-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9805A1FF2026CE6E0011DE88 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PartiApp Release/Pods-PartiApp Release-resources.sh",
-				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PartiApp Release/Pods-PartiApp Release-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9805A2002026CE6E0011DE88 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		1EB65DA11FED29E600E1B5A9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				982344CA26184F620098CDBF /* Natrium.swift in Sources */,
 				1EB65DE21FF0093D00E1B5A9 /* HttpMan.swift in Sources */,
 				1EB65DC61FEFB6BF00E1B5A9 /* UfoWebView.swift in Sources */,
+				2A3BD1A329C76E28006983F2 /* NotificationName.swift in Sources */,
 				1EB65DE41FF0095500E1B5A9 /* ApiMan.swift in Sources */,
 				1EB65DAB1FED29E700E1B5A9 /* ViewController.swift in Sources */,
+				2A3BD19C29C689B6006983F2 /* Reachability.swift in Sources */,
 				1EB65DA91FED29E700E1B5A9 /* AppDelegate.swift in Sources */,
 				98BA529620A5348B0034327E /* CopyUrlToClipboard.swift in Sources */,
+				2A3BD1AD29C77504006983F2 /* Natrium.swift in Sources */,
 				1EB65DBD1FEF97B600E1B5A9 /* Util.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -619,13 +448,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				982344CB26184F620098CDBF /* Natrium.swift in Sources */,
 				9805A1EB2026CE6E0011DE88 /* HttpMan.swift in Sources */,
 				9805A1EC2026CE6E0011DE88 /* UfoWebView.swift in Sources */,
+				2A3BD1A429C76E28006983F2 /* NotificationName.swift in Sources */,
 				9805A1ED2026CE6E0011DE88 /* ApiMan.swift in Sources */,
 				9805A1EE2026CE6E0011DE88 /* ViewController.swift in Sources */,
+				2A3BD19D29C689B6006983F2 /* Reachability.swift in Sources */,
 				9805A1EF2026CE6E0011DE88 /* AppDelegate.swift in Sources */,
 				98BA529720A5348B0034327E /* CopyUrlToClipboard.swift in Sources */,
+				2A3BD1AE29C77504006983F2 /* Natrium.swift in Sources */,
 				9805A1F02026CE6E0011DE88 /* Util.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -634,9 +465,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				982344CC26184F620098CDBF /* Natrium.swift in Sources */,
+				2A3BD1A529C76E28006983F2 /* NotificationName.swift in Sources */,
 				98EC62782033DAE900A8BB4F /* PartiApp_UITests.swift in Sources */,
+				2A3BD1AF29C77504006983F2 /* Natrium.swift in Sources */,
 				98BA529820A5348B0034327E /* CopyUrlToClipboard.swift in Sources */,
+				2A3BD19E29C689B6006983F2 /* Reachability.swift in Sources */,
 				98EC62832033DFB200A8BB4F /* SnapshotHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -817,14 +650,15 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
 		1EB65DB81FED29E700E1B5A9 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F38381283C8C83A3FB2A8E6A /* Pods-PartiApp Debug.debug.xcconfig */;
+			baseConfigurationReference = 2A3BD1B129C7751A006983F2 /* ProjectEnvironment.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = PartiApp/PartiApp.entitlements;
@@ -836,7 +670,10 @@
 				EXCLUDED_ARCHS = "";
 				INFOPLIST_FILE = PartiApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = xyz.parti;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -849,7 +686,7 @@
 		};
 		1EB65DB91FED29E700E1B5A9 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EFB7F0B5B5809E5DD87C4FE6 /* Pods-PartiApp Debug.release.xcconfig */;
+			baseConfigurationReference = 2A3BD1B129C7751A006983F2 /* ProjectEnvironment.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = PartiApp/PartiApp.entitlements;
@@ -860,7 +697,10 @@
 				EXCLUDED_ARCHS = "";
 				INFOPLIST_FILE = PartiApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = xyz.parti;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -873,7 +713,7 @@
 		};
 		9805A2022026CE6E0011DE88 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FA41C40DD289609E8312B056 /* Pods-PartiApp Release.debug.xcconfig */;
+			baseConfigurationReference = 2A3BD1B029C7751A006983F2 /* ProjectEnvironment.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = PartiApp/PartiApp.entitlements;
@@ -883,7 +723,10 @@
 				DEVELOPMENT_TEAM = 5MS33RVRLW;
 				INFOPLIST_FILE = PartiApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = xyz.parti;
 				PRODUCT_NAME = Parti;
 				PROVISIONING_PROFILE = "";
@@ -896,7 +739,7 @@
 		};
 		9805A2032026CE6E0011DE88 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 505A5984F11E33E2019191AE /* Pods-PartiApp Release.release.xcconfig */;
+			baseConfigurationReference = 2A3BD1B029C7751A006983F2 /* ProjectEnvironment.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = PartiApp/PartiApp.entitlements;
@@ -906,7 +749,10 @@
 				DEVELOPMENT_TEAM = 5MS33RVRLW;
 				INFOPLIST_FILE = PartiApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = xyz.parti;
 				PRODUCT_NAME = Parti;
@@ -924,7 +770,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = "PartiApp UITests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "xyz.parti.PartiApp-UITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -940,7 +790,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = "PartiApp UITests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "xyz.parti.PartiApp-UITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -989,6 +843,149 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2A3BD18429C57A86006983F2 /* XCRemoteSwiftPackageReference "MBProgressHUD" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jdg/MBProgressHUD.git";
+			requirement = {
+				kind = exactVersion;
+				version = 1.2.0;
+			};
+		};
+		2A3BD18F29C5973D006983F2 /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ninjaprox/NVActivityIndicatorView.git";
+			requirement = {
+				kind = exactVersion;
+				version = 5.1.1;
+			};
+		};
+		2A3BD19429C5B468006983F2 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
+			requirement = {
+				kind = exactVersion;
+				version = 16.0.0;
+			};
+		};
+		2A3BD19F29C68B69006983F2 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyBeaver/SwiftyBeaver.git";
+			requirement = {
+				kind = exactVersion;
+				version = 2.0.0;
+			};
+		};
+		2A3BD1A629C77141006983F2 /* XCRemoteSwiftPackageReference "SimulatorStatusMagic" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/shinydevelopment/SimulatorStatusMagic";
+			requirement = {
+				kind = exactVersion;
+				version = 2.7.0;
+			};
+		};
+		2A3BD1A929C77475006983F2 /* XCRemoteSwiftPackageReference "Natrium" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/e-sites/Natrium.git";
+			requirement = {
+				kind = exactVersion;
+				version = 8.3.0;
+			};
+		};
+		2A54158329C578F10019DB8B /* XCRemoteSwiftPackageReference "Regex" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sindresorhus/Regex";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		2AE913AB29C778EE00A48377 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = exactVersion;
+				version = 10.6.0;
+			};
+		};
+		2AE913B029C779D400A48377 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS.git";
+			requirement = {
+				kind = exactVersion;
+				version = 7.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2A3BD18529C57A86006983F2 /* MBProgressHUD */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2A3BD18429C57A86006983F2 /* XCRemoteSwiftPackageReference "MBProgressHUD" */;
+			productName = MBProgressHUD;
+		};
+		2A3BD19029C5973D006983F2 /* NVActivityIndicatorView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2A3BD18F29C5973D006983F2 /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */;
+			productName = NVActivityIndicatorView;
+		};
+		2A3BD19229C5973D006983F2 /* NVActivityIndicatorViewExtended */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2A3BD18F29C5973D006983F2 /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */;
+			productName = NVActivityIndicatorViewExtended;
+		};
+		2A3BD19529C5B468006983F2 /* FacebookBasics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2A3BD19429C5B468006983F2 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookBasics;
+		};
+		2A3BD19729C5B468006983F2 /* FacebookCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2A3BD19429C5B468006983F2 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookCore;
+		};
+		2A3BD19929C5B468006983F2 /* FacebookLogin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2A3BD19429C5B468006983F2 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookLogin;
+		};
+		2A3BD1A029C68B69006983F2 /* SwiftyBeaver */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2A3BD19F29C68B69006983F2 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */;
+			productName = SwiftyBeaver;
+		};
+		2A3BD1A729C77141006983F2 /* SimulatorStatusMagic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2A3BD1A629C77141006983F2 /* XCRemoteSwiftPackageReference "SimulatorStatusMagic" */;
+			productName = SimulatorStatusMagic;
+		};
+		2A3BD1AA29C77475006983F2 /* Natrium */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2A3BD1A929C77475006983F2 /* XCRemoteSwiftPackageReference "Natrium" */;
+			productName = Natrium;
+		};
+		2A54158429C578F10019DB8B /* Regex */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2A54158329C578F10019DB8B /* XCRemoteSwiftPackageReference "Regex" */;
+			productName = Regex;
+		};
+		2AE913AC29C778EE00A48377 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2AE913AB29C778EE00A48377 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		2AE913AE29C778EE00A48377 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2AE913AB29C778EE00A48377 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+		2AE913B129C779D400A48377 /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2AE913B029C779D400A48377 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1EB65D9D1FED29E600E1B5A9 /* Project object */;
 }

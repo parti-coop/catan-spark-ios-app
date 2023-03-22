@@ -42,6 +42,8 @@
 			</dict>
 		</array>
 	</dict>
+	<key>FacebookClientToken</key>
+	<string>*******</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>

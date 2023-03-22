@@ -81,6 +81,7 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
   }
 
   func showOfflinePage() {
+    log.debug("showOfflinePage")
     loadLocalHtml("offline")
     m_wasOfflinePageShown = true
   }
@@ -102,6 +103,7 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
   }
 
   func loadLocalHtml(_ filename: String) {
+    log.debug("loadLocalHtml: \(filename)")
     let path = Bundle.main.path(forResource: filename, ofType: "html")
     let fileUrl = URL.init(fileURLWithPath: path!)
     super.loadFileURL(fileUrl, allowingReadAccessTo: Bundle.main.bundleURL)
@@ -326,7 +328,10 @@ class UfoWebView : WKWebView, WKScriptMessageHandler, WKNavigationDelegate, WKUI
       // The target frame, or nil if this is a new window navigation.
       //
       // https://developer.apple.com/documentation/webkit/wknavigationaction/1401918-targetframe
-      let isPartiPage = requestUrl.absoluteString =~ Config.apiBaseUrlRegex.r
+      var isPartiPage = false
+      do {
+        isPartiPage = try Regex(Config.apiBaseUrlRegex).isMatched(by: requestUrl.absoluteString)
+      } catch {}
       if navigationAction.targetFrame != nil || isPartiPage {
         // 앱 내의 웹뷰에서 계속 진행합니다.
         // ex) webView.load(mutableRequest as URLRequest)

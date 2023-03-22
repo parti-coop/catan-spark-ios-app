@@ -13,8 +13,8 @@ import AVFoundation
 import Firebase
 import FirebaseMessaging
 
-import GoogleSignIn
 import FBSDKCoreKit
+import GoogleSignIn
 
 import Firebase
 import FirebaseCrashlytics
@@ -28,15 +28,12 @@ import SimulatorStatusMagic
 #endif
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate
+class AppDelegate: UIResponder, UIApplicationDelegate
 {
   var window: UIWindow?
 
   private var httpMan: HttpMan = HttpMan()
   private var apiMan: ApiMan = ApiMan()
-
-  var googleSignInSuccessCallback: (() -> ())?
-  var googleSignInFailureCallback: ((_ error: NSError) -> ())?
 
   static func getHttpManager() -> HttpMan {
     return (UIApplication.shared.delegate as! AppDelegate).httpMan
@@ -53,27 +50,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate
 
     // Register for remote notifications. This shows a permission dialog on first run, to
     // show the dialog at a more appropriate time move this registration accordingly.
-    if #available(iOS 10.0, *) {
-      // For iOS 10 display notification (sent via APNS)
-      UNUserNotificationCenter.current().delegate = self
-      let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-      UNUserNotificationCenter.current().requestAuthorization(options: authOptions,
-        completionHandler: {_, _ in })
-    } else {
-      let settings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
-      application.registerUserNotificationSettings(settings)
-    }
-
+    UNUserNotificationCenter.current().delegate = self
+    let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+    UNUserNotificationCenter.current().requestAuthorization(options: authOptions,
+      completionHandler: {_, _ in })
+    
     application.registerForRemoteNotifications()
 
     // Override point for customization after application launch.
     setupLog()
 
-    // Initialize Google sign-in
-    GIDSignIn.sharedInstance().clientID = Config.authGoogleClientId
-    GIDSignIn.sharedInstance().serverClientID = Config.authGoogleServerClientId
-    GIDSignIn.sharedInstance().delegate = self
-    
     // Initialize Facebook sign-in
     ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
 
@@ -160,9 +146,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate
   }
 
   func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-    return GIDSignIn.sharedInstance().handle(url,
-                                             sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,
-                                             annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+    return GIDSignIn.sharedInstance.handle(url)
   }
   
   func application(_ app: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
@@ -172,7 +156,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate
     }
     return true
   }
-
+  
   func handlePushData(_ pushInfo: [AnyHashable : Any]) {
     //log.debug("handlePushData: ", Util.getPrettyJsonString(pushInfo) ?? "nil")
 
@@ -182,18 +166,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate
       ViewController.instance.handlePushNotification(urlStr)
     }
   }
-
-  func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-    if let error = error as NSError? {
-      log.error("\(error.localizedDescription)")
-      googleSignInFailureCallback?(error)
-    } else {
-      googleSignInSuccessCallback?()
-    }
-  }
 }
 
-@available(iOS 10, *)
 extension AppDelegate : UNUserNotificationCenterDelegate
 {
   // Receive displayed notifications for iOS 10 devices.
@@ -219,9 +193,9 @@ extension AppDelegate : UNUserNotificationCenterDelegate
 
 extension AppDelegate : MessagingDelegate
 {
-    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+  func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
     #if DEBUG
-        log.debug("Firebase registration token: \(fcmToken)")
+    log.debug("Firebase registration token: \(String(describing: fcmToken))")
     #endif
 
     // TODO: If necessary send token to application server.
