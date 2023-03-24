@@ -39,13 +39,6 @@ playground.xcworkspace
 # Package.pins
 .build/
 
-# CocoaPods
-#
-# We recommend against adding the Pods directory to your .gitignore. However
-# you should judge for yourself, the pros and cons are mentioned at:
-# https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
-#
-# Pods/
 
 # Carthage
 #
@@ -68,8 +61,6 @@ fastlane/test_output
 screenshots/ko/*
 screenshots/screenshots.html
 
-# cocoaPodsKeys
-Pods/CocoaPodsKeys
 env.yml
 
 ### Xcode Patch ###
@@ -82,10 +73,8 @@ env.yml
 PartiApp/GoogleService-Info.plist
 
 # natrium
+/.natrium
 .natrium.yml
-Pods/Natrium/bin/Config.swift
-Pods/Natrium/bin/natrium.log
-Pods/Natrium/bin/natrium.lock
 PartiApp/Info.plist
 PartiApp/natrium.files/*
 !PartiApp/natrium.files/info-PRODUCTION.plist
@@ -96,4 +85,4 @@ PartiApp/natrium.files/*
 Fabric.framework
 
 .DS_Store
-Pods/Natrium/Natrium/natrium.log
+

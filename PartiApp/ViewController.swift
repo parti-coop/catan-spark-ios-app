@@ -9,7 +9,8 @@
 import UIKit
 
 import MBProgressHUD
-import TMReachability
+import Network
+import GoogleSignIn
 import FirebaseMessaging
 import Firebase
 import FirebaseCrashlytics
@@ -18,11 +19,12 @@ import NVActivityIndicatorView
 import GoogleSignIn
 import FBSDKCoreKit
 import FBSDKLoginKit
+import SystemConfiguration
 
 var myContext = 0
 
 class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
-  ,UfoWebDelegate, ApiResultDelegate, GIDSignInUIDelegate
+  ,UfoWebDelegate, ApiResultDelegate
 {
   private static let KEY_AUTHKEY = "xAK"
   static var instance: ViewController!
@@ -37,7 +39,9 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
   var m_curDownloadFilename: String?
   var m_curDownloadedFileUrl: URL?
 
-  var m_remoteHostReach: TMReachability?
+  var m_reachable: Reachable?
+  var m_isConnectedNetwork = false
+  
   var m_indicator: NVActivityIndicatorView!
   
   var m_docIC = UIDocumentInteractionController.init()
@@ -83,29 +87,34 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
     m_webView.translatesAutoresizingMaskIntoConstraints = false
     self.view.addSubview(m_webView)
     
-    self.view.addConstraint(NSLayoutConstraint(item:m_webView,
-                                               attribute:.top,
-                                               relatedBy:.equal,
-                                               toItem:self.topLayoutGuide,
-                                               attribute:.bottom,
-                                               multiplier:1.0,
-                                               constant:0))
+    self.view.addConstraint(NSLayoutConstraint(item: m_webView,
+                                               attribute: .top,
+                                               relatedBy: .equal,
+//                                               toItem:self.topLayoutGuide,
+                                               toItem: view.safeAreaLayoutGuide,
+                                               attribute: .top,
+                                               multiplier: 1.0,
+                                               constant: 0))
+    
+//    var b = self.topLayoutGuide
+//    var a = view.safeAreaLayoutGuide.topAnchor
+//    b.
 
-    self.view.addConstraint(NSLayoutConstraint(item:m_webView,
-                                               attribute:.bottom,
-                                               relatedBy:.equal,
-                                               toItem:self.view,
-                                               attribute:.bottom,
-                                               multiplier:1.0,
-                                               constant:0))
+    self.view.addConstraint(NSLayoutConstraint(item: m_webView,
+                                               attribute: .bottom,
+                                               relatedBy: .equal,
+                                               toItem: self.view,
+                                               attribute: .bottom,
+                                               multiplier: 1.0,
+                                               constant: 0))
 
-    self.view.addConstraint(NSLayoutConstraint(item:m_webView,
-                                               attribute:.leading,
-                                               relatedBy:.equal,
-                                               toItem:self.view,
-                                               attribute:.leading,
-                                               multiplier:1.0,
-                                               constant:0))
+    self.view.addConstraint(NSLayoutConstraint(item: m_webView,
+                                               attribute: .leading,
+                                               relatedBy: .equal,
+                                               toItem: self.view,
+                                               attribute: .leading,
+                                               multiplier: 1.0,
+                                               constant: 0))
 
     self.view.addConstraint(NSLayoutConstraint(item:m_webView,
                                                attribute:.trailing,
@@ -136,13 +145,11 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
   private static let AUTH_PROVIDER_GOOGLE = "google_oauth2"
   
   fileprivate func setupGoogleSignIn() {
-    GIDSignIn.sharedInstance().uiDelegate = self
-    (UIApplication.shared.delegate as! AppDelegate).googleSignInSuccessCallback = googleSignInSuccessCallback
-    (UIApplication.shared.delegate as! AppDelegate).googleSignInFailureCallback = googleSignInFailureCallback
+    GIDSignIn.sharedInstance.configuration = GIDConfiguration(clientID: Config.authGoogleClientId, serverClientID: Config.authGoogleServerClientId)
   }
   
   fileprivate func setupFacebookSignIn() {
-    Settings.appID = Config.authFacebookAppId
+    Settings.shared.appID = Config.authFacebookAppId
   }
   
   func handleStartSocialSignIn(_ provider: String) {
@@ -164,7 +171,21 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
         }
       }
     } else if(ViewController.AUTH_PROVIDER_GOOGLE == provider) {
-      GIDSignIn.sharedInstance().signIn()
+      GIDSignIn.sharedInstance.signIn(withPresenting: self) { [unowned self] result, error in
+        guard error == nil else {
+          googleSignInFailureCallback(error)
+          return
+        }
+        
+        guard let user = result?.user,
+              let tokenString = user.idToken?.tokenString
+        else {
+          googleSignInFailureCallback(error)
+          return
+        }
+
+        googleSignInSuccessCallback(tokenString)
+      }
     }
   }
   
@@ -190,22 +211,24 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
     }
   }
   
-  func googleSignInSuccessCallback() {
-    guard let currentUser = GIDSignIn.sharedInstance().currentUser else {
+  func googleSignInSuccessCallback(_ tokenString: String) {
+    m_webView.evalJs("ufo.successAuth('\(ViewController.AUTH_PROVIDER_GOOGLE)', '\(String(describing: tokenString))')")
+  }
+  
+  func googleSignInFailureCallback(_ error: Error?) {
+    guard let gidError = error as? GIDSignInError else {
+      socialAuthSignInFailureCallback(error)
+      Crashlytics.crashlytics().record(error: NSError(domain: "Google Login Error - Known", code: -1))
       return
     }
     
-    m_webView.evalJs("ufo.successAuth('\(ViewController.AUTH_PROVIDER_GOOGLE)', '\(currentUser.authentication.idToken ?? "")')")
-  }
-  
-  func googleSignInFailureCallback(_ error: NSError) {
-    let errorCode = GIDSignInErrorCode(rawValue: error.code)
-    if errorCode == .canceled {
+    if gidError.code == .canceled {
       socialAuthSignInCancelCallback()
-    } else {
-      socialAuthSignInFailureCallback(error)
-        Crashlytics.crashlytics().record(error: NSError(domain: "Google Login Error", code: error.code, userInfo: error.userInfo))
+      return
     }
+    
+    socialAuthSignInFailureCallback(error)
+    Crashlytics.crashlytics().record(error: NSError(domain: "Google Login Error", code: gidError.errorCode, userInfo: gidError.userInfo))
   }
   
   func facebookSignInSuccessCallback() -> Bool {
@@ -236,28 +259,32 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
   }
 
   private func setupReachability() {
-    NotificationCenter.default.addObserver(self, selector: #selector(self.reachabilityChanged(noti:)),
-      name: NSNotification.Name.reachabilityChanged, object: nil)
-
-    self.m_remoteHostReach = TMReachability.forInternetConnection()
-    self.m_remoteHostReach?.startNotifier()
+    self.m_reachable = Reachability()
+    self.m_reachable?.startNetworkReachabilityObserver()
+    [
+      Notifications.Reachability.connected.name, Notifications.Reachability.notConnected.name
+    ].forEach { notification in
+      NotificationCenter.default.addObserver(self, selector: #selector(self.reachabilityChanged(notification:)), name: notification, object: nil)
+    }
   }
-
-  @objc func reachabilityChanged(noti: Notification?) {
-    guard let reach = noti?.object as? TMReachability else {
+  
+  @objc func reachabilityChanged(notification: Notification?) {
+    guard let reachability = notification?.object as? Notifications.Reachability else {
       return
     }
 
-    if reach.isReachable() {
-      log.debug("RemoteHostReachable", reach.currentReachabilityString())
+    if reachability.name == Notifications.Reachability.connected.name {
+      log.debug("RemoteHostReachable", context: self.m_reachable?.isConnected)
       m_webView.onNetworkReady()
     } else {
       m_webView.onNetworkOffline()
-      log.debug("RemoteHostNotReachable", reach.currentReachabilityString())
+      log.debug("RemoteHostNotReachable", context: self.m_reachable?.isConnected)
     }
   }
 
   deinit {
+    //stop network monitor
+    m_reachable?.stopNetworkReachabilityObserver()
     //remove all observers
     m_webView.removeObserver(self, forKeyPath: "estimatedProgress")
     //remove progress bar from navigation bar
@@ -340,9 +367,10 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
 
   func onWebPageNetworkError(_ url: String?) {
     log.warning("onWebPageNetworkError: \(url ?? "nil")")
-    if m_remoteHostReach?.isReachable() ?? false {
+    if m_reachable?.isConnected ?? false {
       showToast("앗! 연결할 수 없습니다. 나중에 다시 시도해 주세요.")
     } else {
+      log.warning("showOfflinePage onWebPageNetworkError: \(url ?? "nil")")
       m_webView.showOfflinePage()
     }
   }
@@ -396,7 +424,7 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate
       
       // Facebook & Google logout
       LoginManager().logOut()
-      GIDSignIn.sharedInstance().signOut()
+      GIDSignIn.sharedInstance.signOut()
     } else if action == "download" {
       handleDownload(json)
     } else if action == "reload" {
